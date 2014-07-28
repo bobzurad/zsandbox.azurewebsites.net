@@ -7,9 +7,24 @@
     <meta name="author" content="">
 
     <title>Z Sandbox</title>
+
+    <script src="js/core/require.js" type="text/javascript"></script>
+    <script src="js/core/requireConfig.js" type="text/javascript"></script>
   </head>
   <body>
 
 
+  <script type="text/javascript">
+    require(
+      ["jquery", "underscore", "Foo"],
+      function($, _, Foo) {
+        "use strict";
+
+        $(document).ready(function() {
+          var foo = new Foo();
+        });
+      }
+    )
+  </script>
   </body>
 </html>
