@@ -21,7 +21,16 @@
         "use strict";
 
         $(document).ready(function() {
-          var foo = new Foo();
+          var foo1 = new Foo({
+            privateProp: "private1",
+            publicProp: "public1",
+            staticProp: "static1"
+          });
+          var foo2 = new Foo({
+            privateProp: "private2",
+            publicProp: "public2",
+            staticProp: "static2"
+          });
         });
       }
     )
