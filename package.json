@@ -1,0 +1,22 @@
+{
+  "name": "zsandbox",
+  "author": {
+    "name" : "Bob Zurad",
+    "url" : "https://twitter.com/SpuriousTuple"
+  },
+  "description": "My personal sandbox for web stuff, deployed to an instance on Azure",
+  "version": "0.0.1",
+  "homepage": "http://zsandbox.azurewebsites.net/",
+  "repository": "https://github.com/bobzurad/zsandbox.azurewebsites.net",
+  "private": true,
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^0.6.1"
+  },
+  "scripts": {
+    "prestart": "npm install",
+    "start": "http-server -a localhost -p 8001",
+
+    "pretest": "npm install"
+  }
+}
