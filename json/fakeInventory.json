@@ -1,0 +1,56 @@
+{
+  "bracelets": {
+    "b1": {
+      "name": "Chainmaille Bracelet",
+      "description": "Blue & Silver",
+      "price": 17.95,
+      "salePrice": 12.95,
+      "isOnSale": false,
+      "tileImage": "BCB260.png"
+    },
+    "b2": {
+      "name": "Chainmaille Bracelet",
+      "description": "Silver",
+      "price": 19.95,
+      "salePrice": 12.95,
+      "isOnSale": true,
+      "tileImage": "BCMBracelet260.png"
+    },
+    "b3": {
+      "name": "Braided Bracelet",
+      "description": "Black & White",
+      "price": 7.99,
+      "salePrice": 5.99,
+      "isOnSale": false,
+      "tileImage": "BlackGreyBraidedBracelet260.png"
+    },
+    "b4": {
+      "name": "Chainmaille Bracelet",
+      "description": "Blue & Yellow",
+      "price": 17.95,
+      "salePrice": 12.95,
+      "isOnSale": false,
+      "tileImage": "BlueYellowBCB260.png"
+    }
+  },
+  "pendants": {
+    "p1": {
+      "name": "Chainmaille Pendant",
+      "description": "Blue & Silver",
+      "price": 12.95,
+      "salePrice": 9.95,
+      "isOnSale": true,
+      "tileImage": "CSCPendant260.png"
+    }
+  },
+  "coasters": {
+    "c1": {
+      "name": "Star Coasters",
+      "description": "very cosmic",
+      "price": 8.95,
+      "salePrice": 6.95,
+      "isOnSale": false,
+      "tileImage": "Coasters260.png"
+    }
+  }
+}
