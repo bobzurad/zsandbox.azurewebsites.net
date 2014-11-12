@@ -22,8 +22,21 @@
           "use strict";
 
           $(document).ready(function() {
+            Array.prototype.average = function () {
+              var sum = 0, j = 0;
+
+              for (var i = 0; i < this.length, isFinite(this[i]); i++) {
+                sum += parseFloat(this[i]); ++j;
+              }
+
+              return j ? sum / j : 0;
+            };
+
             $.getJSON("json/chartData.json", function(data, textStatus, jqXHR) {
               //success callback
+              var axis0Average = _.pluck(data, "Axis0").average();
+              var axis1Average = _.pluck(data, "Axis1").average();
+
               $("#chart").highcharts({
                 title: {
                   text: "Test Chart"
@@ -72,6 +85,37 @@
                   name: 'Axis0',
                   type: 'spline',
                   data: _.pluck(data, "Axis0"),
+                }, {
+                  type: 'line',
+                  name: 'Axis 0 Average',
+                  data: _.map(_.pluck(data, "Axis0"), function(val, i) {
+                    return { y: axis0Average, color: Highcharts.getOptions().colors[1]};
+                  }),
+                  marker: {
+                      enabled: false
+                  },
+                  states: {
+                      hover: {
+                          lineWidth: 1
+                      }
+                  },
+                  enableMouseTracking: true
+                }, {
+                  type: 'line',
+                  name: 'Axis 1 Average',
+                  yAxis: 1,
+                  data: _.map(_.pluck(data, "Axis1"), function(val, i) {
+                    return [i, axis1Average];
+                  }),
+                  marker: {
+                      enabled: false
+                  },
+                  states: {
+                      hover: {
+                          lineWidth: 2
+                      }
+                  },
+                  enableMouseTracking: true
                 }]
               });
             });
