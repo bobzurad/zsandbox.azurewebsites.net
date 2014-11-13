@@ -89,7 +89,7 @@
                   type: 'line',
                   name: 'Axis 0 Average',
                   data: _.map(_.pluck(data, "Axis0"), function(val, i) {
-                    return { y: axis0Average, color: Highcharts.getOptions().colors[1]};
+                    return [i, axis0Average];
                   }),
                   marker: {
                       enabled: false
@@ -99,7 +99,8 @@
                           lineWidth: 1
                       }
                   },
-                  enableMouseTracking: true
+                  enableMouseTracking: true,
+                  color: Highcharts.getOptions().colors[1]
                 }, {
                   type: 'line',
                   name: 'Axis 1 Average',
@@ -115,7 +116,8 @@
                           lineWidth: 2
                       }
                   },
-                  enableMouseTracking: true
+                  enableMouseTracking: true,
+                  color: Highcharts.getOptions().colors[0]
                 }]
               });
             });
