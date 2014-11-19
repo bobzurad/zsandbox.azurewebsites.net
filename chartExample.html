@@ -22,6 +22,8 @@
           "use strict";
 
           $(document).ready(function() {
+            $.ajaxSetup({ cache: false });
+            
             Array.prototype.average = function () {
               var sum = 0, j = 0;
 
@@ -36,6 +38,7 @@
               //success callback
               var axis0Average = _.pluck(data, "Axis0").average();
               var axis1Average = _.pluck(data, "Axis1").average();
+              var categories = _.pluck(data, "Location");
 
               $("#chart").highcharts({
                 title: {
@@ -45,9 +48,21 @@
                   shared: true
                 },
                 xAxis: [{
-                  categories: _.pluck(data, "Location"),
+                  categories: categories,
                   labels: {
-                    rotation: 90
+                    rotation: 90,
+                    formatter: function () {
+                      var axis0Value = data[categories.indexOf(this.value)].Axis0;
+                      var axis1Value = data[categories.indexOf(this.value)].Axis1;
+
+                      if (axis0Value < axis0Average && axis1Value < axis1Average) {
+                        return '<span style="fill: red;">' + this.value + '</span>';
+                      } else if (axis0Value > axis0Average && axis1Value > axis1Average) {
+                        return '<span style="fill: green;">' + this.value + '</span>';
+                      } else {
+                        return '<span style="fill: gold;">' + this.value + '</span>';
+                      }
+                    }
                   }
                 }],
                 yAxis: [{ // Primary yAxis
