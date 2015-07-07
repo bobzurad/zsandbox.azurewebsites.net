@@ -1,0 +1,9 @@
+{
+  "ko1": {
+    "tickets": [
+      { "id": 1, "name": "Economy", "price": 129.95 },
+      { "id": 2, "name": "Business", "price": 449.95 },
+      { "id": 3, "name": "First Class", "price": 1299.95 }
+    ]
+  }
+}

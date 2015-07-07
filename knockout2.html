@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Knockout Examples</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-debug.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js" type="text/javascript"></script>
+  </head>
+  <body>
+    Choose a ticket class:
+    <select data-bind="options: tickets,
+                       optionsText: 'name',
+                       optionsValue: 'id',
+                       value: chosenTicket"></select>
+
+    <button data-bind="enable: chosenTicket,
+                       click: resetTicket">Clear</button>
+
+<!--
+    <p data-bind="with: chosenTicket">
+      You have chosen <b data-bind="text: name"></b>
+      ($<span data-bind="text: price"></span>)
+    </p>
+-->
+    <script type="text/javascript">
+      function TicketsViewModel() {
+        this.tickets = [
+          { id: 1, name: 'Economy', price: 129.95 },
+          { id: 2, name: 'Business', price: 449.95 },
+          { id: 3, name: 'First Class', price: 1299.95 }
+        ];
+
+        this.getDefaultTicketSelection = function() {
+          return _.find(this.tickets, function(item) {
+            return item.id == 2;
+          });
+        };
+
+        this.chosenTicket = ko.observable(this.getDefaultTicketSelection());
+
+        this.resetTicket = function () {
+          this.chosenTicket(this.getDefaultTicketSelection());
+        }
+      }
+
+      ko.applyBindings(new TicketsViewModel());
+    </script>
+  </body>
+</html>
