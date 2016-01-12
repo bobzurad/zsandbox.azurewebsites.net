@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>CodeSchool Lessons</title>
+    <style>
+      .complete {
+        color: #bbb;
+        text-decoration: line-through;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="todo">
+
+    </div>
+
+    <script src="../../js/core/jquery.js"></script>
+    <script src="../../js/core/underscore.js"></script>
+    <script src="../../js/core/backbone.js"></script>
+
+    <script>
+      //keep model logic in model!
+      var TodoItem = Backbone.Model.extend({
+        defaults: {
+          status: 'incomplete'
+        },
+
+        toggleStatus: function() {
+          if (this.get('status') === 'incomplete') {
+            this.set({'status': 'complete'});
+          } else {
+            this.set({'status': 'incomplete'});
+          }
+          //this.save(); //if we were saving to a server, we'd do it here
+        }
+      });
+
+      var TodoView = Backbone.View.extend({
+        el: '#todo',
+
+        events: {
+          'change input': 'toggleStatus'
+        },
+
+        template: _.template('<h3 class="<%= status %>">'
+          + '<input type=checkbox <% if(status === "complete") print("checked") %> />'
+          + '<%= description %> </h3>'),
+
+        initialize: function() {
+          //render the view whenever the model changes
+          this.model.on('change', this.render, this);
+          //remove the view from the DOM when the model is destoryed
+          this.model.on('destroy', this.remove, this);
+        },
+
+        render: function() {
+          this.$el.html(this.template(this.model.toJSON()));
+        },
+
+        remove: function() {
+          this.$el.remove();
+        },
+
+        toggleStatus: function() {
+          //don't do any model logic in the view! just call the model's function
+          this.model.toggleStatus();
+        }
+      });
+
+      var todoModel = new TodoItem({ description: 'Pick Up Milk'});
+
+      var todoView = new TodoView({ model: todoModel });
+      todoView.render();
+
+      /*  Exercise: run these commands in the console window and see what happens!
+        todoModel.set({description: 'pick up milk and cookies'});   <--view should update with new description
+        todoModel.destroy();  <-- view should be removed from the page
+      */
+    </script>
+  </body>
+<html>

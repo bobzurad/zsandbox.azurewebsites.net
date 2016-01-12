@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>CodeSchool Lessons</title>
+  </head>
+  <body>
+    <div id="app">
+
+    </div>
+
+    <script src="../../js/core/jquery.js"></script>
+    <script src="../../js/core/underscore.js"></script>
+    <script src="../../js/core/backbone.js"></script>
+
+    <script>
+
+      //model definition
+      var Appointment = Backbone.Model.extend({});
+
+      //create the model and set an attribute
+      var appointment = new Appointment();
+      appointment.set('title', 'My knee hurts');
+
+      //view definition
+      var AppointmentView = Backbone.View.extend({
+        el: $("#app"),
+        render: function(){
+          $(this.el).html('<li>' + this.model.get('title') + '</li>');
+        }
+      });
+
+      //create the view
+      var appointmentView = new AppointmentView({model: appointment});
+
+      //render the view
+      appointmentView.render();
+    </script>
+  </body>
+<html>

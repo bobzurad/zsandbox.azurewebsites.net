@@ -54,7 +54,7 @@ $(function(){
 
 
   // Create our global collection of **Todos**.
-  var Todos = new TodoList;
+  var Todos = new TodoList();
 
 
   // Todo Item View
@@ -189,7 +189,7 @@ $(function(){
     }
   });
 
-  
+
   // Finally, we kick things off by creating the **App**.
-  var App = new AppView;
+  var App = new AppView();
 });

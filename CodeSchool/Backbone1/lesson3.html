@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>CodeSchool Lessons</title>
+  </head>
+  <body>
+    <div>
+
+    </div>
+
+    <script src="../../js/core/jquery.js"></script>
+    <script src="../../js/core/underscore.js"></script>
+    <script src="../../js/core/backbone.js"></script>
+
+    <script>
+      //Model definition
+      var TodoModel = Backbone.Model.extend({
+
+      });
+
+      //create a model
+      var todoModel = new TodoModel();
+      todoModel.set({ description: 'pick up milk'});
+
+      //View definition
+      var TodoView = Backbone.View.extend({
+        tagName: 'article',
+        id: 'todo-view1',
+        className: 'todo',
+        render: function() {
+          var html = '<h3>' + this.model.get('description') + '</h3>';
+          this.$el.html(html);
+        }
+      });
+
+      //View definition, this time using a template
+      var TodoViewWithTemplate = Backbone.View.extend({
+        tagName: 'article',
+        id: 'todo-view2',
+        className: 'todo',
+        template: _.template('<h3><%= description %></h3>'),
+        render: function() {
+          var attributes = this.model.toJSON();
+          this.$el.html(this.template(attributes));
+        }
+      });
+
+      //View definition with events
+      var TodoViewWithEvents = Backbone.View.extend({
+        tagName: 'article',
+        id: 'todo-view3',
+        className: 'todo',
+        events: {
+          'dblclick': 'showAlert'
+        },
+        render: function() {
+          var html = '<h3>' + this.model.get('description') + '</h3>';
+          this.$el.html(html);
+        },
+        showAlert: function() { //this function gets called when user double clicks this view
+          alert(this.model.get('description'));
+        }
+      });
+
+      //create and render a View
+      var todoView = new TodoView({ model: todoModel });
+      todoView.render();
+      console.log(todoView.el);
+
+      //create and render a view that uses a template
+      var todoViewWithTemplate = new TodoViewWithTemplate({ model: todoModel });
+      todoViewWithTemplate.render();
+      console.log(todoViewWithTemplate.el); //should be the same as first view
+
+    </script>
+  </body>
+<html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>CodeSchool Lessons</title>
+  </head>
+  <body>
+    <div>
+
+    </div>
+
+    <script src="../../js/core/underscore.js"></script>
+    <script src="../../js/core/backbone.js"></script>
+    <script src="../../js/core/backbone.js"></script>
+
+    <script>
+
+    //every appointment created with this will have the exact same date because defaults is only evaluated once
+    var AppointmentWithDateBug = Backbone.Model.extend({
+      defaults: {
+        title: 'Checkup',
+        date: new Date()
+      }
+    });
+
+    //by making defaults a function that returns an object,
+    //the function will be evaluated when every new model is created
+    var AppointmentDateBugFixed = Backbone.Model.extend({
+      defaults: function() {
+        return {
+          title: 'Checkup',
+          date: new Date()
+        };
+      }
+    });
+
+    </script>
+  </body>
+<html>
