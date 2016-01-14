@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>CodeSchool Lessons</title>
+    <style>
+      .complete {
+        color: #bbb;
+        text-decoration: line-through;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+
+    </div>
+
+    <script src="../../js/core/jquery.js"></script>
+    <script src="../../js/core/underscore.js"></script>
+    <script src="../../js/core/backbone.js"></script>
+
+    <script>
+      //Model definition
+      var TodoItem = Backbone.Model.extend({
+        defaults: {
+          status: 'incomplete'
+        },
+
+        toggleStatus: function() {
+          if (this.get('status') === 'incomplete') {
+            this.set({'status': 'complete'});
+          } else {
+            this.set({'status': 'incomplete'});
+          }
+          //this.save(); //if we were saving to a server, we'd do it here
+        }
+      });
+
+      //Collection definition
+      var TodoList = Backbone.Collection.extend({
+        model: TodoItem,
+
+        initialize: function() {
+          this.on('remove', this.hideModel);
+          this.on('add', this.showModel);
+        },
+
+        hideModel: function(model) {
+          model.trigger('hide');
+        },
+
+        showModel: function(model) {
+          model.trigger('show');
+        },
+
+        focusOnTodoItem: function(id) {
+          //if user refreshed page while focusing on an item, the list will be empty
+          if (this.length === 0) {
+            this.fetch(); //if we were using a server, we'd just query for the id
+          }
+
+          //find the model to keep
+          var modelToKeep = _.filter(this.models,
+            function(model) {
+              return model.get('id') == id;
+            });
+
+          //remove all models from collection except the id that matches
+          this.remove(this.models);
+          this.add(modelToKeep);
+        },
+
+        fetch: function() { //overriding Backbone. instead of fetching from server, just use static data
+          this.reset([
+            { id: 1, description: 'pick up milk', status: 'incomplete' },
+            { id: 2, description: 'get a hair cut', status: 'incomplete' },
+            { id: 3, description: 'learn backbone', status: 'complete' }
+          ]);
+        }
+      });
+
+      //View definition
+      var TodoView = Backbone.View.extend({
+        events: {
+          'change input': 'toggleStatus'
+        },
+
+        template: _.template('<h3 class="<%= status %>">'
+          + '<label>'
+          + '<input type=checkbox <% if(status === "complete") print("checked") %> />'
+          + '<%= description %> </label><a href="#todo/<%= id %>">more</a></h3>'),
+
+        initialize: function() {
+          //render the view whenever the model changes
+          this.model.on('change', this.render, this);
+          //remove the view from the DOM when the model is destroyed
+          this.model.on('destroy', this.remove, this);
+          this.model.on('hide', this.remove, this);
+          //render the view on show event
+          this.model.on('show', this.render, this);
+        },
+
+        render: function() {
+          this.$el.html(this.template(this.model.toJSON()));
+
+          return this;
+        },
+
+        remove: function() {
+          this.$el.remove();
+        },
+
+        toggleStatus: function() {
+          //don't do any model logic in the view! just call the model's function
+          this.model.toggleStatus();
+        }
+      });
+
+      //View Collection definition
+      var TodoListView = Backbone.View.extend({
+        el: '#app',
+
+        initialize: function() {
+          this.collection.on('add', this.addOne, this);
+          this.collection.on('reset', this.reset, this);
+        },
+
+        render: function() {
+          this.reset();
+
+          return this;
+        },
+
+        addOne: function(todoItem) {
+          var todoView = new TodoView({ model: todoItem });
+          this.$el.append(todoView.render().el);
+        },
+
+        reset: function() {
+          this.$el.html('');
+          this.collection.forEach(this.addOne, this);
+        }
+      });
+
+
+      //initialize the app
+      var TodoApp = new (Backbone.Router.extend({
+        routes: {
+          '': 'index',
+          'todo/:id': 'show'
+        },
+
+        initialize: function(options) {
+          this.todoList = new TodoList();
+          this.todoListView = new TodoListView({ collection: this.todoList });
+          this.todoListView.render();
+        },
+
+        start: function() {
+          Backbone.history.start();
+        },
+
+        index: function() {
+          this.todoList.fetch();
+        },
+
+        show: function(id) {
+          this.todoList.focusOnTodoItem(id);
+        }
+      }));
+
+      //on page load, start the app
+      $(document).ready(function() {
+        TodoApp.start();
+      });
+
+    </script>
+  </body>
+<html>
