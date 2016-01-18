@@ -1,0 +1,15 @@
+<div class="note-wrapper">
+  <div class="note-content">
+    <div class="notes-header">
+      <h1 title="Notes">Notes</h1>
+    </div>
+
+    <div class="note-wrapper">
+      <a class="card-notes" ng-repeat="note in notes">
+        <nw-card header="note.title" description="note.description"></nw-card>
+        <button class="btn" ng-click="tweetThatNote(note.description)">Tweet It!</button>
+      </a>
+    </div>
+
+  </div>
+</div>
