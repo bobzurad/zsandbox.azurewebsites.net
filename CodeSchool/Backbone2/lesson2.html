@@ -12,6 +12,7 @@
     </style>
   </head>
   <body>
+    <!--TODO: the "next page" link is broke. also, update the collection to return multiple pages -->
     <div id="app">
 
     </div>
@@ -67,6 +68,12 @@
         initialize: function() {
           this.on('remove', this.hideModel);
           this.on('add', this.showModel);
+        },
+
+        //two ways you can implement comparator
+        comparator: 'status',
+        comparator: function(todo1, todo2) {
+          return todo1.get('status') < todo2.get('status');
         },
 
         hideModel: function(model) {
@@ -226,4 +233,4 @@
 
     </script>
   </body>
-<html>
+</html>
