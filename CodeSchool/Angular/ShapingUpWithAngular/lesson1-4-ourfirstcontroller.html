@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="gemStore">
+  <head>
+    <title>Lesson 1.4</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+  </head>
+  <body ng-controller="StoreController as store">
+    <div class="product row">
+      <h3>
+        {{ store.product.name }}
+        <em class="pull-right">{{ store.product.price }}</em>
+      </h3>
+    </div>
+
+    <script>
+      (function(){
+        var gem = { name: 'Azurite', price: 2.95 };
+        var app = angular.module('gemStore', []);
+        app.controller('StoreController', function() {
+          this.product = gem;
+        });
+      })();
+    </script>
+  </body>
+</html>
