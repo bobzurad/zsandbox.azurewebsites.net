@@ -1,12 +1,12 @@
 angular
   .module('NoteWrangler')
-  .directive('nwCard', 
+  .directive('nwCard',
     [
       function() {
         return {
           restrict: 'E',
           templateUrl: 'templates/directives/nw-card.html',
-          scope: {
+          scope: {  //this scope is isolated to the directive, not inherited from the controller
             header: '=',
             description: '='
           },
@@ -18,4 +18,4 @@ angular
         };
       } //function
     ] //array
-  );//directive  
+  );//directive

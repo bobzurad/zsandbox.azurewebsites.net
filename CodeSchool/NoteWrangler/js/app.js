@@ -20,7 +20,7 @@ angular
         templateUrl: 'templates/pages/users/index.html'
       })
       .otherwise({
-        redirectTo: '/notes'
+        redirectTo: '/'
       });
 
       TweetableProvider.setLength(40);

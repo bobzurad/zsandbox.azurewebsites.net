@@ -1,12 +1,16 @@
 angular
   .module('NoteWrangler')
-  .controller('NotesCreateController', 
-    ['$http', 
+  .controller('NotesCreateController',
+    ['$http',
       function($http) {
         'use strict';
-        
+
         this.saveNote = function(note){
-          $http({method: 'POST', url: '/notes', data: note});
+          controller.errors = null;
+          $http({method: 'POST', url: '/notes', data: note})
+            .catch(function(note) {
+              controller.errors = note.data.error;
+            });
         };
       }
     ]
