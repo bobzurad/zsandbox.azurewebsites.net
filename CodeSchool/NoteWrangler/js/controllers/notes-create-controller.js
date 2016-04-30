@@ -5,11 +5,20 @@ angular
       function($http) {
         'use strict';
 
+        var controller = this;
+        
+        controller.note = new Note();
+
         this.saveNote = function(note){
           controller.errors = null;
-          $http({method: 'POST', url: '/notes', data: note})
+          controller.updating = true;
+
+          note.$save(note)
             .catch(function(note) {
-              controller.errors = note.data.error;
+              controller.errors = [note.data.error];
+            })
+            .finally(function() {
+              controller.updating = false;
             });
         };
       }

@@ -5,8 +5,11 @@ angular
       function NoteFactory($resource) {
         'use strict';
 
-        return $resource("/notes", {}, {
+        return $resource("/notes/:id", {}, {
           tweetIt: {
+            method: 'PUT'
+          },
+          update: {
             method: 'PUT'
           }
         });

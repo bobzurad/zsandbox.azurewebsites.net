@@ -1,17 +1,13 @@
 angular
   .module('NoteWrangler')
-  .controller('NotesShowController', 
-    ['$http', '$routeParams',
-      function($http, $routeParams) {
+  .controller('NotesShowController',
+    ['$http', '$routeParams', 'Note',
+      function($http, $routeParams, Note) {
         'use strict';
-        
+
         var controller = this;
-        
-        $http
-          .get('/notes/' + $routeParams.id)
-          .success(function(data) {
-            controller.note = data;
-          });
+
+        controller.note = Note.get({id: $routeParams.id});
       } 
     ]
   );
