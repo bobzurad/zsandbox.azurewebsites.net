@@ -6,7 +6,7 @@
 
     <div class="note-wrapper">
       <a class="card-notes" ng-repeat="note in notes">
-        <nw-card header="note.title" description="note.description"></nw-card>
+        <nw-card header="note.title" body="note.description"></nw-card>
         <button class="btn" ng-click="tweetThatNote(note.description)">Tweet It!</button>
       </a>
     </div>

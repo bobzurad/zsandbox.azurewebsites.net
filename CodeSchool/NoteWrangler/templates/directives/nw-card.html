@@ -1,14 +1,10 @@
-<div class="note-wrapper">
-  <div class="note-content">
-    <div class="notes-header">
-      <h1 title="Notes">Notes</h1>
-    </div>
+<div class="card" title="{{header}}">
+  <img ng-src="{{image}}" ng-if="image">
 
-    <div class="note-wrapper">
-      <a class="card-notes" ng-repeat="note in notesCtrl.notes">
-        <nw-card header="note.title" description="note.description" tweeted="note.tweeted"></nw-card>
-      </a>
-    </div>
-
+  <div ng-if="icon">
+    <i class="icon icon-card {{icon}}"></i>
   </div>
+
+  <h2 class="h3">{{header}}</h2>
+  <p class="hidden">{{body}}</p>
 </div>
