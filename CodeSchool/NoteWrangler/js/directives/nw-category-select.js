@@ -12,6 +12,9 @@ angular
         link: function(scope, elements, attrs) {
           scope.categories = Category.query();
         },
+        scope: {
+          activeCategory: '='
+        },
         controller: function($scope) {
           var controller = this;
           controller.getActiveCategory = function() {
