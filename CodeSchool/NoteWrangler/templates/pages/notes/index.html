@@ -8,7 +8,7 @@
 
     <div class="note-wrapper">
       <a class="card-notes"
-        ng-repeat="note in notes | filter: {category: {name: activeCategory }} | filter:search"
+        ng-repeat="note in notes"
         ng-href="#/notes/{{note.id}}">
         <nw-card header="note.title" body="note.description"></nw-card>
         <button class="btn" ng-click="tweetThatNote(note.description)">Tweet It!</button>

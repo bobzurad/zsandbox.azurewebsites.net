@@ -14,7 +14,7 @@ angular
           require: '^nwCategorySelect',  //lets nwCategoryItem directive access nwCategorySelect's controller. ^ indicates a parent directive
           link: function(scope, elements, attrs, nwCategorySelectCtrl) {
             scope.makeActive = function() {
-              mwCategorySelectCtrl.setActiveCategory(scope.category);
+              nwCategorySelectCtrl.setActiveCategory(scope.category);
             };
             scope.isCategoryActive = function() {
               return nwCategorySelectCtrl.getActiveCategory() === scope.category.name;

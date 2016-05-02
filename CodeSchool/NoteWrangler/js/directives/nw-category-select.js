@@ -1,8 +1,8 @@
 angular
   .module('NoteWrangler')
   .directive('nwCategorySelect',
-  ['Category',
-    function(Category) {
+  ['$http', 'Category',
+    function($http, Category) {
       'use strict';
 
       return {
@@ -10,7 +10,12 @@ angular
         restrict: 'E',
         templateUrl: 'templates/directives/nw-category-select.html',
         link: function(scope, elements, attrs) {
-          scope.categories = Category.query();
+          //scope.categories = Category.query();
+          scope.categories = $http
+            .get('categories.json')
+            .success(function(data) {
+              scope.categories = data;
+            });
         },
         scope: {
           activeCategory: '='
