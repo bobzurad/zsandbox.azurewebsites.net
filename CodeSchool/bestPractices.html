@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CodeSchool - JavaScript Best Practices</title>
+</head>
+<body>
+  <p>open the console, dummy</p>
+  <script>
+    //other resources:
+    //http://modernweb.com/2013/12/23/45-useful-javascript-tips-tricks-and-best-practices/
+    //https://www.thinkful.com/learn/javascript-best-practices-1/
+
+    //==========================================
+
+
+    //put script tags at bottom of page, or use async attribute:
+    //https://css-tricks.com/async-attribute-scripts-bottom/
+
+
+    //==========================================
+
+
+    /* Document Fragment
+
+    DocumentFragments are DOM Nodes. They are never part of the main DOM tree.
+    The usual use case is to create the document fragment, append elements to the
+    document fragment and then append the document fragment to the DOM tree. In the
+    DOM tree, the document fragment is replaced by all its children.
+
+    Since the document fragment is in memory and not part of the main DOM tree,
+    appending children to it does not cause page reflow (computation of element's
+    position and geometry). Consequently, using document fragments often results
+    in better performance.
+
+    documentFragment are supported in all browsers, even Internet Explorer 6,
+    so there is no reason to not use them.
+
+    https://developer.mozilla.org/en-US/docs/Web/API/Document/createDocumentFragment
+    */
+
+
+    //==========================================
+
+
+    var array = ['The', 'Inverted', 'Peninsula', 'reminds', 'you', 'of',
+                 'something', 'just', 'at', 'the', 'fringe', ',',
+                 'just', 'out', 'of', 'grasp', '.'];
+
+    //outputs: "The Inverted Peninsula reminds you of something just at the fringe , just out of grasp ."
+    console.log(array.join(' '));
+
+
+    //==========================================
+
+
+    //how to measure the exection time of code
+
+    //note: In the timing of one particular process, the messages must match
+    //exactly for the opening .time() and the closing .timeEnd().
+
+    console.time("some message");
+
+    console.timeEnd("some message");
+
+
+    //==========================================
+
+
+    /*
+    Number.prototype.toFixed([digits])
+    The toFixed() method formats a number using fixed-point notation.
+
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed
+    */
+
+
+    //==========================================
+
+
+    var lambString = '57 lazy lambs do bask in the sun.';
+    console.log(parseInt(lambString, 10));    //output: 57  <--- wtf????
+
+    lambString = '57.98 lazy lambs do bask in the sun.';
+    console.log(parseFloat(lambString));
+
+    //parseInt() will accept radix values between 2 and 36
+
+
+    //==========================================
+
+    //closure
+    var someGlobalVar = 'hi';
+
+    var CAVESOFCLARITY = function(valueOfSomeGlobalVar) {
+      //private to CAVESOFCLARITY
+      var treasureChests = 3;
+
+      return {
+        stalactites: 4235,
+        stalagmites: 3924,
+        bats: 345,
+        SECRET: {
+          openChest: function() {
+            treasureChests--;
+            alert('DA DADADA DAAAAAAA!');
+          }
+        }
+      };
+    }(someGlobalVar);
+
+
+
+
+
+    //==========================================
+
+    //augmentation
+    var CAVESOFCLARITY = function() {
+      var treasureChests = 3;
+      var bats = 345;
+
+      return {
+        stalactites: 4235,
+        stalagmites: 3924,
+        SECRET: {
+          openChest: function() {
+            treasureChests--;
+            alert('DA DADADA DAAAAAAA!');
+          }
+        }
+      };
+    }();
+
+    //now we augment CAVESOFCLARITY (possibliy in another file)
+    CAVESOFCLARITY = function(caves) {
+      //private to this augmented version of CAVESOFCLARITY
+      var sandScript = '';
+
+      //adding a function to CAVESOFCLARITY
+      caves.setSandScript = function(message) {
+        sandScript = message;
+      };
+
+      return caves;
+    }(CAVESOFCLARITY);
+
+    /*
+    In simple augmentation, the module file and the augmentation file do not share their private state.
+    Augmented module properties may only access the private data from their file's closure.
+    Private data from the original closure will not be lost, and will be accessible to all
+      original properties that referenced it.
+    */
+
+    //==========================================
+
+
+  </script>
+</body>
+</html>
