@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ES2015</title>
+</head>
+<body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      "use strict";
+      //===========================LESSON 1=====================================
+
+      //scoping examples
+      //var variables are scoped to the function (and hoisted to the top of the function)
+      //let variables are scoped to the nearest block
+      //const variables are scoped to the nearest block
+      function theFunction() {
+        var scopedToTheFunction;
+        let someVar;
+
+        if (true) {
+          let scopedToThisConditionalBlock;
+          let someVar; //<-- this is valid. separate variable in a separate scope
+          const someConstant = 10;    //when using const, an initial value must be provided
+        } else {
+          var alsoScopedToTheFunction;
+        }
+      }
+
+      //===========================LESSON 2=====================================
+
+      //parameter checking (the old way)
+      function loadProfiles(userNames) {
+        let names = typeof userNames !== 'undefined' ? userNames : [];
+        let namesLength = names.length;
+      }
+
+      //parameter checking (the es2015 way, with default parameters!)
+      function loadProfilesEs2015(userNames = []) {
+        let namesLength = userNames.length;
+      }
+
+      //========================================================================
+
+      function optionsParam(someOtherVar, options) {
+        console.log(someOtherVar);
+        console.log(options.name);
+        console.log(options.age);
+      }
+
+      optionsParam("hello", { name: "bob", age: 33 });
+
+      function optionsParamEs2015(someOtherVar, { name, age } = {}) {
+        console.log(someOtherVar);
+        console.log(name);
+        console.log(age);
+      }
+
+      optionsParamEs2015("hello", { name: 'bob', age: 33 });
+      optionsParamEs2015("hello", { age: 64});
+
+      //========================================================================
+      //rest paramters must ALWAYS be the last argument of a function
+
+      function restParams(someParam, ...aRestParam) { //... is part of the rest parameter syntax
+        console.log("someParam = ", someParam);
+        for (let i in aRestParam) {
+          console.log("rest param: ", aRestParam[i]);
+        }
+      }
+
+      restParams("hi", "one", "two", "three");
+
+      //========================================================================
+
+      var spreadOperator = ["bob", "corinne", "addison"];
+      console.log(spreadOperator);    //logs array object
+      console.log(...spreadOperator); //logs individual contents of array
+
+      //========================================================================
+      //arrow function
+
+      let printName = function(value){
+        console.log(value);
+      }
+
+      let printNameEs2015 = (value) => {
+        console.log(value);
+      }
+
+      //========================================================================
+      //arrow functions and lexical binding
+
+      function TagComponent(target, urlPath) {
+        this.targetElement = target;
+        this.urlPath = urlPath;
+      }
+      TagComponent.prototype.render = function() {
+        $.getJSON(this.urlPath, function(data) {
+          let tags = data.tags;
+          console.log(this.targetElement, ...tags);   //this.targetElement will be logged as undefined
+        });
+      }
+
+      let tagComponent = new TagComponent("#someDiv", "tags.json");
+      tagComponent.render();
+
+      //the ES2015 way
+      function TagComponentEs2015(target, urlPath) {
+        this.targetElement = target;
+        this.urlPath = urlPath;
+      }
+      TagComponentEs2015.prototype.render = function() {
+        $.getJSON(this.urlPath, (data) => {
+          //with arrow functions (lexical binding), this function is in the same scope as TagComponentEs2015
+          let tags = data.tags;
+          console.log(this.targetElement, ...tags);
+        });
+      }
+
+      let tagComponentEs2015 = new TagComponentEs2015("#someDiv", "tags.json");
+      tagComponentEs2015.render();
+
+      //========================================================================
+
+      console.log("ready");
+    });
+  </script>
+</body>
+</html>
