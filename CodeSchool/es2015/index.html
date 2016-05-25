@@ -9,6 +9,7 @@
   <script>
     $(document).ready(function() {
       "use strict";
+      console.log("ready");
       //===========================LESSON 1=====================================
 
       //scoping examples
@@ -122,9 +123,140 @@
       let tagComponentEs2015 = new TagComponentEs2015("#someDiv", "tags.json");
       tagComponentEs2015.render();
 
+
+      //=========================LESSON 3=======================================
+      //object initializer
+      let name = "bob";
+      let age = 33;
+      let user = { name, age };
+      console.log(user.name);
+      console.log(user.age);
+
+      function buildUser(firstName, lastName) {
+        let fullName = firstName + ' ' + lastName;
+
+        return { firstName: firstName, lastName: lastName, fullName: fullName };
+      }
+      function buildUserEs2015(firstName, lastName) {
+        let fullName = firstName + ' ' + lastName;
+
+        return { firstName, lastName, fullName };
+      }
+
+      let user1 = buildUser("bob", "zurad");
+      console.log(user1.firstName, user1.lastName, user1.fullName);
+
+      let user2 = buildUserEs2015("corinne", "zurad");
+      console.log(user2.firstName, user2.lastName, user2.fullName);
+
+      //object destructuring
+      let { firstName, fullName } = buildUserEs2015("addison", "zurad");
+      console.log(firstName, fullName);
+
+      //========================================================================
+      //method initializer
+      function buildUser2Es2015(firstName, lastName, postCount) {
+        let fullName = firstName + ' ' + lastName;
+        const ACTIVE_POST_COUNT = 10;
+
+        return {
+          firstName,
+          lastName,
+          fullName,
+          isActive() {
+            return postCount >= ACTIVE_POST_COUNT;
+          }
+        };
+      }
+
+      let user3 = buildUser2Es2015("homer", "simpson", 20);
+      console.log("is ", user3.fullName, " active? ", user3.isActive());
+
+      //========================================================================
+      //template strings
+      let name2 = "bob";
+      let admin = { fullName: "ned flanders "};
+
+      let veryLongText = `Hi ${name},
+
+      this is some very
+      very
+
+      veeeryy long text.
+
+      Regards,
+        ${admin.fullName}
+      `;
+
+      console.log(veryLongText);
+
+      //========================================================================
+      //Object.assign
+      function options(options) {
+        let size = options.size || 'large';
+        let color = options.color || 'blue';
+
+        console.log(size, color);
+      }
+      function optionsEs2015(options = {}) {
+        let defaults = {
+          size: 'large',
+          color: 'blue'
+        };
+
+        let settings = Object.assign({}, defaults, options);
+
+        console.log(settings.size, settings.color);
+      }
+
+      options({size: 'small'});
+      optionsEs2015({size: 'small'});
+
+      //Object.assign does NOT behave the same as jQuery's $.extend()
+      //example:
+      let defaults = {
+        container:       ".main",
+        isActiveClass:   ".is-active"
+      };
+      let options1 = {
+        container:       ".main-container",
+        isActiveClass:   ".is-active-element"
+      };
+      let options2 = {
+        isActiveClass:   ".is-active-content"
+      };
+      let settings = Object.assign({}, defaults, options1, options2);
+      console.log(settings.container, settings.isActiveClass);    //outputs .main-container .is-active-content
+
+
+      //=======================LESSON 4=========================================
+      //array destructuring
+      let users = ["bob", "corrine", "addison"];
+      //the old way
+      let a1 = users[0];
+      let b1 = users[1];
+      let c1 = users[2];
+      console.log(a1, b1, c1);
+      //the ES2015 way
+      let [a2, b2, c2] = users;
+      console.log(a2, b2, c2);
+      //and if we want to skip values
+      let [a3, , b3] = users;
+      console.log(a3, b3);    //outputs: bob, addison
+      //we can also use rest parameters
+      let [a4, ...theRest] = users;
+      console.log(a4, theRest);
+      console.log(a4, ...theRest);
+
       //========================================================================
 
-      console.log("ready");
+
+      //========================================================================
+
+
+
+
+      console.log("done");
     });
   </script>
 </body>
