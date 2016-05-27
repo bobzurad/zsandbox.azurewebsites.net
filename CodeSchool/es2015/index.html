@@ -175,7 +175,7 @@
       //========================================================================
       //template strings
       let name2 = "bob";
-      let admin = { fullName: "ned flanders "};
+      let sysAdmin = { fullName: "ned flanders "};
 
       let veryLongText = `Hi ${name},
 
@@ -185,7 +185,7 @@
       veeeryy long text.
 
       Regards,
-        ${admin.fullName}
+        ${sysAdmin.fullName}
       `;
 
       console.log(veryLongText);
@@ -248,13 +248,85 @@
       console.log(a4, theRest);
       console.log(a4, ...theRest);
 
-      //========================================================================
-
 
       //========================================================================
+      //for..in
+      for (let index in users) {
+        console.log(users[index]);
+      }
 
+      //for..of (es2015)
+      for (let user of users) {
+        console.log(user);
+      }
 
+      //using for..of with objects
+      console.log(typeof users[Symbol.iterator]); //outputs function
+      //so the object must have an iterator function defined in it to use for..of
 
+      //========================================================================
+      //array.find (es2015)
+      let users2 = [
+        { name: "bob", isAdmin: true },
+        { name: "corinne", isAdmin: true },
+        { name: "addison", isAdmin: false}
+      ];
+
+      //these 3 examples output the same thing
+      //array.find returns the *first* object that matches the condition
+      let admin = users2.find(function(user) {
+        return user.isAdmin;
+      });
+      console.log(admin);
+      let admin2 = users2.find((user) => {
+        return user.isAdmin;
+      })
+      console.log(admin2);
+      let admin3 = users2.find(user => user.isAdmin);
+      console.log(admin3);
+
+      //========================================================================
+      //maps (key/value pairs)
+      //refrence:
+      //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
+
+      //using an object as a key
+      let mapUser1 = { name: "bob" };
+      let mapUser2 = { name: "corinne"};
+
+      let totalReplies = new Map();
+      totalReplies.set(mapUser1, 5);
+      totalReplies.set(mapUser2, 42);
+
+      console.log(totalReplies.get(mapUser1));
+      console.log(totalReplies.get(mapUser2));
+      console.log(totalReplies.has(mapUser1));
+
+      //========================================================================
+      //iterating a map with for..of
+      let mapSettings = new Map()
+
+      mapSettings.set("user", "bob"),
+      mapSettings.set("topic", "ES2015");
+      mapSettings.set("userReplies", ["so cool", "yay!"]);
+
+      for (let [key, value] of mapSettings) {
+        console.log(key + '=' + value);
+      }
+
+      //========================================================================
+      //WeakMap
+      //same as Map, but key must be an object. key cannot be primative data type or string
+      //WeakMaps are not iterable. cannot use for..of on a WeakMaps
+      //why use WeakMaps? better with memory
+      //individual items in a WeakMap can be garbage collected
+
+      //========================================================================
+      //========================================================================
+      //========================================================================
+      //========================================================================
+      //========================================================================
+      
 
       console.log("done");
     });
