@@ -321,12 +321,47 @@
       //why use WeakMaps? better with memory
       //individual items in a WeakMap can be garbage collected
 
+
+      //========================================================================
+      //Sets (like arrays, but enforces unique keys. duplicate entries are ignored)
+      //Sets store unique values of any type, whether primitive values or object references
+      //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
+
+      let tags = new Set();
+      tags.add("JavaScript");
+      tags.add("Programming");
+      tags.add({ version: "2015"});
+      tags.add("Web");
+
+      for (let tag of tags) {
+        console.log(tag);
+      }
+
+      let [a, b, c, d] = tags;
+      console.log(a, b, c, d);
+
+      //========================================================================
+      //WeakSet
+      //only stores objects
+      //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet
+      //
+      //has 2 methods that Set doesn't have: .has() and .delete()
+      //cannot use for..of with a WeakSet
+      //has no methods for reading data
+
+      let weakTags = new WeakSet();
+      weakTags.add({ name: "JavaScript" });
+
+      let iOS = { name: "iOS" };
+      weakTags.add(iOS);
+
+      console.log(weakTags.has(iOS));
+
       //========================================================================
       //========================================================================
       //========================================================================
       //========================================================================
-      //========================================================================
-      
+
 
       console.log("done");
     });
