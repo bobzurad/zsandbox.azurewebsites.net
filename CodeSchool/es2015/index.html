@@ -357,6 +357,62 @@
 
       console.log(weakTags.has(iOS));
 
+
+      //=========================LESSON 5=======================================
+      //Classes
+
+      //old way
+      function SponsorWidget(name, description, url) {
+        this.name = name;
+        this.description = description;
+        this.url = url;
+      }
+      SponsorWidget.prototype.render = function() {
+        console.log("rendering from SponsorWidget");
+      };
+
+      let sponsorWidget = new SponsorWidget("widget1", "someWidget", "http://google.com");
+      sponsorWidget.render();
+
+
+      //ES2015 way
+      class Widget {
+
+        constructor() {
+          this.baseCSS = "site-widget";
+        }
+
+        parse(value) {
+          return value;
+        }
+      }
+
+      class SponsorWidgetES2015 extends Widget {
+
+        constructor(name, description, url) {
+          super();
+
+          this.name = name;
+          this.description = description;
+          this.url = url;
+        }
+
+        render() {
+          let parsedName = super.parse(this.name);  //calling parse method from Widget
+          let css = this.baseCSS;
+          console.log("rendering from SponsorWidgetES2015");
+          console.log(parsedName);
+          console.log(css);
+        }
+
+        parse(value) { //an override
+
+        }
+      }
+
+      let sponsorWidgetES2015 = new SponsorWidgetES2015("widget1", "someWidget", "http://google.com");
+      sponsorWidgetES2015.render();
+
       //========================================================================
       //========================================================================
       //========================================================================
