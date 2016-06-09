@@ -423,7 +423,43 @@
       //.jshintrc tells Atom's jshint that we're using ES6
 
 
-      //========================================================================
+
+      //========================LESSON 6========================================
+      //Promises
+      //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+
+      function getTagsFromServer() {
+        return new Promise(function(resolve, reject) {
+
+          let url = './tags.json';
+          let request = new XMLHttpRequest();
+
+          request.open('GET', url, true);
+          request.onload = function() {
+            if (request.status >= 200 && request.status < 400) {
+              resolve(JSON.parse(request.response).tags);
+            } else {
+              reject(new Error(request.status));
+            }
+          };
+          request.onerror = function() {
+            reject(new Error("some error occured"));
+          };
+
+          request.send();
+        })
+      };
+
+      getTagsFromServer()
+        .then(function(tags) {
+          return tags.filter((tag) => tag === "action");
+        }).then(function(actionTag) {
+          console.log(actionTag);
+        }).catch(function(error) {
+          console.log(error);
+        });
+
+
       //========================================================================
       //========================================================================
 
