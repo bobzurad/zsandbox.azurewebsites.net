@@ -461,8 +461,94 @@
 
 
       //========================================================================
-      //========================================================================
+      //Iterators/Iterables
+      //objects with an iterator function
+      //iterator function returns { done: false, value: <value> }
+      //when the iterator should stop, it returns { done: true, value: undefined }
 
+      let post = {
+        title: "New Features in JS",
+        replies: 19
+      };
+
+      post[Symbol.iterator] = function() {
+        let properties = Object.keys(this);
+        let count = 0;
+        let isDone = false;
+
+        let next = () => {
+          if (count >= properties.length) {
+            isDone = true;
+          }
+          return { done: isDone, value: this[properties[count++]] };
+        };
+
+        return { next };
+      }
+
+      //let's see that iterator in action!
+      for (let p of post) {
+        console.log(p);
+      }
+
+      console.log([...post]);
+
+      let [title, replies] = post;
+      console.log(title);
+      console.log(replies);
+
+
+      //========================================================================
+      //Generators
+      //a function that returns iterator objects using the 'yield' keyword
+      //iterotor objects returned automatically have the next function
+
+      function *nameList() {
+        yield "Tyler";    //returns { done: false, value: "Tyler" }
+        yield "Bob";      //returns { done: false, value: "Bob" }
+      }
+
+      //could also be
+      //function * nameList() {...
+      //function* nameList() {...
+
+      for (let name of nameList()) {
+        console.log(name);
+      }
+
+      console.log([...nameList()]);
+
+      let [first, second] = nameList();
+      console.log(first);
+      console.log(second);
+
+      //========================================================================
+      //a better version of the post iterator above
+
+      let postG = {
+        title: "New Features in JS - and Generators!",
+        replies: 190
+      };
+
+      postG[Symbol.iterator] = function *() {
+        let properties = Object.keys(this);
+        for (let p of properties) {
+          yield this[p];
+        }
+      }
+
+      //let's see that iterator in action!
+      for (let p of postG) {
+        console.log(p);
+      }
+
+      console.log([...postG]);
+
+      let [titleG, repliesG] = postG;
+      console.log(titleG);
+      console.log(repliesG);
+
+      //========================================================================
 
       console.log("done");
     });
