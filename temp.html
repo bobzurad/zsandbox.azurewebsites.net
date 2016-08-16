@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>temp</title>
+
+    <script src="js/core/jquery.js"></script>
+  </head>
+  <body>
+
+    <div>
+      <button id="button1">
+        Show
+      </button>
+    </div>
+    <div>
+      <button id="button2">
+        Show
+      </button>
+    </div>
+
+    <script>
+      $(document).ready(function() {
+        $("button[id^=button]").on('click', function(e) {
+          var button = e.currentTarget;
+          if (button.textContent.trim() === "Show") {
+            button.textContent = "Hide";
+          } else {
+            button.textContent = "Show";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
