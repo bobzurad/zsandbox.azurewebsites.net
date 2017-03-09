@@ -25,6 +25,7 @@
     "highcharts": "^4.2.4",
     "jquery": "^2.2.3",
     "requirejs": "^2.2.0",
+    "sinch-rtc": "^1.4.5",
     "underscore": "^1.8.3"
   }
 }

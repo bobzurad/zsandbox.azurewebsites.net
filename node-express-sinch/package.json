@@ -1,0 +1,19 @@
+{
+  "name": "node-express-sinch",
+  "version": "1.0.0",
+  "description": "sinch voice test",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bobzurad/zsandbox.azurewebsites.net/tree/master/node-express-sinch"
+  },
+  "author": "Bob Zurad",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2"
+  }
+}
