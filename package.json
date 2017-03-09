@@ -10,6 +10,9 @@
   "repository": "https://github.com/bobzurad/zsandbox.azurewebsites.net",
   "private": true,
   "license": "MIT",
+  "engines": {
+    "node": "6.10.0"
+  },
   "devDependencies": {
     "http-server": "^0.6.1"
   },
