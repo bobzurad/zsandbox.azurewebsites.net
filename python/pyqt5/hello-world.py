@@ -1,6 +1,6 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMessageBox, QDesktopWidget, \
-    QToolTip, QMainWindow
+from PyQt5.QtWidgets import QApplication, QPushButton, QMessageBox, QDesktopWidget, \
+    QToolTip, QMainWindow, QAction, QMenu
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtGui import QIcon, QFont
 
@@ -26,11 +26,34 @@ class App(QMainWindow):
         self.setWindowIcon(QIcon('doomavatar.jpeg'))
         self.statusBar().showMessage("Ready")
 
-        button = QPushButton('Show Alert', self)
-        button.setToolTip('this is a <b>tooltip</b>')
-        button.resize(button.sizeHint())    # not sure what this does or if necessary
-        button.move(100, 70)
-        button.clicked.connect(self.on_click)
+        # exit action
+        exit_action = QAction(QIcon("doomavatar.jpeg"), "&Exit", self)
+        exit_action.setShortcut("Ctrl+Q")
+        exit_action.setStatusTip("Exit application")
+        exit_action.triggered.connect(super().close)
+
+        # menu and sub menu
+        import_menu = QMenu("Import", self)
+        import_account_action = QAction("Import Account", self)
+        import_menu.addAction(import_account_action)
+
+        # new action
+        new_action = QAction("New", self)
+
+        # menu bar
+        menu_bar = self.menuBar()
+
+        # file menu
+        file_menu = menu_bar.addMenu("&File")
+        file_menu.addAction(new_action)
+        file_menu.addMenu(import_menu)
+        file_menu.addAction(exit_action)
+
+        alert_button = QPushButton('Show Alert', self)
+        alert_button.setToolTip('this is a <b>tooltip</b>')
+        alert_button.resize(alert_button.sizeHint())    # not sure what this does or if necessary
+        alert_button.move(100, 70)
+        alert_button.clicked.connect(self.alert_button__on_click)
 
         self.show()
 
@@ -51,7 +74,7 @@ class App(QMainWindow):
             event.ignore()
 
     @pyqtSlot()
-    def on_click(self):
+    def alert_button__on_click(self):
         print('button clicked')
         QMessageBox.about(self, "Alert", "Hello World!!!")
 
