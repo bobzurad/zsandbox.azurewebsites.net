@@ -72,6 +72,8 @@ class App(QMainWindow):
         grid.addWidget(self.xylabel, 0, 0, Qt.AlignTop)
         self.setMouseTracking(True)
         self.setLayout(grid)
+        self.xylabel.move(50, 200)
+        self.xylabel.setFixedWidth(200)
 
         # two buttons, same handler
         btn1 = QPushButton("Button 1", self)
