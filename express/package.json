@@ -1,0 +1,14 @@
+{
+  "name": "express-test",
+  "version": "1.0.0",
+  "description": "fun with express",
+  "main": "hello-world.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bob Zurad",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
