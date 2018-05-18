@@ -1,0 +1,37 @@
+{
+    //this file is only here for reference. put this file in .vscode/ folder
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch typescript/vscode-debug",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/typescript/vscode-debug/src/app.ts",
+            "stopOnEntry": false,
+            "args": [],
+            "cwd": "${workspaceRoot}/typescript/vscode-debug/",
+            "preLaunchTask": null,            
+            "runtimeExecutable": null,
+            "runtimeArgs": [
+                "--nolazy"
+            ],
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "console": "internalConsole",
+            "sourceMaps": true,
+            "outDir": "${workspaceRoot}/typescript/vscode-debug/dist"
+        },
+        {
+            "name": "Attach typescript/vscode-debug",
+            "type": "node",
+            "request": "attach",
+            "port": 5858,
+            "address": "localhost",
+            "restart": false,
+            "sourceMaps": false,
+            "localRoot": "${workspaceRoot}/typescript/vscode-debug",
+            "remoteRoot": null
+        }
+    ]
+}
