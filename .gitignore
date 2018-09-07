@@ -6,3 +6,7 @@ bower_components/
 tmp
 .DS_Store
 .vscode/
+
+# compiled qml files
+*.qmlc
+*.jsc
