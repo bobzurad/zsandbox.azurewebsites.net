@@ -1,0 +1,9 @@
+formatVersion: 1
+formatType: am-application
+---
+id:      'app2'
+icon:    'icon.png'
+code:    'mainwindow.qml'
+runtime: 'qml'
+name:
+  en: 'App2'

@@ -1,8 +1,8 @@
 import QtQuick 2.6
-import QtQuick.Window 2.2
 import QtQuick.Controls 1.4
+import QtApplicationManager 1.0
 
-ApplicationWindow {
+ApplicationManagerWindow {
     id: mainWindow
 
     // propertys can be set directly in the qml file.
@@ -16,6 +16,6 @@ ApplicationWindow {
             top: parent.top
             left: parent.left
         }
-        text: "hello world 2"
+        text: "hello world"
     }
 }
