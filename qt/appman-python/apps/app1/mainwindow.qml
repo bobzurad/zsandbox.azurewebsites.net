@@ -5,17 +5,51 @@ import QtApplicationManager 1.0
 ApplicationManagerWindow {
     id: mainWindow
 
-    // propertys can be set directly in the qml file.
     width:  320
     height:  240
     color: "white"
     visible: true
 
     Text {
+        width: parent.width
         anchors {
             top: parent.top
-            left: parent.left
+            topMargin: 10
         }
-        text: "hello world"
+        horizontalAlignment: Text.AlignHCenter
+        text: view_model.current_value
+        font.pointSize: 48
+    }
+
+    Button {
+        id: upButton
+        width: 100
+        height: 50
+        anchors {
+            bottom: parent.bottom
+            right: parent.right
+            bottomMargin: 2
+            rightMargin: 2
+        }
+        text: "+"
+        onClicked: {
+            view_model.increment()
+        }
+    }
+
+    Button {
+        id: downButton
+        width: 100
+        height: 50
+        anchors {
+            bottom: parent.bottom
+            left: parent.left
+            bottomMargin: 2
+            leftMargin: 2
+        }
+        text: "-"
+        onClicked: {
+            view_model.decrement()
+        }
     }
 }
