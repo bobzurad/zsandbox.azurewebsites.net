@@ -1,7 +1,9 @@
 import QtQuick 2.6
 import QtQuick.Controls 1.4
 import QtQuick.Window 2.2
+//import QtApplicationManager 1.0   //this is currently throwing an error: module "QtApplicationManager" is not installed
 
+//ApplicationManagerWindow {    // can't use this until ApplicationManager import is working
 ApplicationWindow {
     id: mainWindow
 
