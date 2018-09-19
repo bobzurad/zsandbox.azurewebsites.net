@@ -13,7 +13,6 @@ if __name__ == '__main__':
 
     engine = QQmlApplicationEngine()
     context = engine.rootContext()
-    engine.addImportPath("/home/bob/Baxter/git/bsb-core/")
     engine.addImportPath("/home/bob/Qt/5.11.2/Automotive/sources/qtapplicationmanager/dummyimports/")
 
     # create a view model
