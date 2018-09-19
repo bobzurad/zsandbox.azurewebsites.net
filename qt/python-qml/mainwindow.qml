@@ -1,9 +1,10 @@
 import QtQuick 2.6
 import QtQuick.Controls 1.4
 import QtQuick.Window 2.2
-//import QtApplicationManager 1.0   //this is currently throwing an error: module "QtApplicationManager" is not installed
+import QtApplicationManager 1.0
+import bsb_core.modules.base_ui.view 1.0
 
-//ApplicationManagerWindow {    // can't use this until ApplicationManager import is working
+//ApplicationManagerWindow {    // use this instead of ApplicationWindow when running this app in the context of the Qt Application Manager
 ApplicationWindow {
     id: mainWindow
 
@@ -13,6 +14,7 @@ ApplicationWindow {
     visible: true
 
     Text {
+        id: currentValue
         width: parent.width
         anchors {
             top: parent.top
@@ -22,6 +24,13 @@ ApplicationWindow {
         text: view_model.current_value
         font.pointSize: 48
     }
+
+    BsbText {
+        anchors {
+            top: currentValue.bottom
+        }
+        text: "test"
+    }    
 
     Button {
         id: upButton
