@@ -1,7 +1,7 @@
 Goals:
  - Use the Qt Application Manager to run 2 qml apps that use python models
 
-To ensure dependencies for the python apps are installed, run `"pip install ."` in each of the app folders (where setup.py)
+To ensure dependencies for the python apps are installed, run `"pip install ."` in each of the app folders (where setup.py is for each app)
 
 To run from Qt Application Manager:
  - appman -c am-config.yaml -r
