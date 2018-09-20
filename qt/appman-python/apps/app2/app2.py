@@ -12,7 +12,7 @@ if __name__ == '__main__':
     context = engine.rootContext()
 
     # import the path for the Qt Application Manager
-    engine.addImportPath("/home/bob/Qt/5.11.2/Automotive/sources/qtapplicationmanager/dummyimports/")
+    #engine.addImportPath("/home/bob/Qt/5.11.2/Automotive/sources/qtapplicationmanager/dummyimports/")
 
     # create a view model
     view_model = ViewModel()
