@@ -1,27 +1,28 @@
 import sys
 import os
 
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtCore import QUrl
-from PyQt5.QtQml import QQmlComponent, QQmlApplicationEngine
-from PyQt5.QtQuick import QQuickWindow
+from PySide2.QtGui import QGuiApplication
+from PySide2.QtQml import QQmlApplicationEngine
 
+from view_model import ViewModel
 
 if __name__ == '__main__':
-    myApp = QApplication(sys.argv)
-
+    myApp = QGuiApplication(sys.argv)
     engine = QQmlApplicationEngine()
     context = engine.rootContext()
 
-    component = QQmlComponent(engine)
-    component.loadUrl(QUrl('mainwindow.qml'))
+    # import the path for the Qt Application Manager
+    engine.addImportPath("/home/bob/Qt/5.11.2/Automotive/sources/qtapplicationmanager/dummyimports/")
 
-    # some boilerplate to make sure the component is ready before showing
-    if component.status() != QQmlComponent.Ready:
-        if component.status() == QQmlComponent.Error:
-            sys.exit(component.errorString())
+    # create a view model
+    view_model = ViewModel()
 
-    root_window: QQuickWindow = component.create()
+    # bind the view model to the context
+    context.setContextProperty('view_model', view_model)
 
-    myApp.exec_()
-    sys.exit()
+    # load the main QML window
+    engine.load('mainwindow.qml')
+    if not engine.rootObjects():
+        sys.exit(-1)
+
+    sys.exit(myApp.exec_())

@@ -1,8 +1,9 @@
 import QtQuick 2.6
 import QtQuick.Controls 1.4
-import QtApplicationManager 1.0
+import QtQuick.Window 2.2
+//import QtApplicationManager 1.0
 
-ApplicationManagerWindow {
+ApplicationWindow {
     id: mainWindow
 
     width:  320

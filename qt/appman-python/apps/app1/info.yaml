@@ -3,7 +3,10 @@ formatType: am-application
 ---
 id:      'app1'
 icon:    'icon.png'
-code:    'mainwindow.qml'
-runtime: 'qml'
+code:    'startup.sh'
+runtime: 'native'
+environmentVariables:   # if you omit environmentVariables, it'll use wayland by default
+  #QT_QPA_PLATFORM: "wayland;xcb"
+  QT_QPA_PLATFORM: "xcb"
 name:
   en: 'App1'

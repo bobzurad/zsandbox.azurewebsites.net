@@ -3,7 +3,7 @@ formatType: am-application
 ---
 id:      'app2'
 icon:    'icon.png'
-code:    'mainwindow.qml'
-runtime: 'qml'
+code:    'startup.sh'
+runtime: 'native'
 name:
   en: 'App2'

@@ -16,10 +16,11 @@ applications:
 
 logging:
   rules:
-    - "*=false"
+    - "*=true"
     - "qt.*=false"
     - "am.*=false"
     - "qml*=true"
+    - "py*=true"
     - "*.warning=true"
     - "*.critical=true"
 
