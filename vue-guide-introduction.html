@@ -20,6 +20,14 @@
       <span v-bind:title="message">
         Hover your mouse over me for a few seconds...
       </span>
+      <br/>
+      <span>This will change: {{ msg }}</span>
+      <br/>
+      <span v-once>This will never change: {{ msg }}</span>
+      <br/>
+      <span>This will change: {{ msg }}</span>
+      <br/>
+      <span>This will also never change: {{ frozenObj.msg }}</span>
     </div>
 
     <div id="app3">
@@ -60,10 +68,17 @@
         }
       })
 
+      var frozenObj = {
+        msg: 'also frozen'
+      }
+      Object.freeze(frozenObj)
+
       var app2 = new Vue({
         el: '#app2',
         data: {
-          message: 'You loaded this data on ' + new Date().toLocaleString()
+          message: 'You loaded this data on ' + new Date().toLocaleString(),
+          msg: 'frozen',
+          frozenObj: frozenObj
         }
       })
 
