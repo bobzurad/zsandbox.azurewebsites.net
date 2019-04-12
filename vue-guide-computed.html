@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8"/>
+    <title>VueJS</title>
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+
+    <div id="example">
+      <p>Original Message: {{ message }}</p>
+      <p>Computed Reversed Message: {{ reversedMessage }}</p>
+      <p>Reversed Message Method: {{ reverseMessage() }}</p>
+      <p>Full Name: {{ fullName }}</p>
+    </div>
+
+    <script>
+      var vm = new Vue({
+        el: '#example',
+        data: {
+          message: "Hello Vue",
+          firstName: "Jon",
+          lastName: "Snow"
+        },
+        computed: {
+          // computed values are cached, and getters by default
+          reversedMessage: function() {
+            return this.message.split('').reverse().join('')
+          },
+          // computed value with getter and setter
+          fullName: {
+            get: function() {
+              return this.firstName + " " + this.lastName
+            },
+            set: function(newValue) {
+              var names = newValue.split(' ')
+              this.firstName = names[0]
+              this.lastName = names[names.length - 1]
+            }
+          }
+        },
+        methods: {
+          // methods are executed every time a template calls them
+          reverseMessage: function() {
+            return this.message.split('').reverse().join('')
+          }
+        }
+      })
+    </script>
+
+  </body>
+  </html>
