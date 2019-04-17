@@ -67,6 +67,13 @@
           v-bind:key="item.id"
         ></todo-item>
       </ol>
+      <p>{{ someObject.favoriteColor }}</p>
+      <p>{{ someObject.title }}</p>
+      <div>
+        <span v-for="n in 10">
+          {{ n }}
+        </span>
+      </div>
     </div>
 
 
@@ -142,7 +149,10 @@
             { text: "clean kitchen" },
             { text: "give Addison bath" },
             { text: "package and freeze chicken" }
-          ]
+          ],
+          someObject: {
+            name: "Jon"
+          }
         }
       })
 
@@ -157,6 +167,19 @@
       Vue.set(app7.todoList, 0, { text: "this will work"})
       app7.$set(app7.todoList, 1, { text: "this will also work"})
       app7.todoList.splice(10)
+
+      //
+      // object change detection caveats
+      //
+      // this is NOT reactive:
+      app7.someObject.favoriteColor = "this won't work"
+      // this is reactive:
+      app7.$set(app7.someObject, "favoriteColor", "black")  // comment out the non-reactive line above to make this work
+      // or, to add multiple reactive properties:
+      app7.someObject = Object.assign({}, app7.someObject, {
+        age: 27,
+        title: "Lord Commander"
+      })
     </script>
 
   </body>

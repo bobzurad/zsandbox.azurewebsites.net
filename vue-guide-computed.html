@@ -16,6 +16,12 @@
       <p>Computed Reversed Message: {{ reversedMessage }}</p>
       <p>Reversed Message Method: {{ reverseMessage() }}</p>
       <p>Full Name: {{ fullName }}</p>
+      <ul>
+        <li v-for="n in evenNumbers">{{ n }}</li>
+      </ul>
+      <ul>
+        <li v-for="n in even(numbers)">{{ n }}</li>
+      </ul>
     </div>
 
     <script>
@@ -24,7 +30,8 @@
         data: {
           message: "Hello Vue",
           firstName: "Jon",
-          lastName: "Snow"
+          lastName: "Snow",
+          numbers: [1, 2, 3, 4, 5, 6]
         },
         computed: {
           // computed values are cached, and getters by default
@@ -41,12 +48,22 @@
               this.firstName = names[0]
               this.lastName = names[names.length - 1]
             }
+          },
+          evenNumbers: function() {
+            return this.numbers.filter(function(number) {
+              return number % 2 === 0
+            })
           }
         },
         methods: {
           // methods are executed every time a template calls them
           reverseMessage: function() {
             return this.message.split('').reverse().join('')
+          },
+          even: function(numbers) {
+            return numbers.filter(function(number) {
+              return number % 2 === 0
+            })
           }
         }
       })
