@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8"/>
+    <title>VueJS</title>
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <!-- v-model will ignore the initial value, checked or selected attributes found on any form elements. 
+          It will always treat the Vue instance data as the source of truth. You should declare the initial
+          value on the JavaScript side, inside the data option of your component. -->
+
+    <div id="app">
+      <!-- input -->
+      <input v-model="inputMessage" placeholder="edit me">
+      <p>Message is: {{ inputMessage }}</p>
+      <br>
+
+      <!-- textarea -->
+      <span>Multiline message is:</span>
+      <p style="white-space: pre-line;">{{ textareaMessage }}</p>
+      <br>
+      <textarea v-model="textareaMessage" placeholder="add multiple lines"></textarea>
+      <br>
+
+      <!-- checkbox -->
+      <input type="checkbox" id="checkbox" v-model="checked">
+      <label for="checkbox">{{ checked }}</label>
+      <br>
+
+      <!-- checkbox array -->
+      <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+      <label for="jack">Jack</label>
+      <input type="checkbox" id="john" value="John" v-model="checkedNames">
+      <label for="john">John</label>
+      <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+      <label for="mike">Mike</label>
+      <br>
+      <span>Checked names: {{ checkedNames }}</span>
+      <br>
+
+      <!-- radio -->
+      <input type="radio" id="one" value="One" v-model="picked">
+      <label for="one">One</label>
+      <br>
+      <input type="radio" id="two" value="Two" v-model="picked">
+      <label for="two">Two</label>
+      <br>
+      <span>Picked: {{ picked }}</span>
+      <br>
+
+      <!-- select -->
+      <select v-model="selected">
+        <option disabled value="">Please select one</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+      </select>
+      <span>Selected: {{ selected }}</span>
+      <br>
+
+    </div>
+
+    <script>
+    
+    var app = new Vue({
+      el: "#app",
+      data: {
+        inputMessage: "",
+        textareaMessage: "",
+        checked: true,
+        checkedNames: [],
+        picked: "",
+        selected: ""
+      }
+    })
+    
+    </script>
+  </body>
+</html>
