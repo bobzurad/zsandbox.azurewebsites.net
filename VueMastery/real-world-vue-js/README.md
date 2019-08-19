@@ -10,15 +10,18 @@ We encourage you to follow the course on Vue Mastery, and code along with us.  T
 | 3 - Optimizing your IDE | [Starting Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson3-editor-start) | [Finished Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson3-editor-finish) |
 | 4 - Vue Router Basics | [Starting Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson4-routing-start) | [Finished Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson4-routing-finish) |
 | 5 - Dynamic Routes & History Mode | [Starting Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson5-dynamic-routing-start) | [Finished Code](https://github.com/Code-Pop/real-world-vue/releases/tag/lesson5-dynamic-routing-finish) |
- 
+
 
 ## Project setup
 ```
+npm install -g @vue/cli
+npm install -g json-server
 npm install
 ```
 
 ### Compiles and hot-reloads for development
 ```
+json-server --watch data.json
 npm run serve
 ```
 
