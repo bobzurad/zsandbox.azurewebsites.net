@@ -15,6 +15,7 @@ export default new Vuex.Store({
       'food',
       'community'
     ],
+    clickCount: 0,
     events: [
       { id: 1, title: '...', organizer: '...' },
       { id: 2, title: '...', organizer: '...' },
@@ -29,7 +30,11 @@ export default new Vuex.Store({
       { id: 4, text: '...', done: false }
     ]
   },
-  mutations: {},
+  mutations: {
+    INCREMENT_CLICK_COUNT(state) {
+      state.clickCount += 1
+    }
+  },
   actions: {},
   getters: {
     catLength: state => {
