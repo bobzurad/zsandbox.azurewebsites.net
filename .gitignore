@@ -7,6 +7,9 @@ tmp
 .DS_Store
 .vscode/
 
+# java
+*.class
+
 # compiled qml files
 *.qmlc
 *.jsc
