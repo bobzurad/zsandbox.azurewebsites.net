@@ -19,7 +19,6 @@ We encourage you to follow the course on Vue Mastery, and code along with us. Th
 
 ```bash
 npm install -g @vue/cli
-npm install -g json-server
 npm install
 ```
 
