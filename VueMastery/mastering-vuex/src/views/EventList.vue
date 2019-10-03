@@ -2,6 +2,21 @@
   <div>
     <h1>Events Listing</h1>
     <EventCard v-for="event in events" :key="event.id" :event="event" />
+    <template v-if="page != 1">
+      <router-link
+        :to="{ name: 'event-list', query: { page: page - 1 } }"
+        rel="prev"
+        >Prev Page</router-link
+      >
+    </template>
+    <template v-if="page > 1 && page * perPage < eventsTotalCount"
+      >&nbsp;|&nbsp;</template
+    >
+    <template v-if="page * perPage < eventsTotalCount">
+      <router-link :to="{ name: 'event-list', query: { page: page + 1 } }"
+        >Next Page</router-link
+      >
+    </template>
     <p>Click Count: {{ clickCount }}</p>
     <input type="number" v-model.number="incrementBy" />
     <button @click="incrementCount">Increment</button>
@@ -10,7 +25,6 @@
 
 <script>
 import EventCard from '@/components/EventCard.vue'
-import EventService from '@/services/EventService.js'
 import { mapState } from 'vuex'
 
 export default {
@@ -20,20 +34,22 @@ export default {
   data() {
     return {
       incrementBy: 1,
-      events: []
+      perPage: 3
     }
   },
   created() {
-    EventService.getEvents()
-      .then(response => {
-        this.events = response.data
-      })
-      .catch(error => {
-        console.log('There was an error: ' + error.response)
-      })
+    this.$store.dispatch('fetchEvents', {
+      perPage: this.perPage,
+      page: this.page
+    })
   },
   // a computed property will only re-evaluate when some of its reactive dependencies have changed
-  computed: mapState(['clickCount']),
+  computed: {
+    page() {
+      return parseInt(this.$route.query.page) || 1
+    },
+    ...mapState(['events', 'eventsTotalCount', 'clickCount'])
+  },
   // a method invocation will always run the function whenever a re-render happens
   methods: {
     incrementCount() {

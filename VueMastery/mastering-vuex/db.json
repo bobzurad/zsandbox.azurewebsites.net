@@ -99,6 +99,34 @@
       "date": "2019-10-19T18:34:00.000Z",
       "time": "10:00",
       "attendees": []
+    },
+    {
+      "id": 1151068,
+      "category": "education",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam Jahr"
+      },
+      "title": "Teach the Children",
+      "description": "We're going to teach children some cool things",
+      "location": "The School",
+      "date": "2019-10-10T20:04:00.000Z",
+      "time": "9:00",
+      "attendees": []
+    },
+    {
+      "id": 61235,
+      "category": "community",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam Jahr"
+      },
+      "title": "Read to the Elderly",
+      "description": "We're going to read a book to the elderly",
+      "location": "The Old Folks Home",
+      "date": "2019-10-15T20:06:00.000Z",
+      "time": "18:00",
+      "attendees": []
     }
   ]
 }

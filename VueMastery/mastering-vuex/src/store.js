@@ -17,13 +17,9 @@ export default new Vuex.Store({
       'community'
     ],
     clickCount: 0,
-    events: [
-      { id: 1, title: '...', organizer: '...' },
-      { id: 2, title: '...', organizer: '...' },
-      { id: 3, title: '...', organizer: '...' },
-      { id: 4, title: '...', organizer: '...' },
-      { id: 5, title: '...', organizer: '...' }
-    ],
+    event: {},
+    events: [], // this doesn't store ALL of the events, just the events that were fetched
+    eventsTotalCount: 0, // this is the total number of events, not just events.length
     todos: [
       { id: 1, text: '...', done: true },
       { id: 2, text: '...', done: false },
@@ -41,6 +37,15 @@ export default new Vuex.Store({
     },
     INCREMENT_CLICK_COUNT(state, value) {
       state.clickCount += value
+    },
+    SET_EVENT(state, event) {
+      state.event = event
+    },
+    SET_EVENTS(state, events) {
+      state.events = events
+    },
+    SET_EVENTS_TOTAL_COUNT(state, eventsTotalCount) {
+      state.eventsTotalCount = eventsTotalCount
     }
   },
   // actions are asynchronous
@@ -49,6 +54,34 @@ export default new Vuex.Store({
       return EventService.postEvent(event).then(() => {
         commit('ADD_EVENT', event)
       })
+    },
+    fetchEvent({ commit, getters }, id) {
+      // first check if we have the event already
+      const event = getters.getEventById(id)
+
+      if (event) {
+        commit('SET_EVENT', event)
+      } else {
+        // we don't have the event locally, so use the API to fetch it
+        EventService.getEvent(id)
+          .then(response => {
+            commit('SET_EVENT', response.data)
+          })
+          .catch(error => {
+            console.log('Error getting event: ' + error.response)
+          })
+      }
+    },
+    // payload (second param) can be single variable OR an object
+    fetchEvents({ commit }, { perPage, page }) {
+      EventService.getEvents(perPage, page)
+        .then(response => {
+          commit('SET_EVENTS', response.data)
+          commit('SET_EVENTS_TOTAL_COUNT', response.headers['x-total-count'])
+        })
+        .catch(error => {
+          console.log('There was an error: ' + error.response)
+        })
     },
     updateCount({ state, commit }, value) {
       if (state.user) {
