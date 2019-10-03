@@ -14,6 +14,20 @@ var options1 = {
   chart: {
     height: 350,
     type: 'radialBar',
+    toolbar: {
+      show: true,
+      tools: {
+        download: true,
+        selection: true,
+        zoom: true,
+        zoomin: true,
+        zoomout: true,
+        pan: true,
+        reset: true | '<img src="/static/icons/reset.png" width="20">',
+        customIcons: []
+      },
+      autoSelected: 'zoom'
+    },
   },
   plotOptions: {
     radialBar: {
