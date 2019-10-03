@@ -1,6 +1,6 @@
 # real-world-vue (mastering vuex)
 
-## Following along?
+## Following along
 
 We encourage you to follow the course on Vue Mastery, and code along with us. This course has tags representing the start and finish of each level, just in case you get stuck. Here's the start and ending code of each lesson, if you'd like to download them.
 
@@ -17,7 +17,7 @@ We encourage you to follow the course on Vue Mastery, and code along with us. Th
 
 ## Project setup
 
-```
+```bash
 npm install -g @vue/cli
 npm install -g json-server
 npm install
@@ -25,20 +25,19 @@ npm install
 
 ### Compiles and hot-reloads for development
 
-```
-json-server --watch db.json
+```bash
 npm run serve
 ```
 
 ### Compiles and minifies for production
 
-```
+```bash
 npm run build
 ```
 
 ### Lints and fixes files
 
-```
+```bash
 npm run lint
 ```
 
@@ -52,7 +51,7 @@ Install the following extensions:
 
 Add this to your user settings.json:
 
-```
+```bash
     "vetur.validation.template": false,
     "eslint.validate": [
         {
