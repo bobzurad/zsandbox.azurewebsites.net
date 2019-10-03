@@ -71,6 +71,34 @@
           "name": "Mary Gordon"
         }
       ]
+    },
+    {
+      "id": 6482523,
+      "category": "food",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam Jahr"
+      },
+      "title": "Deliver Food to Shelter",
+      "description": "We're delivering food to a local food shelter",
+      "location": "Food Shelter",
+      "date": "2019-10-03T18:19:00.000Z",
+      "time": "15:00",
+      "attendees": []
+    },
+    {
+      "id": 2547310,
+      "category": "nature",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam Jahr"
+      },
+      "title": "Plant Trees",
+      "description": "We're going to plant some trees",
+      "location": "Konkel Park",
+      "date": "2019-10-19T18:34:00.000Z",
+      "time": "10:00",
+      "attendees": []
     }
   ]
 }

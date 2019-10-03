@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import EventService from '@/services/EventService.js'
 
 Vue.use(Vuex)
 
@@ -30,12 +31,31 @@ export default new Vuex.Store({
       { id: 4, text: '...', done: false }
     ]
   },
+  // mutations are synchronous
+  // it's good practice to keep mutations within actions
+  // - only actions should call mutations, this prevents the need for future refactoring
+  // - components will have methods that dispatch actions in the store
   mutations: {
-    INCREMENT_CLICK_COUNT(state) {
-      state.clickCount += 1
+    ADD_EVENT(state, event) {
+      state.events.push(event)
+    },
+    INCREMENT_CLICK_COUNT(state, value) {
+      state.clickCount += value
     }
   },
-  actions: {},
+  // actions are asynchronous
+  actions: {
+    createEvent({ commit }, event) {
+      return EventService.postEvent(event).then(() => {
+        commit('ADD_EVENT', event)
+      })
+    },
+    updateCount({ state, commit }, value) {
+      if (state.user) {
+        commit('INCREMENT_CLICK_COUNT', value)
+      }
+    }
+  },
   getters: {
     catLength: state => {
       return state.categories.length
