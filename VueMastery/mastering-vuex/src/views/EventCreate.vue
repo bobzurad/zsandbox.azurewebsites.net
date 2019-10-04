@@ -82,6 +82,7 @@ export default {
     },
     //... is JavaScript's new object-spread operator https://github.com/tc39/proposal-object-rest-spread
     ...mapGetters('event', ['getEventById']),
+    ...mapGetters(['catLength']),
     ...mapState({
       userName: state => state.user.user.name,
       userId: state => state.user.user.id
@@ -120,11 +121,6 @@ export default {
         time: '',
         attendees: []
       }
-    }
-  },
-  getters: {
-    catLength: state => {
-      return state.categories.length
     }
   }
 }

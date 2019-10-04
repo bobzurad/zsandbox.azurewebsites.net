@@ -29,5 +29,10 @@ export default new Vuex.Store({
       { id: 3, text: '...', done: true },
       { id: 4, text: '...', done: false }
     ]
+  },
+  getters: {
+    catLength: state => {
+      return state.categories.length
+    }
   }
 })
