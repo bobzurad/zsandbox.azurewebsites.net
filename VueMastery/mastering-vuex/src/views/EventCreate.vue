@@ -81,10 +81,10 @@ export default {
       return this.$store.getters.catLength
     },
     //... is JavaScript's new object-spread operator https://github.com/tc39/proposal-object-rest-spread
-    ...mapGetters(['getEventById']),
+    ...mapGetters('event', ['getEventById']),
     ...mapState({
-      userName: state => state.user.name,
-      userId: state => state.user.id
+      userName: state => state.user.user.name,
+      userId: state => state.user.user.id
       //categories: 'categories' //can also do it this way for top level items in state
     })
     /* can also do it this way, mapping state directly
@@ -94,7 +94,7 @@ export default {
   methods: {
     createEvent() {
       this.$store
-        .dispatch('createEvent', this.event)
+        .dispatch('event/createEvent', this.event)
         .then(() => {
           this.$router.push({
             name: 'event-show',
@@ -107,7 +107,7 @@ export default {
         })
     },
     createFreshEvent() {
-      const user = this.$store.state.user
+      const user = this.$store.state.user.user
       const id = Math.floor(Math.random() * 10000000)
       return {
         id: id,
@@ -120,6 +120,11 @@ export default {
         time: '',
         attendees: []
       }
+    }
+  },
+  getters: {
+    catLength: state => {
+      return state.categories.length
     }
   }
 }

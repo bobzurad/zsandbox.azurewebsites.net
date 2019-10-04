@@ -127,6 +127,90 @@
       "date": "2019-10-15T20:06:00.000Z",
       "time": "18:00",
       "attendees": []
+    },
+    {
+      "id": 2557040,
+      "category": "nature",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "title": "Hiking",
+      "description": "We're going hiking!",
+      "location": "Kettle Moraine",
+      "date": "2019-10-19T21:24:00.000Z",
+      "time": "10:00",
+      "attendees": []
+    },
+    {
+      "id": 40532,
+      "category": "housing",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "title": "Habitat for Humanity",
+      "description": "Let's build some houses",
+      "location": "The Lower East Side",
+      "date": "2019-10-21T02:06:00.000Z",
+      "time": "9:00",
+      "attendees": []
+    },
+    {
+      "id": 2996580,
+      "category": "animal welfare",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "title": "Dog Walking",
+      "description": "Let's walk some dogs, dawg.",
+      "location": "The Park",
+      "date": "2019-10-04T02:38:00.000Z",
+      "time": "9:00",
+      "attendees": []
+    },
+    {
+      "id": 6357076,
+      "category": "nature",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "title": "Fishing",
+      "description": "Let's go fishing",
+      "location": "Lake Delton",
+      "date": "2019-10-06T03:07:00.000Z",
+      "time": "6:00",
+      "attendees": []
+    },
+    {
+      "id": 7387363,
+      "category": "housing",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "title": "Paint the Old Mill",
+      "description": "Let's paint the Old Mill",
+      "location": "Old Mill",
+      "date": "2019-10-24T03:30:00.000Z",
+      "time": "",
+      "attendees": []
+    },
+    {
+      "id": 6697962,
+      "category": "nature",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "title": "Camping",
+      "description": "Let's go camping!",
+      "location": "Peninsula State Park",
+      "date": "2019-10-23T03:35:00.000Z",
+      "time": "14:00",
+      "attendees": []
     }
   ]
 }
