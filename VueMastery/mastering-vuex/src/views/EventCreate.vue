@@ -77,9 +77,14 @@ export default {
     localComputed() {
       return 'i did not come from the store'
     },
-    catLength() {
+    /*
+    catLength() { // this is a duplicate of mapGetters(['catLength'])
       return this.$store.getters.catLength
     },
+    getEventById() {  // this is a duplicate of mapGetters('event', ['getEventById'])
+      return this.$store.getters['event/getEventById']
+    },
+    */
     //... is JavaScript's new object-spread operator https://github.com/tc39/proposal-object-rest-spread
     ...mapGetters('event', ['getEventById']),
     ...mapGetters(['catLength']),
