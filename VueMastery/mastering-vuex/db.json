@@ -211,6 +211,34 @@
       "date": "2019-10-23T03:35:00.000Z",
       "time": "14:00",
       "attendees": []
+    },
+    {
+      "id": 5688810,
+      "category": "nature",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "title": "Bird Watching",
+      "description": "Let's watch some birds",
+      "location": "Kettle Moraine",
+      "date": "2019-10-10T04:11:00.000Z",
+      "time": "10:00",
+      "attendees": []
+    },
+    {
+      "id": 6535487,
+      "category": "animal welfare",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "title": "Dog Walking",
+      "description": "Let's walk some Dogs",
+      "location": "The Park",
+      "date": "2019-10-24T04:18:00.000Z",
+      "time": "10:00",
+      "attendees": []
     }
   ]
 }

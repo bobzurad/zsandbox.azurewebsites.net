@@ -108,9 +108,7 @@ export default {
           })
           this.event = this.createFreshEvent()
         })
-        .catch(e => {
-          console.log('there was a problem submitting your event: ' + e)
-        })
+        .catch(() => {})
     },
     createFreshEvent() {
       const user = this.$store.state.user.user

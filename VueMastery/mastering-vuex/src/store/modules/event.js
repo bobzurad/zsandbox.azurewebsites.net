@@ -50,11 +50,28 @@ export const actions = {
     // example of using the state from store.js (global namespace)
     console.log('User creating event is ' + rootState.user.user.name)
 
-    return EventService.postEvent(event).then(() => {
-      commit('ADD_EVENT', event)
-    })
+    return EventService.postEvent(event)
+      .then(() => {
+        commit('ADD_EVENT', event)
+
+        const notification = {
+          type: 'success',
+          message: 'Your event has been created!'
+        }
+
+        dispatch('notification/add', notification, { root: true })
+      })
+      .catch(error => {
+        const notification = {
+          type: 'error',
+          message: 'There was a problem creating your event: ' + error.message
+        }
+
+        dispatch('notification/add', notification, { root: true })
+        throw error
+      })
   },
-  fetchEvent({ commit, getters }, id) {
+  fetchEvent({ commit, getters, dispatch }, id) {
     // first check if we have the event already
     const event = getters.getEventById(id)
 
@@ -67,19 +84,29 @@ export const actions = {
           commit('SET_EVENT', response.data)
         })
         .catch(error => {
-          console.log('Error getting event: ' + error.response)
+          const notification = {
+            type: 'error',
+            message: 'There was a problem fetching the event: ' + error.message
+          }
+
+          dispatch('notification/add', notification, { root: true })
         })
     }
   },
   // payload (second param) can be single variable OR an object
-  fetchEvents({ commit }, { perPage, page }) {
+  fetchEvents({ commit, dispatch }, { perPage, page }) {
     EventService.getEvents(perPage, page)
       .then(response => {
         commit('SET_EVENTS', response.data)
         commit('SET_EVENTS_TOTAL_COUNT', response.headers['x-total-count'])
       })
       .catch(error => {
-        console.log('There was an error: ' + error.response)
+        const notification = {
+          type: 'error',
+          message: 'There was a problem fetching events: ' + error.message
+        }
+
+        dispatch('notification/add', notification, { root: true })
       })
   }
 }
