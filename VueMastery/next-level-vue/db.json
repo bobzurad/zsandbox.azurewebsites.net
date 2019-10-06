@@ -1,0 +1,244 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "title": "Beach Cleanup",
+      "date": "Aug 28 2018",
+      "time": "10:00",
+      "location": "Daytona Beach",
+      "description": "Let's clean up this beach.",
+      "organizer": "Adam Jahr",
+      "category": "sustainability",
+      "attendees": [
+        {
+          "id": "abc123",
+          "name": "Adam Jahr"
+        },
+        {
+          "id": "def456",
+          "name": "Gregg Pollack"
+        },
+        {
+          "id": "ghi789",
+          "name": "Beth Swanson"
+        },
+        {
+          "id": "jkl101",
+          "name": "Mary Gordon"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Park Cleanup",
+      "date": "Nov 12 2018",
+      "time": "12:00",
+      "location": "132 N Magnolia Street, Orlando, Florida",
+      "description": "We're going to clean up this park.",
+      "organizer": "Adam Jahr",
+      "category": "nature",
+      "attendees": [
+        {
+          "id": "ghi789",
+          "name": "Beth Swanson"
+        },
+        {
+          "id": "jkl101",
+          "name": "Mary Gordon"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Pet Adoption Day",
+      "date": "Dec 2 2018",
+      "time": "12:00",
+      "location": "132 N Magnolia Street, Orlando, Florida",
+      "description": "Help animals find new homes.",
+      "organizer": "Gregg Pollack",
+      "category": "animal welfare",
+      "attendees": [
+        {
+          "id": "abc123",
+          "name": "Adam Jahr"
+        },
+        {
+          "id": "ghi789",
+          "name": "Beth Swanson"
+        },
+        {
+          "id": "jkl101",
+          "name": "Mary Gordon"
+        }
+      ]
+    },
+    {
+      "id": 6482523,
+      "category": "food",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam Jahr"
+      },
+      "title": "Deliver Food to Shelter",
+      "description": "We're delivering food to a local food shelter",
+      "location": "Food Shelter",
+      "date": "2019-10-03T18:19:00.000Z",
+      "time": "15:00",
+      "attendees": []
+    },
+    {
+      "id": 2547310,
+      "category": "nature",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam Jahr"
+      },
+      "title": "Plant Trees",
+      "description": "We're going to plant some trees",
+      "location": "Konkel Park",
+      "date": "2019-10-19T18:34:00.000Z",
+      "time": "10:00",
+      "attendees": []
+    },
+    {
+      "id": 1151068,
+      "category": "education",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam Jahr"
+      },
+      "title": "Teach the Children",
+      "description": "We're going to teach children some cool things",
+      "location": "The School",
+      "date": "2019-10-10T20:04:00.000Z",
+      "time": "9:00",
+      "attendees": []
+    },
+    {
+      "id": 61235,
+      "category": "community",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam Jahr"
+      },
+      "title": "Read to the Elderly",
+      "description": "We're going to read a book to the elderly",
+      "location": "The Old Folks Home",
+      "date": "2019-10-15T20:06:00.000Z",
+      "time": "18:00",
+      "attendees": []
+    },
+    {
+      "id": 2557040,
+      "category": "nature",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "title": "Hiking",
+      "description": "We're going hiking!",
+      "location": "Kettle Moraine",
+      "date": "2019-10-19T21:24:00.000Z",
+      "time": "10:00",
+      "attendees": []
+    },
+    {
+      "id": 40532,
+      "category": "housing",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "title": "Habitat for Humanity",
+      "description": "Let's build some houses",
+      "location": "The Lower East Side",
+      "date": "2019-10-21T02:06:00.000Z",
+      "time": "9:00",
+      "attendees": []
+    },
+    {
+      "id": 2996580,
+      "category": "animal welfare",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "title": "Dog Walking",
+      "description": "Let's walk some dogs, dawg.",
+      "location": "The Park",
+      "date": "2019-10-04T02:38:00.000Z",
+      "time": "9:00",
+      "attendees": []
+    },
+    {
+      "id": 6357076,
+      "category": "nature",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "title": "Fishing",
+      "description": "Let's go fishing",
+      "location": "Lake Delton",
+      "date": "2019-10-06T03:07:00.000Z",
+      "time": "6:00",
+      "attendees": []
+    },
+    {
+      "id": 7387363,
+      "category": "housing",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "title": "Paint the Old Mill",
+      "description": "Let's paint the Old Mill",
+      "location": "Old Mill",
+      "date": "2019-10-24T03:30:00.000Z",
+      "time": "",
+      "attendees": []
+    },
+    {
+      "id": 6697962,
+      "category": "nature",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "title": "Camping",
+      "description": "Let's go camping!",
+      "location": "Peninsula State Park",
+      "date": "2019-10-23T03:35:00.000Z",
+      "time": "14:00",
+      "attendees": []
+    },
+    {
+      "id": 5688810,
+      "category": "nature",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "title": "Bird Watching",
+      "description": "Let's watch some birds",
+      "location": "Kettle Moraine",
+      "date": "2019-10-10T04:11:00.000Z",
+      "time": "10:00",
+      "attendees": []
+    },
+    {
+      "id": 6535487,
+      "category": "animal welfare",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "title": "Dog Walking",
+      "description": "Let's walk some Dogs",
+      "location": "The Park",
+      "date": "2019-10-24T04:18:00.000Z",
+      "time": "10:00",
+      "attendees": []
+    }
+  ]
+}
