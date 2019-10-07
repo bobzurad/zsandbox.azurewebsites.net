@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "(start json-server --watch db.json && start vue-cli-service serve) || (json-server --watch db.json & vue-cli-service serve)",
+    "serve": "(start json-server --watch db.json && start vue-cli-service serve) || (json-server -d 1500 --watch db.json & vue-cli-service serve)",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "axios": "^0.19.0",
     "lodash": "^4.17.15",
+    "nprogress": "^0.2.0",
     "vue": "^2.6.10",
     "vue-router": "^3.1.2",
     "vuejs-datepicker": "^1.6.2",
