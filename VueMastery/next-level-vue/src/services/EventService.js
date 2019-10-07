@@ -1,5 +1,5 @@
 import axios from 'axios'
-import NProgress from 'nprogress'
+import store from '@/store/store'
 
 const apiClient = axios.create({
   baseURL: 'http://localhost:3000',
@@ -12,11 +12,11 @@ const apiClient = axios.create({
 
 /* axios interceptors to start and stop progress bar */
 apiClient.interceptors.request.use(config => {
-  NProgress.start()
+  store.dispatch('loader/startLoading')
   return config
 })
 apiClient.interceptors.response.use(response => {
-  NProgress.done()
+  store.dispatch('loader/doneLoading')
   return response
 })
 

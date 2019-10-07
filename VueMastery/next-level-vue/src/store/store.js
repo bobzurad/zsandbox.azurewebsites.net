@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import * as user from '@/store/modules/user.js'
 import * as event from '@/store/modules/event.js'
 import * as notification from '@/store/modules/notification.js'
+import * as loader from '@/store/modules/loader.js'
 import counter from '@/store/modules/counter.js'
 
 Vue.use(Vuex)
@@ -13,7 +14,8 @@ export default new Vuex.Store({
     user,
     event,
     counter,
-    notification
+    notification,
+    loader
   },
   state: {
     categories: [
