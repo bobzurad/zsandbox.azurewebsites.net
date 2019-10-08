@@ -6,7 +6,9 @@
       <h5>Organized by {{ event.organizer ? event.organizer.name : '' }}</h5>
       <h5>Category: {{ event.category }}</h5>
     </div>
-    <BaseIcon name="map"><h2>Location</h2></BaseIcon>
+    <BaseIcon name="map">
+      <h2>Location</h2>
+    </BaseIcon>
     <address>{{ event.location }}</address>
     <h2>Event details</h2>
     <p>{{ event.description }}</p>
@@ -29,20 +31,33 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
+import store from '@/store/store'
 
 export default {
   props: ['id'],
-  created() {
-    this.fetchEvent(this.id)
+  beforeRouteEnter(routeTo, routeFrom, next) {
+    // we have to use store.dispatch() because beforeRouteEnter does not have access to "this"
+    store.dispatch('event/fetchEvent', routeTo.params.id).then(() => {
+      // this should prevent the template from rendering until the data is loaded.
+      // but it's not working. the empty template loads immediatly,
+      // even though event/fetchEvent returns the promise
+      console.log(new Date()) // the date logged in the console is earlier than DECREMENT_COUNT from the loader module, so we know this is getting called before the data is done loading
+      next()
+    })
+  },
+  beforeRouteLeave(routeTo, routeFrom, next) {
+    const answer = window.confirm('Are you sure you want to leave?')
+    if (answer) {
+      next()
+    } else {
+      next(false) // cancel the route and stay on page
+    }
   },
   computed: {
     ...mapState({
       event: state => state.event.event
     })
-  },
-  methods: {
-    ...mapActions('event', ['fetchEvent'])
   }
 }
 </script>
