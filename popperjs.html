@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Popper.JS Examples</title>
+
+    <script src="https://unpkg.com/popper.js@1.16.0/dist/umd/popper.min.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div class="my-button">reference</div>
+    <div class="my-popper">popper</div>
+  <script>
+    const reference = document.querySelector(".my-button");
+    const popper = document.querySelector(".my-popper");
+    new Popper(reference, popper, {
+      onCreate: data => {
+        // data is an object containing all the informations computed
+        // by Popper.js and used to style the popper and its arrow
+        // The complete description is available in Popper.js documentation
+        console.log(`onCreate: ${data}`)
+      },
+      onUpdate: data => {
+        // same as `onCreate` but called on subsequent updates
+        console.log(`onUpdate: ${data}`)
+      }
+    });  
+  </script>
+  </body>
+</html>

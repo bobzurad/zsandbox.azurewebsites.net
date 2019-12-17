@@ -12,6 +12,21 @@
     <address>{{ event.location }}</address>
     <h2>Event details</h2>
     <p>{{ event.description }}</p>
+    <popper
+      trigger="hover"
+      :options="{
+        placement: 'top',
+        modifiers: { offset: { offset: '0,10px' } }
+      }"
+    >
+      <div class="popper">
+        Popper Content
+      </div>
+
+      <span slot="reference">
+        Hover over this for Popper
+      </span>
+    </popper>
     <h2>
       Attendees
       <span class="badge -fill-gradient">{{
@@ -33,8 +48,13 @@
 <script>
 import { mapState } from 'vuex'
 import store from '@/store/store'
+import Popper from 'vue-popperjs'
+import 'vue-popperjs/dist/vue-popper.css'
 
 export default {
+  components: {
+    popper: Popper
+  },
   props: ['id'],
   beforeRouteEnter(routeTo, routeFrom, next) {
     // we have to use store.dispatch() because beforeRouteEnter does not have access to "this"
