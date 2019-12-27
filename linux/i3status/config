@@ -7,17 +7,17 @@
 # If the above line is not correctly displayed, fix your editor first!
 
 general {
-        colors = true
-	      color_good = '#42b3d8'
-	      color_degraded = '#df882b'
-	      color_bad = '#f61920'
-        interval = 1
+	colors = true
+	color_good = '#42b3d8'
+	color_degraded = '#df882b'
+	color_bad = '#f61920'
+	interval = 2
 }
 
 # order += "ipv6"
 order += "ethernet _first_"
 order += "wireless _first_"
-order += "load"
+order += "cpu_usage"
 order += "cpu_temperature 0"
 order += "memory"
 order += "disk /"
@@ -48,6 +48,11 @@ cpu_temperature 0 {
         path = "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input"
 }
 
+cpu_usage {
+	format = "%usage"
+	max_threshold = 80
+}
+
 load {
         format = "%1min"
 }
@@ -59,7 +64,7 @@ memory {
 }
 
 tztime local {
-        format = "%Y-%b-%d %I:%M:%S %p"
+        format = "%Y-%b-%d %I:%M %p"
 }
 
 volume master {
