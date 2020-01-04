@@ -1,0 +1,13 @@
+[Unit]
+Description=Lock screen before suspend
+Before=sleep.target
+
+[Service]
+User=bob
+Type=forking
+Environment=DISPLAY=:0
+ExecStart=/etc/systemd/system/i3lockscreen.sh
+
+[Install]
+WantedBy=sleep.target
+
