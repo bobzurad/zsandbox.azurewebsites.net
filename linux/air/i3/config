@@ -198,3 +198,5 @@ exec dropbox start &
 # start libinput-gestures
 exec libinput-gestures-setup start &
 
+# start compton
+exec --no-startup-id compton --config ~/.config/compton.conf -b &

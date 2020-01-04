@@ -15,6 +15,10 @@ then run:
 usermod -aG video <user>
 ```
 
+### compton.conf
+
+taken from here: https://www.reddit.com/r/linuxmasterrace/comments/3hp37x/for_anyone_having_lag_with_compton_this_might/
+
 ### i3lock.service
 
 enable this service with:
