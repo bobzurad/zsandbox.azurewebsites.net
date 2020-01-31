@@ -15,7 +15,7 @@ then run:
 usermod -aG video <user>
 ```
 
-place brightness.sh in ~/.config
+place brightness.sh in ~/.config and make sure it's executable
 
 ### i3lock.service
 https://hund0b1.gitlab.io/2019/01/08/using-i3lock-with-systemd-suspend.html
