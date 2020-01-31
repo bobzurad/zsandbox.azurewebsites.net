@@ -5,7 +5,7 @@ Before=sleep.target
 [Service]
 User=bob
 Type=simple
-Environment=DISPLAY=:1
+Environment=DISPLAY=:0
 ExecStart=/etc/systemd/system/i3lockscreen.sh
 
 [Install]
