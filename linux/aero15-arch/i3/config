@@ -203,7 +203,7 @@ exec libinput-gestures-setup start &
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 # enable 2 finger right-click on trackpad
-exec --no-startup-id xinput set-prop 19 340 {0, 1} &
+exec --no-startup-id xinput set-prop 19 341 {0, 1} &
 
 # set background
 exec --no-startup-id /home/bob/.fehbg &
