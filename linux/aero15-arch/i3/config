@@ -184,7 +184,8 @@ bar {
 # bob bob bob bob
 
 # lock screen
-bindsym $mod+Escape exec i3lock -i ~/Dropbox/img/1080p/space.png
+#bindsym $mod+Escape exec i3lock -i ~/Dropbox/img/1080p/space.png
+bindsym $mod+Escape exec light-locker-command -l
 
 # start bluetooth applet
 exec blueman-applet &
@@ -202,5 +203,10 @@ exec libinput-gestures-setup start &
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 # enable 2 finger right-click on trackpad
-exec --no-startup-id xinput set-prop 19 307 {0, 1} &
+exec --no-startup-id xinput set-prop 19 340 {0, 1} &
 
+# set background
+exec --no-startup-id /home/bob/.fehbg &
+
+# start light-locker
+exec --no-startup-id light-locker &
