@@ -68,10 +68,16 @@ export const actions = {
         }
 
         dispatch('notification/add', notification, { root: true })
+        dispatch('loader/doneLoading', null, { root: true })
+
         throw error
       })
   },
   fetchEvent({ commit, getters, dispatch }, id) {
+    if (id == state.event.id) {
+      return state.event
+    }
+
     // first check if we have the event already
     const event = getters.getEventById(id)
 
@@ -82,6 +88,7 @@ export const actions = {
       return EventService.getEvent(id)
         .then(response => {
           commit('SET_EVENT', response.data)
+          return response.data
         })
         .catch(error => {
           const notification = {
@@ -90,6 +97,7 @@ export const actions = {
           }
 
           dispatch('notification/add', notification, { root: true })
+          dispatch('loader/doneLoading', null, { root: true })
         })
     }
   },
@@ -107,6 +115,7 @@ export const actions = {
         }
 
         dispatch('notification/add', notification, { root: true })
+        dispatch('loader/doneLoading', null, { root: true })
       })
   }
 }

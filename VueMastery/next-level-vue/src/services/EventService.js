@@ -7,7 +7,8 @@ const apiClient = axios.create({
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json'
-  }
+  },
+  timeout: 15000
 })
 
 /* axios interceptors to start and stop progress bar */
