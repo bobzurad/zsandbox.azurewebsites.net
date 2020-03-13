@@ -8,6 +8,7 @@ import 'nprogress/nprogress.css'
 
 Vue.config.productionTip = false
 
+// automatically register components named Base*.vue
 const requireComponent = require.context(
   './components',
   false,
