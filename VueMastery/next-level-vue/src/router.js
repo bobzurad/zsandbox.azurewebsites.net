@@ -4,6 +4,7 @@ import EventCreate from './views/EventCreate.vue'
 import EventList from './views/EventList.vue'
 import EventShow from './views/EventShow.vue'
 import NotFound from './views/NotFound.vue'
+import Example from './views/Example.vue'
 
 Vue.use(Router)
 
@@ -25,6 +26,10 @@ export default new Router({
       path: '/event/create',
       name: 'event-create',
       component: EventCreate
+    },
+    {
+      path: '/example',
+      component: Example
     },
     {
       path: '/404',
