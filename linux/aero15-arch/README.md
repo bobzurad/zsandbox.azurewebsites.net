@@ -1,4 +1,4 @@
-these files last used on a 2012 MacBook Air running Arch Linux with i3
+these files last used on a Gigabyte Aero 15 running Arch Linux with i3
 
 ## prereqs
 
