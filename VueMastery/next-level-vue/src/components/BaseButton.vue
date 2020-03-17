@@ -2,7 +2,7 @@
   <div>
     <button
       v-on="$listeners"
-      v-bind="attrs"
+      v-bind="$attrs"
       class="button"
       :class="buttonClass"
     >

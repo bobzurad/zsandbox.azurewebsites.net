@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "(start json-server --watch db.json && start vue-cli-service serve) || (json-server -d 1500 --watch db.json & vue-cli-service serve)",
+    "serve": "(start json-server --watch db.json && start vue-cli-service serve) || (json-server -d 500 --watch db.json & vue-cli-service serve)",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
