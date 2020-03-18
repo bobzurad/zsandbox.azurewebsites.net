@@ -18,31 +18,14 @@
 </template>
 
 <script>
+import { formFieldMixin } from '../mixins/formFieldMixin'
+
 export default {
-  inheritAttrs: false,
+  mixins: [formFieldMixin],
   props: {
     options: {
       type: Array,
       required: true
-    },
-    label: {
-      type: String,
-      default: ''
-    },
-    value: [String, Number]
-  },
-  computed: {
-    listeners() {
-      // resolve the conflict between @input and v-on in <select>
-      return {
-        ...this.$listeners,
-        input: this.updateValue
-      }
-    }
-  },
-  methods: {
-    updateValue(event) {
-      this.$emit('input', event.target.value)
     }
   }
 }

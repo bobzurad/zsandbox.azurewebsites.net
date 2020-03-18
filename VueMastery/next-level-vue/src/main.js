@@ -9,6 +9,13 @@ import Vuelidate from 'vuelidate'
 
 Vue.use(Vuelidate)
 
+Vue.mixin({
+  mounted() {
+    // WARNING - this code runs for EVERY component
+    console.log('I am mixed into every component')
+  }
+})
+
 Vue.config.productionTip = false
 
 // automatically register components named Base*.vue

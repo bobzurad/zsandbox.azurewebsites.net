@@ -20,11 +20,14 @@
 
 <script>
 import { required, email } from 'vuelidate/lib/validators'
+import { exampleMixin } from '../mixins/exampleMixin'
 
 export default {
+  mixins: [exampleMixin],
   data() {
     return {
-      email: null
+      email: null,
+      message: 'I take priority from the mixin' // this overrites 'message' in the mixin
     }
   },
   validations: {
@@ -33,7 +36,15 @@ export default {
       email
     }
   },
+  created() {
+    this.hello()
+    console.log(this.message)
+  },
   methods: {
+    hello() {
+      // this method overrites the hello() method in the mixin
+      console.log('Hello from the component')
+    },
     submit() {
       this.$v.$touch() // make the form dirty
       if (!this.$v.$invalid) {
