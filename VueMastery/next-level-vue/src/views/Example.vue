@@ -15,6 +15,9 @@
     </div>
     <button :disabled="$v.$invalid" type="submit">Submit</button>
     <p v-if="$v.$anyError" class="errorMessage">Please correct all fields</p>
+
+    <!-- filters example -->
+    <p>{{ comment | reply('bro') | shout | exclaim }}</p>
   </form>
 </template>
 
@@ -26,6 +29,7 @@ export default {
   mixins: [exampleMixin],
   data() {
     return {
+      comment: 'no one cares',
       email: null,
       message: 'I take priority from the mixin' // this overrites 'message' in the mixin
     }
@@ -39,6 +43,17 @@ export default {
   created() {
     this.hello()
     console.log(this.message)
+  },
+  filters: {
+    exclaim(value) {
+      return value + '!!!'
+    },
+    reply(value, name) {
+      return `${value}, ${name}`
+    },
+    shout(value) {
+      return value.toUpperCase()
+    }
   },
   methods: {
     hello() {
