@@ -1,3 +1,26 @@
 class Dep {
-  // TODO: 6 minutes into lesson 2
+  constructor() {
+    this.subscribers = []
+  }
+  depend() {
+    if (target && !this.subscribers.includes(target)) {
+      this.subscribers.push(target)
+    }
+  }
+  notify() {
+    this.subscribers.forEach(sub => sub())
+  }
 }
+
+const dep = new Dep()
+
+let price = 5
+let quantity = 2
+let total = 0
+
+let target = () => {
+  total = price * quantity
+}
+
+dep.depend()
+target()
