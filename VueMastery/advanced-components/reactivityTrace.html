@@ -20,6 +20,15 @@
           product: 'Socks'
         }
       })
+      //  Where in the Vue source code can we see { product: 'Socks' } become reactive?
+      
+      //  Vue.js 2.6.11:
+      //  new Vue() -> Vue.prototype._init(options) -> initState(vm) -> 
+      //  initData(vm) -> observe(data, true) -> new Observer(value) -> 
+      //  Observer.prototype.walk(obj) -> defineReactive(obj, key, val)
+
+      //  Change Detection Caveats: 
+      //  https://vuejs.org/v2/guide/reactivity.html#Change-Detection-Caveats
     </script>
   </body>
 </html>
