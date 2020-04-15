@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Vue Template Compiling</title>
+
+    <script src="https://vuejs.org/js/vue.js"></script>
+    <style>
+      .green {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <custom-heading :level="myLevel">Hey There!</custom-heading>
+    </div> 
+    <script>
+      // TODO: custom-heading isn't working
+      Vue.component('custom-heading', {
+        props: ['level'],
+        render(h) {
+          return h('h' + this.level, this.$slots.default)
+        }
+      })
+
+      var app = new Vue({
+        el: '#app',
+        data: {
+          myLevel: 1,
+          name: 'Bob'
+        },
+        render(h) {
+          /* this function returns a VNode:
+              {
+                tag: "div",
+                attrs: {
+                  id: 1234
+                },
+                class: "green",
+                children: [
+                  {
+                    text: "Hello Bob"
+                  }
+                ]
+              }
+          */
+          //  this will render <div id="1234" class="green">Hello Bob</div>
+          //  return h('div', { attrs: { id: 1234 }, class: 'green', }, `Hello ${this.name}`)
+          
+          // updated to return a more complex node  ---v
+
+          // h is an alias for createElement
+          // see here for arguments to pass to createElement():
+          //  https://vuejs.org/v2/guide/render-function.html#createElement-Arguments
+
+          // JSX can make this easier: https://www.npmjs.com/package/babel-preset-vue          
+          return h('div', [
+            h('div', { attrs: { id: 1234 }, class: 'green', }, `Hello ${this.name}`),
+            h('div', 'Enjoy some treats:'),
+            h('ul', [
+              h('li', 'Cake'),
+              h('li', 'Donuts'),
+              h('li', 'Coffee')
+            ])
+          ])
+        }
+      })
+    </script>
+  </body>
+</html>
