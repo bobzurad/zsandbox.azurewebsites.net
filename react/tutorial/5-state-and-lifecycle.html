@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>5 - State and Lifecycle</title>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but this page doesn't work properly without JavaScript
+        enabled. Please enable it to continue.
+      </strong>
+    </noscript>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+    /*
+        When <Clock /> is passed to ReactDOM.render(), React calls the constructor of the Clock component. 
+        Since Clock needs to display the current time, it initializes this.state with an object including the current time. 
+        We will later update this state.
+        React then calls the Clock component’s render() method. 
+        This is how React learns what should be displayed on the screen. 
+        React then updates the DOM to match the Clock’s render output.
+        When the Clock output is inserted in the DOM, React calls the componentDidMount() lifecycle method. 
+        Inside it, the Clock component asks the browser to set up a timer to call the component’s tick() method once a second.
+        Every second the browser calls the tick() method.
+        Inside it, the Clock component schedules a UI update by calling setState() with an object containing the current time. 
+        Thanks to the setState() call, React knows the state has changed, and calls the render() method again to learn what should be on the screen.
+        This time, this.state.date in the render() method will be different, and so the render output will include the updated time. 
+        React updates the DOM accordingly.
+        If the Clock component is ever removed from the DOM, React calls the componentWillUnmount() lifecycle method so the timer is stopped.
+    */
+    class Clock extends React.Component {
+        constructor(props) {
+          super(props); // always call super(props)
+          this.state = { 
+            date: new Date(),
+            counter: 0,
+          };
+        }
+
+        componentDidMount() {
+          this.timerID = setInterval(
+            () => this.tick(),
+            1000
+          );
+        }
+
+        componentWillUnmount() {
+          clearInterval(this.timerID);
+        }
+
+        tick() {
+          // Two important things to remember about state!
+
+          // 1) do not modify state directly
+
+          // WRONG!
+          // this.state.date = new Date()
+          // Correct
+          this.setState({
+            date: new Date()
+          });
+
+          // 2) State updates are asynchronous, so don't rely on their values for calculating next state
+
+          // WRONG!
+          // this.setState({
+          //   counter: this.state.counter + this.props.increment,
+          // });
+          // Correct
+          this.setState((state, props) => ({
+            counter: state.counter + parseInt(props.increment)
+          }));          
+        }
+
+        render() {
+          return (
+            <div>
+              <h1>Hello, world!</h1>
+              <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+              <h3>Counter: {this.state.counter}</h3>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(
+        <Clock increment="1" />,
+        document.getElementById('root')
+      );
+
+    </script>
+  </body>
+</html>
