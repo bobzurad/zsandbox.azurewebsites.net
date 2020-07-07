@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>9 - Forms</title>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but this page doesn't work properly without JavaScript
+        enabled. Please enable it to continue.
+      </strong>
+    </noscript>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+      // This form uses controlled components, meaning that the form data is handled by a React component.
+      class Form extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            dish: "Beer",
+            comments: "default comment",
+            isGoing: true,
+            name: "default name",
+            numberOfGuests: 2,
+            timePreference: "Afternoon"
+          };
+
+          this.handleInputChange = this.handleInputChange.bind(this);
+        }
+
+        handleInputChange(event) {
+          const target = event.target;
+          const value = target.name === 'isGoing' ? target.checked : target.value;
+          const name = target.name;
+          this.setState({
+            [name]: value
+          });
+        }
+
+        handleSubmit(event) {
+          console.log(this.state);
+          event.preventDefault();
+        }
+
+        render() {
+          return (
+            <form onSubmit={this.handleSubmit.bind(this)}>
+              <label>
+                Name:
+                <input name="name"
+                  value={this.state.name}
+                  onChange={this.handleInputChange} />
+              </label>
+              <br />
+              <label>
+                Is going:
+                <input
+                  name="isGoing"
+                  type="checkbox"
+                  checked={this.state.isGoing}
+                  onChange={this.handleInputChange} />
+              </label>
+              <br />
+              <label>
+                Number of guests:
+                <input
+                  name="numberOfGuests"
+                  type="number"
+                  value={this.state.numberOfGuests}
+                  onChange={this.handleInputChange} />
+              </label>
+              <br />
+              <select name="dish"
+                value={this.state.dish}
+                onChange={this.handleInputChange}>
+                <option value="Salad">Salad</option>
+                <option value="Chips">Chips</option>
+                <option value="Beer">Beer</option>
+                <option value="Meat">Meat</option>
+              </select>
+              <br />
+              <label>
+                Morning
+                <input name="timePreference"
+                  type="radio"
+                  value="Morning"
+                  checked={this.state.timePreference === "Morning"}
+                  onChange={this.handleInputChange}
+                />
+              </label>
+              <label>
+                Afternoon
+                <input name="timePreference"
+                  type="radio"
+                  value="Afternoon"
+                  checked={this.state.timePreference === "Afternoon"}
+                  onChange={this.handleInputChange}
+                />
+              </label>
+              <label>
+                Evening
+                <input name="timePreference"
+                  type="radio"
+                  value="Evening"
+                  checked={this.state.timePreference === "Evening"}
+                  onChange={this.handleInputChange}
+                />
+              </label>  
+              <br />
+              <textarea name="comments" value={this.state.comments} onChange={this.handleInputChange} />
+              <br />
+              <input value="this is read only" />
+              <input disabled="disabled" value="this is also read only" />
+              <br />
+              This field is editable because it's value is null
+              <br />
+              <input value={null} />
+              <input type="submit" value="Submit" />
+            </form>
+          );
+        }
+      }
+
+      function App() {
+        return (
+          <Form />
+        )
+      }
+
+      ReactDOM.render(
+        <App />,
+        document.getElementById('root')
+      );
+    </script>
+  </body>
+</html>
