@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>8 - Lists and Keys</title>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but this page doesn't work properly without JavaScript
+        enabled. Please enable it to continue.
+      </strong>
+    </noscript>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function ListItem(props) {
+        return <li>{props.value}</li>;
+      }
+
+      function NumberList(props) {
+        const numbers = props.numbers;
+        const listItems = numbers.map((number) =>
+          <ListItem key={number.toString()} value={number} />
+        );
+        return (
+          <ul>
+            {listItems}
+          </ul>
+        );
+      }
+
+      /* 
+      Keys Must Only Be Unique Among Siblings
+
+      Keys used within arrays should be unique among their siblings. However they don’t need to be globally unique.
+      We can use the same keys when we produce two different arrays.
+      */
+      function Blog(props) {
+        const sidebar = (
+          <ul>
+            {props.posts.map((post) =>
+              <li key={post.id}>
+                {post.title}
+              </li>
+            )}
+          </ul>
+        );
+        const content = props.posts.map((post) =>
+          <div key={post.id}>
+            <h3>{post.title}</h3>
+            <p>{post.content}</p>
+          </div>
+        );
+        return (
+          <div>
+            {sidebar}
+            <hr />
+            {content}
+            </div>
+        );
+      }
+
+      function App() {
+        const numbers = [1, 2, 3, 4, 5];
+        const posts = [
+          {id: 1, title: 'Hello World', content: 'Welcome to learning React!'},
+          {id: 2, title: 'Installation', content: 'You can install React from npm.'}
+        ];
+        return (
+          <div>
+            <NumberList numbers={numbers} />
+            <Blog posts={posts} />
+          </div>
+        )
+      }
+
+      ReactDOM.render(
+        <App />,
+        document.getElementById('root')
+      );
+    </script>
+  </body>
+</html>
