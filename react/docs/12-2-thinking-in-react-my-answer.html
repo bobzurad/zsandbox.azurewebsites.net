@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>12 - Thinking in React (Step 2)</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/@babel/standalone/babel.min.js"
+    ></script>
+    <style>
+      .category-text {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <strong
+        >We're sorry but this page doesn't work properly without JavaScript
+        enabled. Please enable it to continue.
+      </strong>
+    </noscript>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function ProductRow(props) {
+        return (
+          <div>
+            <span>{props.name}</span>
+            <span>${props.price}</span>
+          </div>
+        );
+      }
+
+      function ProductCategoryRow(props) {
+        return <div className="category-text">{props.category}</div>;
+      }
+
+      function ProductTable() {
+        return (
+          <div>
+            <div>
+              <span>Name</span>
+              <span>Price</span>
+            </div>
+            <ProductCategoryRow category="Sporting Goods" />
+            <ProductRow name="Football" price="49.99" />
+            <ProductRow name="Baseball" price="9.99" />
+            <ProductRow name="Basketball" price="29.99" />
+            <ProductCategoryRow category="Electronics" />
+            <ProductRow name="iPod Touch" price="99.99" />
+            <ProductRow name="iPhone 5" price="399.99" />
+            <ProductRow name="Nexus 7" price="199.99" />
+          </div>
+        );
+      }
+
+      function SearchBar() {
+        return (
+          <div>
+            <input placeholder="Search..." />
+            <br />
+            <label>
+              <input type="checkbox" />
+              Only show products in stock
+            </label>
+          </div>
+        );
+      }
+
+      function FilterableProductTable() {
+        return (
+          <div>
+            <SearchBar />
+            <ProductTable />
+          </div>
+        );
+      }
+
+      function App() {
+        return <FilterableProductTable />;
+      }
+
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+</html>
