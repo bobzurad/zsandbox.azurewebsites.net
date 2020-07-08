@@ -5,13 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>4 - Components and Props</title>
-    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/@babel/standalone/babel.min.js"
+    ></script>
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but this page doesn't work properly without JavaScript
+      <strong
+        >We're sorry but this page doesn't work properly without JavaScript
         enabled. Please enable it to continue.
       </strong>
     </noscript>
@@ -19,7 +29,6 @@
     <div id="root"></div>
 
     <script type="text/babel">
-
       function Welcome(props) {
         return <h1>Hello, {props.name}</h1>;
       }
@@ -34,16 +43,14 @@
         );
       }
 
-      ReactDOM.render(
-        <App />,
-        document.getElementById('root')
-      );
+      ReactDOM.render(<App />, document.getElementById("root"));
 
       function Avatar(props) {
         return (
-          <img className="Avatar"
-                src={props.user.avatarUrl}
-                alt={props.user.name}
+          <img
+            className="Avatar"
+            src={props.user.avatarUrl}
+            alt={props.user.name}
           />
         );
       }
@@ -52,9 +59,7 @@
         return (
           <div className="UserInfo">
             <Avatar user={props.user} />
-            <div className="UserInfo-name">
-              {props.user.name}
-            </div>
+            <div className="UserInfo-name">{props.user.name}</div>
           </div>
         );
       }
@@ -63,12 +68,8 @@
         return (
           <div className="Comment">
             <UserInfo user={props.author} />
-            <div className="Comment-text">
-              {props.text}
-            </div>
-            <div className="Comment-date">
-              {formatDate(props.date)}
-            </div>
+            <div className="Comment-text">{props.text}</div>
+            <div className="Comment-date">{formatDate(props.date)}</div>
           </div>
         );
       }

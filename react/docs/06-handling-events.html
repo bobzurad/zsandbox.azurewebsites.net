@@ -5,13 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>6 - Handling Events</title>
-    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/@babel/standalone/babel.min.js"
+    ></script>
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but this page doesn't work properly without JavaScript
+      <strong
+        >We're sorry but this page doesn't work properly without JavaScript
         enabled. Please enable it to continue.
       </strong>
     </noscript>
@@ -24,7 +34,7 @@
           super(props);
           this.state = {
             isToggleOn: true,
-            counter: 0
+            counter: 0,
           };
 
           // This binding is necessary to make `this` work in the callback
@@ -34,25 +44,25 @@
           // This type of binding works too, but it's experimental
           // (https://babeljs.io/docs/en/babel-plugin-transform-class-properties/)
           this.handleCountClick = (arg2) => {
-            console.log(arg2)
-            this.setState(state => ({
-              counter: state.counter + 1
+            console.log(arg2);
+            this.setState((state) => ({
+              counter: state.counter + 1,
             }));
-          }
+          };
         }
 
         handleClick(arg1) {
-          console.log(arg1)
-          this.setState(state => ({
-            isToggleOn: !state.isToggleOn
+          console.log(arg1);
+          this.setState((state) => ({
+            isToggleOn: !state.isToggleOn,
           }));
         }
-        
+
         render() {
           return (
             <div>
               <button onClick={this.handleClick.bind(this, "arg1")}>
-                {this.state.isToggleOn ? 'ON' : 'OFF'}
+                {this.state.isToggleOn ? "ON" : "OFF"}
               </button>
               <button onClick={(e) => this.handleCountClick("arg2", e)}>
                 {this.state.counter}
@@ -62,10 +72,7 @@
         }
       }
 
-      ReactDOM.render(
-        <Toggle />,
-        document.getElementById('root')
-      );
+      ReactDOM.render(<Toggle />, document.getElementById("root"));
     </script>
   </body>
 </html>

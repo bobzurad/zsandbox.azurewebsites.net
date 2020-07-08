@@ -5,13 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>5 - State and Lifecycle</title>
-    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/@babel/standalone/babel.min.js"
+    ></script>
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but this page doesn't work properly without JavaScript
+      <strong
+        >We're sorry but this page doesn't work properly without JavaScript
         enabled. Please enable it to continue.
       </strong>
     </noscript>
@@ -19,8 +29,7 @@
     <div id="root"></div>
 
     <script type="text/babel">
-
-    /*
+      /*
         When <Clock /> is passed to ReactDOM.render(), React calls the constructor of the Clock component. 
         Since Clock needs to display the current time, it initializes this.state with an object including the current time. 
         We will later update this state.
@@ -36,20 +45,17 @@
         React updates the DOM accordingly.
         If the Clock component is ever removed from the DOM, React calls the componentWillUnmount() lifecycle method so the timer is stopped.
     */
-    class Clock extends React.Component {
+      class Clock extends React.Component {
         constructor(props) {
           super(props); // always call super(props)
-          this.state = { 
+          this.state = {
             date: new Date(),
             counter: 0,
           };
         }
 
         componentDidMount() {
-          this.timerID = setInterval(
-            () => this.tick(),
-            1000
-          );
+          this.timerID = setInterval(() => this.tick(), 1000);
         }
 
         componentWillUnmount() {
@@ -65,7 +71,7 @@
           // this.state.date = new Date()
           // Correct
           this.setState({
-            date: new Date()
+            date: new Date(),
           });
 
           // 2) State updates are asynchronous, so don't rely on their values for calculating next state
@@ -76,8 +82,8 @@
           // });
           // Correct
           this.setState((state, props) => ({
-            counter: state.counter + parseInt(props.increment)
-          }));          
+            counter: state.counter + parseInt(props.increment),
+          }));
         }
 
         render() {
@@ -91,11 +97,7 @@
         }
       }
 
-      ReactDOM.render(
-        <Clock increment="1" />,
-        document.getElementById('root')
-      );
-
+      ReactDOM.render(<Clock increment="1" />, document.getElementById("root"));
     </script>
   </body>
 </html>

@@ -5,13 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>9a - Uncontrolled Components (Advanced)</title>
-    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/@babel/standalone/babel.min.js"
+    ></script>
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but this page doesn't work properly without JavaScript
+      <strong
+        >We're sorry but this page doesn't work properly without JavaScript
         enabled. Please enable it to continue.
       </strong>
     </noscript>
@@ -31,7 +41,16 @@
 
         handleSubmit(event) {
           console.log(this.input.current.value);
-          console.log(`Selected file - ${this.fileInput.current.files[0].name}`)
+          if (
+            this.fileInput.current.files &&
+            this.fileInput.current.files.length > 0
+          ) {
+            console.log(
+              `Selected file - ${this.fileInput.current.files[0].name}`
+            );
+          } else {
+            console.log("no file selected");
+          }
           event.preventDefault();
         }
 
@@ -55,15 +74,10 @@
       }
 
       function App() {
-        return (
-          <Form />
-        )
+        return <Form />;
       }
 
-      ReactDOM.render(
-        <App />,
-        document.getElementById('root')
-      );
+      ReactDOM.render(<App />, document.getElementById("root"));
     </script>
   </body>
 </html>
