@@ -34,12 +34,11 @@
       class Form extends React.Component {
         constructor(props) {
           super(props);
-          this.handleSubmit = this.handleSubmit.bind(this);
           this.input = React.createRef();
           this.fileInput = React.createRef();
         }
 
-        handleSubmit(event) {
+        handleSubmit = (event) => {
           console.log(this.input.current.value);
           if (
             this.fileInput.current.files &&
@@ -52,7 +51,7 @@
             console.log("no file selected");
           }
           event.preventDefault();
-        }
+        };
 
         render() {
           return (

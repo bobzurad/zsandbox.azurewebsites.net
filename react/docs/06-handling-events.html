@@ -41,10 +41,11 @@
           //  (commented out because we're using .bind(this, "arg1") below)
           // this.handleClick = this.handleClick.bind(this);
 
-          // This type of binding works too, but it's experimental
+          // This type of binding works too, but it's experimental (BUT EVERYONE USES IT)
           // (https://babeljs.io/docs/en/babel-plugin-transform-class-properties/)
-          this.handleCountClick = (arg2) => {
+          this.handleCountClick = (arg2, e) => {
             console.log(arg2);
+            console.log(e);
             this.setState((state) => ({
               counter: state.counter + 1,
             }));

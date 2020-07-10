@@ -103,17 +103,15 @@
       class SearchBar extends React.Component {
         constructor(props) {
           super(props);
-          this.handleFilter = this.handleFilter.bind(this);
-          this.handleInStock = this.handleInStock.bind(this);
         }
 
-        handleFilter(e) {
+        handleFilter = (e) => {
           this.props.onFilterChange(e.target.value);
-        }
+        };
 
-        handleInStock(e) {
+        handleInStock = (e) => {
           this.props.onInStockOnlyChange(e.target.checked);
-        }
+        };
 
         render() {
           return (
@@ -136,19 +134,15 @@
             filterText: "",
             inStockOnly: false,
           };
-          this.handleFilterChange = this.handleFilterChange.bind(this);
-          this.handleInStockOnlyChange = this.handleInStockOnlyChange.bind(
-            this
-          );
         }
 
-        handleFilterChange(filterText) {
+        handleFilterChange = (filterText) => {
           this.setState({ filterText });
-        }
+        };
 
-        handleInStockOnlyChange(inStockOnly) {
+        handleInStockOnlyChange = (inStockOnly) => {
           this.setState({ inStockOnly });
-        }
+        };
 
         render() {
           return (
