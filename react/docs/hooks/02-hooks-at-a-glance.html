@@ -39,11 +39,36 @@
 
       // this is how we "import" useState when using CDNs and a single html file
       // https://stackoverflow.com/questions/59834741/cdn-links-for-react-packages-and-how-to-import-it-when-using-react-using-the-scr
-      const { useState } = React;
+      const { useState, useEffect } = React;
 
       function Hooks() {
         const [count, setCount] = useState(0);
-        return <button onClick={() => setCount(count + 1)}>{count}</button>;
+        const [age, setAge] = useState(38);
+        const [person, setPerson] = useState({
+          firstName: "Robert",
+          lastName: "Zurad",
+        });
+
+        // similar to componentDidMount and componentDidUpdate, useEffect runs after every render
+        useEffect(() => {
+          document.title = `Hooks Count: ${count}`;
+          return () => {
+            // similar to componentWillUnmount
+            console.log("unmounted");
+          };
+        });
+
+        return (
+          <button
+            onClick={() => {
+              setCount(count + 1);
+              //setPerson({ middleName: "John" }); // warning! this replaces the object, does not merge!
+              setPerson({ ...person, middleName: "John" }); // this will merge
+            }}
+          >
+            {count}
+          </button>
+        );
       }
 
       class NoHooks extends React.Component {
