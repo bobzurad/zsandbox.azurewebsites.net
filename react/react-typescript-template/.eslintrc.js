@@ -3,6 +3,7 @@ module.exports = {
     "airbnb-typescript-prettier"
   ],
   "rules": {
+    '@typescript-eslint/no-var-requires': 0,
     "arrow-parens": [
       "warn",
       "as-needed"
