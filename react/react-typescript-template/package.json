@@ -24,8 +24,8 @@
   "scripts": {
     "start": "webpack-dev-server --hot --open",
     "build": "webpack --config webpack.config.js --mode production",
-    "lint": "eslint . --ext .js,.ts,.jsx,.tsx",
-    "lint-fix": "eslint --fix . --ext .js,.ts,.jsx,.tsx"
+    "lint": "eslint src/**/*.{js,jsx,ts,tsx}",
+    "lint-fix": "eslint --fix src/**/*.{js,jsx,ts,tsx}"
   },
   "devDependencies": {
     "@types/react": "^16.9.49",
