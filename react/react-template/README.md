@@ -72,16 +72,6 @@ module.exports = {
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
-      },
-      {
-        test: /\.s?css$/,
-        use: ["style-loader", "css-loader", "sass-loader"]
-      },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: [
-          "file-loader"
-        ]
       }
     ]
   }
@@ -111,7 +101,7 @@ module.exports = {
 
 ```javascript
 import React from "react";
-import "./App.scss";
+import "./App.css";
 
 const App = () => (
   <div className="container">
@@ -168,7 +158,7 @@ yarn add --dev eslint eslint-config-airbnb eslint-plugin-react eslint-plugin-rea
 
 2. Add `.eslintrc.js`
 
-```json
+```javascript
 module.exports = {
   extends: [
     "airbnb",
@@ -193,9 +183,9 @@ module.exports = {
     "lint-fix": "eslint --fix **/*.{js,jsx}",
 ```
 
-If you're using VS Code, install the ESLint extension `dbaeumer.vscode-eslint`, to automatically format your code files as you edit them.
+If you're using VS Code, install the ESLint extension `dbaeumer.vscode-eslint`, to automatically validate and format your code files as you edit them.
 
-### Add SASS support and image file loader
+### Add SASS support and image loader support
 
 1. Install packages
 
