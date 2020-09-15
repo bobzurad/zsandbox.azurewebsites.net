@@ -26,8 +26,8 @@
   "scripts": {
     "start": "webpack-dev-server --hot --open",
     "build": "webpack --config webpack.config.js --mode production",
-    "lint": "eslint **/*.{js,jsx}",
-    "lint-fix": "eslint --fix **/*.{js,jsx}",
+		"lint": "eslint '**/*.{js,jsx}'",
+    "lint-fix": "eslint --fix '**/*.{js,jsx}'",
     "test": "jest"
   },
   "devDependencies": {

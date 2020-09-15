@@ -141,7 +141,7 @@ ReactDOM.render(<App />, document.getElementById("root"))
 "scripts": {
     "start": "webpack-dev-server --hot --open",
     "build": "webpack --config webpack.config.js --mode production"
-  }
+}
 ```
 
 You can now build the app with `yarn build` and run the app with `yarn start`
@@ -179,8 +179,8 @@ module.exports = {
 4. Add scripts to `package.json`
 
 ```json
-    "lint": "eslint **/*.{js,jsx}",
-    "lint-fix": "eslint --fix **/*.{js,jsx}",
+		"lint": "eslint '**/*.{js,jsx}'",
+    "lint-fix": "eslint --fix '**/*.{js,jsx}'"
 ```
 
 If you're using VS Code, install the ESLint extension `dbaeumer.vscode-eslint`, to automatically validate and format your code files as you edit them.
