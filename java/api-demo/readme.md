@@ -1,15 +1,12 @@
 A Spring Boot REST API
 
-todo:
-* put init data in ./db/init.sql
-
 to run:
 
 * start mysql:
   * `docker-compose up`
 
 * start the web server:
-  * (from IntelliJ) right-click ApiDemoApplication, Run
+  * `mvn spring-boot:run`
 
 to connect to mysql instance:
 * `docker exec -it api-demo_mysql_1 /bin/bash`
