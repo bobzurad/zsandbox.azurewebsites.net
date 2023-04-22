@@ -1,6 +1,7 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import styles from "../../styles/category/Category.module.css";
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   const request = await fetch("http://localhost:8080/category/");
@@ -28,8 +29,8 @@ export default function Home({
       <Head>
         <title>EcomApp - Categories</title>
       </Head>
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <div className="columns-3 w-full gap-12">
+      <main className={styles.main}>
+        <div className={styles.center}>
           <div>Categories</div>
           {data.length === 0 ? (
             <>
@@ -46,7 +47,7 @@ export default function Home({
             </>
           )}
         </div>
-        <div className="columns-3 w-full gap-12">
+        <div className={styles.center}>
           <div>Add Category</div>
           <div>
             <input />
