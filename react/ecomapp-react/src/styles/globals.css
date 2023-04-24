@@ -86,6 +86,9 @@ a {
   text-decoration: none;
 }
 
+label {
+  color: #FFF !important;
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
