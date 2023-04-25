@@ -1,12 +1,14 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext, useEffect } from "react";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { Button, Input, Space, Form } from "antd";
 import type { FormInstance } from "antd";
+import { CategoryContext, CategoryContextType } from "@/context/category";
 import { postData } from "@/util/api";
 import { validateMessages } from "@/util/form";
 import styles from "../../styles/category/Category.module.css";
+import { ICategoryModel } from "@/models/category";
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   const request = await fetch("http://localhost:8080/category/");
@@ -19,17 +21,16 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   };
 };
 
-export default function Home({
-  data,
-}: {
-  data: {
-    id: number;
-    categoryName: string;
-    description: string;
-    imageUrl: string;
-  }[];
-}) {
-  const [categories, setCategories] = useState(data);
+export default function Home({ data }: { data: ICategoryModel[] }) {
+  const { categories, updateCategories } = useContext(
+    CategoryContext
+  ) as CategoryContextType;
+
+  useEffect(() => {
+    updateCategories(data);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
   const [newCategoryName, setNewCategoryName] = useState("");
   const [newCategoryDescription, setNewCategoryDescription] = useState("");
   const [newCategoryIsLoading, setNewCategoryIsLoading] = useState(false);
@@ -58,7 +59,7 @@ export default function Home({
         // refresh categories
         const request = await fetch("http://localhost:8080/category/");
         const data = await request.json();
-        setCategories(data);
+        updateCategories(data);
       })
       .catch((reason) => {
         console.log(reason);
