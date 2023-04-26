@@ -2,10 +2,15 @@ import { useState, useRef } from "react";
 import Head from "next/head";
 import { Button, Input, Form } from "antd";
 import type { FormInstance } from "antd";
+import { useSetAtom } from "jotai";
+import { categoriesAtom } from "../../context/category";
 import { postData } from "@/util/api";
 import { validateMessages } from "@/util/form";
+import { ICategoryModel } from "@/models/category";
 
 export default function AddCategory() {
+  const setCategories = useSetAtom(categoriesAtom);
+
   const [newCategoryName, setNewCategoryName] = useState("");
   const [newCategoryDescription, setNewCategoryDescription] = useState("");
   const [newCategoryIsLoading, setNewCategoryIsLoading] = useState(false);
@@ -34,8 +39,7 @@ export default function AddCategory() {
         // refresh categories
         const request = await fetch("http://localhost:8080/category/");
         const data = await request.json();
-        console.log(data);
-        //updateCategories(data);
+        setCategories(data as ICategoryModel[]);
       })
       .catch((reason) => {
         console.log(reason);

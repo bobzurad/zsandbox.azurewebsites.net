@@ -1,9 +1,10 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { Space } from "antd";
-import { CategoryContext, CategoryContextType } from "@/context/category";
+import { useAtom } from "jotai";
+import { categoriesAtom } from "../../context/category";
 import AddCategory from "../../components/category/addCategory";
 import styles from "../../styles/category/Category.module.css";
 import { ICategoryModel } from "@/models/category";
@@ -20,14 +21,12 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 };
 
 export default function Home({ data }: { data: ICategoryModel[] }) {
-  const { categories, updateCategories } = useContext(
-    CategoryContext
-  ) as CategoryContextType;
+  const [categories, setCategories] = useAtom(categoriesAtom);
 
+  // set categories loaded from getServerSideProps
   useEffect(() => {
-    updateCategories(data);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+    setCategories(data);
+  }, [setCategories, data]);
 
   return (
     <>

@@ -1,11 +1,11 @@
 import type { AppProps } from "next/app";
-import { CategoryProvider } from "../context/category";
+import { Provider } from "jotai";
 import "@/styles/globals.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <CategoryProvider>
+    <Provider>
       <Component {...pageProps} />
-    </CategoryProvider>
+    </Provider>
   );
 }
