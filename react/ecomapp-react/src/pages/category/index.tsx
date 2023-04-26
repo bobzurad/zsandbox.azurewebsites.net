@@ -1,9 +1,9 @@
-import { useEffect } from "react";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { Space } from "antd";
-import { useAtom } from "jotai";
+import { useAtomValue } from "jotai";
+import { useHydrateAtoms } from "jotai/utils";
 import { categoriesAtom } from "../../context/category";
 import AddCategory from "../../components/category/addCategory";
 import styles from "../../styles/category/Category.module.css";
@@ -21,12 +21,10 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 };
 
 export default function Home({ data }: { data: ICategoryModel[] }) {
-  const [categories, setCategories] = useAtom(categoriesAtom);
+  // load props data into atom
+  useHydrateAtoms([[categoriesAtom, data]]);
 
-  // set categories loaded from getServerSideProps
-  useEffect(() => {
-    setCategories(data);
-  }, [setCategories, data]);
+  const categories = useAtomValue(categoriesAtom);
 
   return (
     <>
