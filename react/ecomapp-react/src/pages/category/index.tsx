@@ -1,7 +1,7 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import { Space } from "antd";
+import { Space, Row, Col } from "antd";
 import { useAtomValue } from "jotai";
 import { useHydrateAtoms } from "jotai/utils";
 import { categoriesAtom } from "../../context/category";
@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 
 export default function Home({ data }: { data: ICategoryModel[] }) {
   // load props data into atom
-  useHydrateAtoms([[categoriesAtom, data]]);
+  useHydrateAtoms(new Map([[categoriesAtom, data]]));
 
   const categories = useAtomValue(categoriesAtom);
 
@@ -31,33 +31,35 @@ export default function Home({ data }: { data: ICategoryModel[] }) {
       <Head>
         <title>EcomApp - Categories</title>
       </Head>
-      <main className={styles.main}>
-        <div className={styles.center}>
-          <Space size="large">
-            <div>Categories</div>
-            {categories.length === 0 ? (
-              <>
-                <div>There are no categories.</div>
-              </>
-            ) : (
-              <>
-                {categories.map((category) => {
-                  return (
-                    <div key={category.id}>
-                      <div>{category.categoryName}</div>
-                      <div>{category.description}</div>
-                    </div>
-                  );
-                })}
-              </>
-            )}
-          </Space>
-        </div>
-        <div className={styles.center}>
+      <Row justify="space-between">
+        <Col xs={24} lg={24} xl={12}>
+          <div>Categories</div>
+          {categories.length === 0 ? (
+            <>
+              <div>There are no categories.</div>
+            </>
+          ) : (
+            <>
+              {categories.map((category) => {
+                return (
+                  <div key={category.id}>
+                    <div>{category.categoryName}</div>
+                    <div>{category.description}</div>
+                  </div>
+                );
+              })}
+            </>
+          )}
+        </Col>
+        <Col xs={24} lg={24} xl={12}>
           <AddCategory />
-        </div>
-        <Link href="/">← Back to Home</Link>
-      </main>
+        </Col>
+      </Row>
+      <Row justify={"space-between"}>
+        <Col span={24}>
+          <Link href="/">← Back to Home</Link>
+        </Col>
+      </Row>
     </>
   );
 }
