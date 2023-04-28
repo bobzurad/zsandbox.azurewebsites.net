@@ -1,27 +1,23 @@
 import { useAtomValue } from "jotai";
+import { List } from "antd";
 import { categoriesAtom } from "../../context/category";
+import ListCategoryItem from "./listCategoryItem";
 
 export default function ListCategory() {
   const categories = useAtomValue(categoriesAtom);
 
   return (
     <>
-      <div>Categories</div>
+      <h2>Categories</h2>
       {categories.length === 0 ? (
         <>
           <div>There are no categories.</div>
         </>
       ) : (
-        <>
-          {categories.map((category) => {
-            return (
-              <div key={category.id}>
-                <div>{category.categoryName}</div>
-                <div>{category.description}</div>
-              </div>
-            );
-          })}
-        </>
+        <List
+          dataSource={categories}
+          renderItem={(category) => <ListCategoryItem category={category} />}
+        />
       )}
     </>
   );

@@ -7,6 +7,7 @@ import { categoriesAtom } from "../../context/category";
 import { postData } from "@/util/api";
 import { validateMessages } from "@/util/form";
 import { ICategoryModel } from "@/models/category";
+import styles from "@/styles/category/AddCategory.module.css";
 
 export default function AddCategory() {
   const setCategories = useSetAtom(categoriesAtom);
@@ -62,7 +63,7 @@ export default function AddCategory() {
       >
         <Form.Item
           name="newCategoryName"
-          label="Name"
+          label={<label className={styles.label}>Name</label>}
           rules={[{ required: true }]}
         >
           <Input
@@ -71,7 +72,10 @@ export default function AddCategory() {
             onChange={(event) => setNewCategoryName(event.currentTarget.value)}
           />
         </Form.Item>
-        <Form.Item name="newCategoryDescription" label="Description">
+        <Form.Item
+          name="newCategoryDescription"
+          label={<label className={styles.label}>Description</label>}
+        >
           <Input.TextArea
             size="large"
             value={newCategoryDescription}
