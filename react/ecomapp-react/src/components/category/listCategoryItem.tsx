@@ -1,14 +1,19 @@
 import { useState, useRef } from "react";
 import { List, Avatar, Button, Modal, Form, Input } from "antd";
 import type { FormInstance } from "antd";
+import { useSetAtom } from "jotai";
+import { categoriesAtom } from "@/context/category";
 import { ICategoryModel } from "@/models/category";
 import { validateMessages } from "@/util/form";
 import styles from "@/styles/category/ListCategoryItem.module.css";
+import { postData } from "@/util/api";
 
 export default function ListCategoryItem(props: { category: ICategoryModel }) {
   const [category, setCategory] = useState(props.category);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
+  const setCategories = useSetAtom(categoriesAtom);
   const editCategoryFormRef = useRef<FormInstance>(null);
 
   const editCategoryFormLayout = {
@@ -21,11 +26,26 @@ export default function ListCategoryItem(props: { category: ICategoryModel }) {
   };
 
   const handleOk = () => {
-    // TODO: save updated category
-    setIsModalOpen(false);
+    // save updated values
+    setIsSaving(true);
+    postData("http://localhost:8080/category/update/" + category.id, category)
+      .then(async (responseData) => {
+        // refresh categories
+        const request = await fetch("http://localhost:8080/category/");
+        const data = await request.json();
+        setCategories(data as ICategoryModel[]);
+        setIsSaving(false);
+        setIsModalOpen(false);
+      })
+      .catch((reason) => {
+        console.log(reason);
+        setIsSaving(false);
+      });
   };
 
   const handleCancel = () => {
+    // revert to original values
+    setCategory(props.category);
     setIsModalOpen(false);
   };
 
@@ -53,14 +73,24 @@ export default function ListCategoryItem(props: { category: ICategoryModel }) {
       <Modal
         title="Edit Category"
         open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
+        footer={[
+          <Button key="cancel" onClick={handleCancel}>
+            Cancel
+          </Button>,
+          <Button key="ok" type="primary" loading={isSaving} onClick={handleOk}>
+            Ok
+          </Button>,
+        ]}
       >
         <Form
           {...editCategoryFormLayout}
           name="edit-category"
           ref={editCategoryFormRef}
           validateMessages={validateMessages}
+          initialValues={{
+            editCategoryName: category.categoryName,
+            editCategoryDescription: category.description,
+          }}
         >
           <Form.Item
             name="editCategoryName"
@@ -70,15 +100,24 @@ export default function ListCategoryItem(props: { category: ICategoryModel }) {
             <Input
               size="large"
               value={category.categoryName}
-              defaultValue={category.categoryName}
-              onChange={(event) => console.log(event.currentTarget.value)}
+              onChange={(event) =>
+                setCategory({
+                  ...category,
+                  categoryName: event.currentTarget.value,
+                })
+              }
             />
           </Form.Item>
           <Form.Item name="editCategoryDescription" label="Description">
             <Input.TextArea
               size="large"
               value={category.description}
-              onChange={(event) => console.log(event.currentTarget.value)}
+              onChange={(event) =>
+                setCategory({
+                  ...category,
+                  description: event.currentTarget.value,
+                })
+              }
             />
           </Form.Item>
         </Form>
