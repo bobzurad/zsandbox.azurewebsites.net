@@ -10,8 +10,9 @@ import { postData } from "@/util/api";
 
 export default function ListCategoryItem(props: { category: ICategoryModel }) {
   const [category, setCategory] = useState(props.category);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const setCategories = useSetAtom(categoriesAtom);
   const editCategoryFormRef = useRef<FormInstance>(null);
@@ -21,32 +22,59 @@ export default function ListCategoryItem(props: { category: ICategoryModel }) {
     wrapperCol: { span: 16 },
   };
 
-  const showModal = () => {
-    setIsModalOpen(true);
+  const refreshCategories = async () => {
+    const request = await fetch("http://localhost:8080/category/");
+    const data = await request.json();
+    setCategories(data as ICategoryModel[]);
   };
 
-  const handleOk = () => {
+  const showEditModal = () => {
+    setIsEditModalOpen(true);
+  };
+
+  const showDeleteModal = () => {
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleUpdate = () => {
     // save updated values
-    setIsSaving(true);
+    setIsLoading(true);
     postData("http://localhost:8080/category/update/" + category.id, category)
       .then(async (responseData) => {
         // refresh categories
-        const request = await fetch("http://localhost:8080/category/");
-        const data = await request.json();
-        setCategories(data as ICategoryModel[]);
-        setIsSaving(false);
-        setIsModalOpen(false);
+        await refreshCategories();
+        setIsLoading(false);
+        setIsEditModalOpen(false);
       })
       .catch((reason) => {
         console.log(reason);
-        setIsSaving(false);
+        setIsLoading(false);
       });
   };
 
-  const handleCancel = () => {
+  const handleCancelUpdate = () => {
     // revert to original values
     setCategory(props.category);
-    setIsModalOpen(false);
+    setIsEditModalOpen(false);
+  };
+
+  const handleDelete = () => {
+    setIsLoading(true);
+    postData("http://localhost:8080/category/delete/" + category.id)
+      .then(async (responseData) => {
+        // refresh categories
+        await refreshCategories();
+        setIsLoading(false);
+        setIsDeleteModalOpen(false);
+      })
+      .catch((reason) => {
+        console.log(reason);
+        setIsLoading(false);
+      });
+  };
+
+  const handleCancelDelete = () => {
+    setIsDeleteModalOpen(false);
   };
 
   return (
@@ -56,9 +84,17 @@ export default function ListCategoryItem(props: { category: ICategoryModel }) {
           <Button
             key={`list-edit-${category.id}`}
             size="small"
-            onClick={showModal}
+            onClick={showEditModal}
           >
             Edit
+          </Button>,
+          <Button
+            key={`list-delete-${category.id}`}
+            size="small"
+            onClick={showDeleteModal}
+            danger
+          >
+            Delete
           </Button>,
         ]}
       >
@@ -71,13 +107,28 @@ export default function ListCategoryItem(props: { category: ICategoryModel }) {
         />
       </List.Item>
       <Modal
+        title="Delete Category"
+        open={isDeleteModalOpen}
+        onCancel={handleCancelDelete}
+        onOk={handleDelete}
+      >
+        <p>Are you sure you want to delete the following Category?</p>
+        <p>{category.categoryName}</p>
+        <p>{category.description}</p>
+      </Modal>
+      <Modal
         title="Edit Category"
-        open={isModalOpen}
+        open={isEditModalOpen}
         footer={[
-          <Button key="cancel" onClick={handleCancel}>
+          <Button key="cancel" onClick={handleCancelUpdate}>
             Cancel
           </Button>,
-          <Button key="ok" type="primary" loading={isSaving} onClick={handleOk}>
+          <Button
+            key="ok"
+            type="primary"
+            loading={isLoading}
+            onClick={handleUpdate}
+          >
             Ok
           </Button>,
         ]}

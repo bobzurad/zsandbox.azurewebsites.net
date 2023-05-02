@@ -54,4 +54,17 @@ public class CategoryController {
         // If the category doesn't exist then return a response of unsuccessful.
         return new ResponseEntity<>(new ApiResponse(false, "category does not exist"), HttpStatus.NOT_FOUND);
     }
+
+    @PostMapping("/delete/{categoryId}")
+    public ResponseEntity<ApiResponse> deleteCategory(@PathVariable("categoryId") Integer categoryId) {
+      // Check to see if the category exists.
+      if (Objects.nonNull(categoryService.readCategory(categoryId))) {
+        // If the category exists then delete it.
+        categoryService.deleteCategory(categoryId);
+        return new ResponseEntity<ApiResponse>(new ApiResponse(true, "deleted the category"), HttpStatus.OK);
+      }
+
+      // If the category doesn't exist then return a response of unsuccessful.
+      return new ResponseEntity<>(new ApiResponse(false, "category does not exist"), HttpStatus.NOT_FOUND);
+    }
 }
