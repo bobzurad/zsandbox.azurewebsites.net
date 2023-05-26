@@ -24,6 +24,7 @@ export default function Home() {
           />
         </div>
 
+        <Link href="/product/">Products</Link>
         <Link href="/category/">Categories</Link>
       </main>
     </>
