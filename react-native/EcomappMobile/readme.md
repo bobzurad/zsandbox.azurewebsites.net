@@ -8,6 +8,10 @@ This project interacts with data from the API at https://github.com/bobzurad/zsa
 
 This project requires NodeJS 14 or later. To setup your dev environment, follow the official [React Native Guide](https://reactnative.dev/docs/environment-setup) and select the `React Native CLI QuickStart`. This project **DOES NOT** use Expo! Stop at "Creating a new application", because this application is already created :)
 
+After you cloned this repo, run `npm install`
+
+If you're on macOS, also run `cd ios` and `pod install`
+
 ### Additional Notes
 
 If using VSCode, make sure the following extensions are installed:
