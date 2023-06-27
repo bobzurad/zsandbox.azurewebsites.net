@@ -28,6 +28,7 @@ const CategoryHome = () => {
         categories.map(category => {
           return (
             <List.Item
+              key={category.id}
               title={category.categoryName}
               description={category.description}
             />
