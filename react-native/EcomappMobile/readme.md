@@ -2,7 +2,12 @@
 
 This is a mobile app created with `npx react-native init`
 
+### API
+
 This project interacts with data from the API at https://github.com/bobzurad/zsandbox.azurewebsites.net/tree/master/java/ecomapp
+ - Note: If you have this API running on your localhost and you want to access it from the phone or emulator, run `adb reverse tcp:8080 tcp:8080` before starting the app. For more, see [here](https://dev.to/tusharsadhwani/connecting-android-apps-to-localhost-simplified-57lm)
+
+### Libraries
 
 Some important libraries/packages that this app uses includes:
 
