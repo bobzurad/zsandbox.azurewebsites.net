@@ -1,7 +1,18 @@
 import * as React from 'react';
-import {Text, List} from 'react-native-paper';
+import {StyleSheet} from 'react-native';
+import {FAB} from 'react-native-paper';
 import fetchClient from '../api/index';
 import {ICategoryModel} from '../models/category';
+import CategoryList from './CategoryList';
+
+const styles = StyleSheet.create({
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
+  },
+});
 
 const CategoryHome = () => {
   const [categories, setCategories] = React.useState([] as ICategoryModel[]);
@@ -23,17 +34,12 @@ const CategoryHome = () => {
 
   return (
     <>
-      <Text>Categories</Text>
-      {categories.length > 0 &&
-        categories.map(category => {
-          return (
-            <List.Item
-              key={category.id}
-              title={category.categoryName}
-              description={category.description}
-            />
-          );
-        })}
+      <CategoryList categories={categories} />
+      <FAB
+        icon="plus"
+        style={styles.fab}
+        onPress={() => console.log('Pressed')}
+      />
     </>
   );
 };
