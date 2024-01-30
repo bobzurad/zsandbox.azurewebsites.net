@@ -2,8 +2,8 @@
   "eslint.workingDirectories": ["./VueMastery/unit-testing-vue"],
   "files.autoSave": "off",
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
-    "source.fixAll": true
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll": "explicit"
   },
   "editor.formatOnSave": true,
   "[javascript]": {
