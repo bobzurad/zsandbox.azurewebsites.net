@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+
+  haproxy:
+    image: docker.io/haproxy:2.4-alpine
+    volumes:
+      - /home/bob/git/zsandbox.azurewebsites.net/oauth/oauth-sessions/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    extra_hosts:
+      # Docker Desktop uses `host.docker.internal` for the host,
+      # mimic this for linux installs, requires Docker 20.10+
+      - host.docker.internal:host-gateway
+    ports:
+      - 8080:8080
+
+  redis:
+    # Starts Redis without persistence
+    image: docker.io/redis:6.2.5-alpine
+    ports:
+      - 6379:6379
