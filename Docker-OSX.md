@@ -53,6 +53,9 @@ Insert following above the found line:
 ```Dockerfile
 RUN sed -i -e 's/os.get_terminal_size().columns/80/g' /home/arch/OSX-KVM/./fetch-macOS-v2.py
 ```
+
+Note: By default, the Dockerfile is set to build an image with a resolution of 1920x1080. To change the resolution, see here: https://github.com/sickcodes/Docker-OSX?tab=readme-ov-file#changing-display-resolution
+
 Then run this to build the image:
 ```bash
 docker build -t sickcodes/docker-osx:sonoma --build-arg SHORTNAME=sonoma .
@@ -89,6 +92,8 @@ Create a partition using the unused space to house the OS and your files if you 
 Quit Disk Utility and click Reinstall macOS
 
 The macOS installer will reboot a few times. When it does, select "macOS Installer" on boot. Then on subsequent reboots, select macOS.
+
+After the installation process is done, and you've logged into the macOS desktop, you can shut down the VM.
 
 ## Extract the Base Image
 Here we will extract the Base Image to be used as a persisted volume.
@@ -140,6 +145,7 @@ docker run -it \
     -e RAM=24 \
     -e "DISPLAY=${DISPLAY:-:0.0}" \
     -e "NOPICKER=true" \
+    -e GENERATE_UNIQUE=true \
     sickcodes/docker-osx:naked
 ```
 
@@ -147,4 +153,44 @@ When the container is shut down and no longer running, it can be started again b
 
 ```bash
 docker start -ai macvm
+```
+
+## Build a Naked VNC Image
+We can access the macOS VM with a VNC Client by building a VNC image.
+
+Open `vnc-version/Dockerfile.nakedvnc` and change
+```Dockerfile
+ARG BASE_IMAGE=sickcodes/docker-osx:latest
+```
+to
+```Dockerfile
+ARG BASE_IMAGE=sickcodes/docker-osx:sonoma
+```
+
+Then build the image:
+```bash
+cd vnc-version
+docker build -t sickcodes/docker-osx:nakedvnc -f Dockerfile.nakedvnc .
+```
+
+Note down the VNC password printed during building the container! It will be permanent for each run so you can save it to your VNC client. You can connect to it via localhost:5999. Don’t forget to set “grab input” and “hide menubar” both in the QEMU menu bar _and_ the VNC client.
+
+## Create and start a macOS container to access via VNC
+
+```bash
+docker run -i \
+    --device /dev/kvm \
+    --name macvnc \
+    --network host \
+    -p 50922:10022 \
+    -p 5999:5999 \
+    -v "${PWD}/mac_hdd_ng.img:/image" \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -e "DISPLAY=${DISPLAY:-:0.0}" \
+    -e RAM=24 \
+    -e CPU='Haswell-noTSX' \
+    -e CPUID_FLAGS='kvm=on,vendor=GenuineIntel,+invtsc,vmware-cpuid-freq=on' \
+    -e EXTRA='-smp 16,cores=8,threads=2' \
+    -e EXTRA="-display none -vnc 0.0.0.0:99,password=on" \
+    sickcodes/docker-osx:nakedvnc
 ```
