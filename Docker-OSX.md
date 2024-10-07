@@ -34,6 +34,7 @@ If running Wayland on the host:
 sudo pacman -S xorg-xhost
 xhost +local:docker
 ```
+Note: When starting the macvm container, if you get the error `gtk initialization failed`, then run `xhost +local:docker` again.
 
 ## Create the Base Image
 
@@ -194,3 +195,6 @@ docker run -i \
     -e EXTRA="-display none -vnc 0.0.0.0:99,password=on" \
     sickcodes/docker-osx:nakedvnc
 ```
+
+## Common Errors
+When starting the macvm container, if you get the error `gtk initialization failed`, then run `xhost +local:docker`, and start the container again.
