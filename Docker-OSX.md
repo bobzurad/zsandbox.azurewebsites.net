@@ -167,7 +167,7 @@ You can start the container headless and connect to it with a VNC client. To do 
 
 Once the container starts, you'll be at a `(qemu)` prompt. You might have to hit enter a few times for the `(qemu)` prompt to appear. To connect to the running container:
 
-* At the `(qemu)` prompt, set a password by running:  `change password <some_password>`
+* At the `(qemu)` prompt, set a password by running:  `change vnc password <some_password>`
 * Use a VNC client to connect to the container at `localhost:5999`
 * Connect with the password you just set.
 
