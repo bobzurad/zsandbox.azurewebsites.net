@@ -156,44 +156,42 @@ When the container is shut down and no longer running, it can be started again b
 docker start -ai macvm
 ```
 
-## Build a Naked VNC Image
-We can access the macOS VM with a VNC Client by building a VNC image.
+## Create and start a headless macOS container
 
-Open `vnc-version/Dockerfile.nakedvnc` and change
-```Dockerfile
-ARG BASE_IMAGE=sickcodes/docker-osx:latest
-```
-to
-```Dockerfile
-ARG BASE_IMAGE=sickcodes/docker-osx:sonoma
-```
+You can start the container headless and connect to it with a VNC client. To do so, first change `docker run -it` to `docker run -i` and add the following lines:
 
-Then build the image:
 ```bash
-cd vnc-version
-docker build -t sickcodes/docker-osx:nakedvnc -f Dockerfile.nakedvnc .
+    -p 5999:5999 \
+    -e EXTRA="-display none -vnc 0.0.0.0:99,password=on" \
 ```
 
-Note down the VNC password printed during building the container! It will be permanent for each run so you can save it to your VNC client. You can connect to it via localhost:5999. Don’t forget to set “grab input” and “hide menubar” both in the QEMU menu bar _and_ the VNC client.
+Once the container starts, you'll be at a `(qemu)` prompt. You might have to hit enter a few times for the `(qemu)` prompt to appear. To connect to the running container:
 
-## Create and start a macOS container to access via VNC
+* At the `(qemu)` prompt, set a password by running:  `change password <some_password>`
+* Use a VNC client to connect to the container at `localhost:5999`
+* Connect with the password you just set.
+
+### Example: 
+Here is the docker run command for a headless container, using a custom image:
 
 ```bash
 docker run -i \
     --device /dev/kvm \
-    --name macvnc \
+    --name macvm \
     --network host \
     -p 50922:10022 \
     -p 5999:5999 \
-    -v "${PWD}/mac_hdd_ng.img:/image" \
+    -v "${PWD}/mac_hdd_ng_sonoma-2560x1440.img:/image" \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
-    -e "DISPLAY=${DISPLAY:-:0.0}" \
-    -e RAM=24 \
     -e CPU='Haswell-noTSX' \
     -e CPUID_FLAGS='kvm=on,vendor=GenuineIntel,+invtsc,vmware-cpuid-freq=on' \
     -e EXTRA='-smp 16,cores=8,threads=2' \
+    -e RAM=24 \
+    -e "DISPLAY=${DISPLAY:-:0.0}" \
+    -e "NOPICKER=true" \
+    -e GENERATE_UNIQUE=true \
     -e EXTRA="-display none -vnc 0.0.0.0:99,password=on" \
-    sickcodes/docker-osx:nakedvnc
+    bobzurad/docker-osx:sonoma-2560x1440_naked
 ```
 
 ## Common Errors
