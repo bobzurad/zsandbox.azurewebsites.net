@@ -5,3 +5,9 @@ spring:
     user:
       name: test
       password: test
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${clientId}
+            client-secret: ${clientSecret}
