@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: OAuth2 Basic Demo
+  security:
+    user:
+      name: test
+      password: test
