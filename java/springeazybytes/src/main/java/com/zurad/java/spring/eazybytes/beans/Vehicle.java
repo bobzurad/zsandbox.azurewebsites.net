@@ -2,10 +2,9 @@ package com.zurad.java.spring.eazybytes.beans;
 
 public class Vehicle {
 
-    public String name;
+    private String name;
 
-    public Vehicle() {
-    }
+    public Vehicle() {}
 
     public Vehicle(String name) {
         this.name = name;
