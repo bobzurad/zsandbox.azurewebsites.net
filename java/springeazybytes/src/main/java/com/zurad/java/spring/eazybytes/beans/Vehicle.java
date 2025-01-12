@@ -4,7 +4,8 @@ public class Vehicle {
 
     public String name;
 
-    public Vehicle() {}
+    public Vehicle() {
+    }
 
     public Vehicle(String name) {
         this.name = name;
@@ -13,6 +14,7 @@ public class Vehicle {
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
