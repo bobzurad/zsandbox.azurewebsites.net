@@ -1,5 +1,7 @@
 package com.zurad.java.spring.eazybytes;
 
+import java.util.function.Supplier;
+
 import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -23,6 +25,9 @@ public class Main {
 
         // create our components that were registered as beans with @ComponentScan in ProjectConfig.java
         components(context);
+
+        // create beans using a Supplier
+        supplierBeans(context);
 
         // close context
         context.close();
@@ -62,5 +67,16 @@ public class Main {
         var dogBean = context.getBean(Animal.class);
         System.out.println("Animal name from dog bean: " + dogBean.getName());
         dogBean.printHello();
+    }
+
+    private static void supplierBeans(AnnotationConfigApplicationContext context) {
+        Supplier<Vehicle> subaruSupplier = () -> {
+            return new Vehicle("Subaru WRX");
+        };
+
+        context.registerBean("Subaru", Vehicle.class, subaruSupplier);
+
+        var subaruBean = context.getBean("Subaru", Vehicle.class);
+        System.out.println("Vehicle name from Subaru bean: " + subaruBean.getName());
     }
 }
