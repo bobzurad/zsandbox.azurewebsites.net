@@ -7,6 +7,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.zurad.java.spring.eazybytes.beans.Animal;
+import com.zurad.java.spring.eazybytes.beans.Person;
 import com.zurad.java.spring.eazybytes.beans.Vehicle;
 import com.zurad.java.spring.eazybytes.config.ProjectConfig;
 
@@ -38,8 +39,7 @@ public class Main {
     }
 
     private static void beans(AnnotationConfigApplicationContext context) {
-        // we have to specify the bean name because we have more than one bean of type
-        // Vehicle defined
+        // we have to specify the bean name because we have more than one bean of type Vehicle defined
         var bean = context.getBean("vehicle", Vehicle.class);
         System.out.println("Vehicle name from Spring Context: " + bean.getName());
 
@@ -71,6 +71,15 @@ public class Main {
         var dogBean = context.getBean(Animal.class);
         System.out.println("Animal name from dog bean: " + dogBean.getName());
         dogBean.printHello();
+
+        var lucyBean = context.getBean(Person.class);
+        System.out.println("Person name from lucy bean: " + lucyBean.getName());
+        System.out.println(
+                "Autowired Vehicle bean name from lucy bean: " + lucyBean.getVehicle().getName());
+        System.out.println(
+                "Autowired Vehicle2 bean name from lucy bean: " + lucyBean.getVehicle2().getName());
+        System.out.println(
+                "Autowired Vehicle3 bean name from lucy bean: " + lucyBean.getVehicle3().getName());
     }
 
     private static void supplierBeans(AnnotationConfigApplicationContext context) {
