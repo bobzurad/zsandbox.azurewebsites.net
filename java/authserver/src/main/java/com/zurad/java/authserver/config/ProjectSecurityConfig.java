@@ -115,7 +115,7 @@ public class ProjectSecurityConfig {
 //				.clientId("oidc-client")
 //				.clientSecret("{noop}secret")
 //				.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-//				.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+//				.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)  //TODO: note you can set multiple Grant Types...
 //				.authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
 //				.redirectUri("http://127.0.0.1:8080/login/oauth2/code/oidc-client")
 //				.postLogoutRedirectUri("http://127.0.0.1:8080/")
@@ -126,6 +126,23 @@ public class ProjectSecurityConfig {
 //
 //		return new InMemoryRegisteredClientRepository(oidcClient);
 //	}
+
+	@Bean
+	public RegisteredClientRepository registeredClientRepository() {
+		RegisteredClient clientCredentialsClient = RegisteredClient.withId(UUID.randomUUID().toString())
+			.clientId("eazybankapi")
+			.clientSecret("{noop}VxubZgAXyyTq9lGjj3qGvWNsHtE4SqTq") // some random string
+			.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+			.authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+			.scopes(scopeConfig -> scopeConfig.addAll(List.of(OidcScopes.OPENID, "ADMIN", "USER")))
+			.tokenSettings(TokenSettings.builder()
+				.accessTokenTimeToLive(Duration.ofMinutes(10))
+				.accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED)
+				.build())
+			.build();
+
+		return new InMemoryRegisteredClientRepository(clientCredentialsClient);
+	}
 
 	@Bean 
 	public JWKSource<SecurityContext> jwkSource() {
