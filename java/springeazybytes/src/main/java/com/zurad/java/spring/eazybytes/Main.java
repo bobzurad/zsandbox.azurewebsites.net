@@ -7,6 +7,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.zurad.java.spring.eazybytes.beans.Animal;
+import com.zurad.java.spring.eazybytes.beans.Car;
 import com.zurad.java.spring.eazybytes.beans.Person;
 import com.zurad.java.spring.eazybytes.beans.Vehicle;
 import com.zurad.java.spring.eazybytes.config.ProjectConfig;
@@ -33,6 +34,9 @@ public class Main {
 
         // create beans from the XmlContext
         xmlBeans();
+
+        // run our services
+        services(context);
 
         // close context
         context.close();
@@ -100,5 +104,13 @@ public class Main {
         System.out.println("Vehicle name from Toyota bean: " + toyotaBean.getName());
 
         context.close();
+    }
+
+    private static void services(AnnotationConfigApplicationContext context) {
+        var car = context.getBean(Car.class);
+
+        System.out.println("Car name from car bean: " + car.getName());
+        car.makeSound();
+        car.go();
     }
 }

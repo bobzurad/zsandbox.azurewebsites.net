@@ -5,10 +5,13 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
+import com.zurad.java.spring.eazybytes.beans.Car;
 import com.zurad.java.spring.eazybytes.beans.Vehicle;
 
 @Configuration
-@ComponentScan(basePackages = "com.zurad.java.spring.eazybytes.beans") // register components in this package as beans
+@ComponentScan(basePackages = { "com.zurad.java.spring.eazybytes.beans",
+        "com.zurad.java.spring.eazybytes.beans.speakers",
+        "com.zurad.java.spring.eazybytes.beans.tires", "com.zurad.java.spring.eazybytes.services" }) // register components in this package as beans
 public class ProjectConfig {
 
     // name and value of this bean is vehicle
@@ -44,5 +47,10 @@ public class ProjectConfig {
     @Bean
     Integer number() {
         return 16;
+    }
+
+    @Bean
+    Car car() {
+        return new Car("Chevrolet Tahoe");
     }
 }
