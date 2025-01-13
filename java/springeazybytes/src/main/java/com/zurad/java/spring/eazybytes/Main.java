@@ -4,6 +4,7 @@ import java.util.function.Supplier;
 
 import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.zurad.java.spring.eazybytes.beans.Animal;
 import com.zurad.java.spring.eazybytes.beans.Vehicle;
@@ -28,6 +29,9 @@ public class Main {
 
         // create beans using a Supplier
         supplierBeans(context);
+
+        // create beans from the XmlContext
+        xmlBeans();
 
         // close context
         context.close();
@@ -78,5 +82,14 @@ public class Main {
 
         var subaruBean = context.getBean("Subaru", Vehicle.class);
         System.out.println("Vehicle name from Subaru bean: " + subaruBean.getName());
+    }
+
+    private static void xmlBeans() {
+        var context = new ClassPathXmlApplicationContext("beans.xml");
+
+        var toyotaBean = context.getBean(Vehicle.class);
+        System.out.println("Vehicle name from Toyota bean: " + toyotaBean.getName());
+
+        context.close();
     }
 }
