@@ -11,11 +11,18 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+/*
+    This AuthenticationProvider will be used when grant type authorization_code is used.
+    This provider uses the EazyBankUserDetailsService to load the user from the database.
+    After the user is loaded from the database, the PasswordEncoder is used to validate the password.
+    If the password is valid, an Authentication token is returned.
+    The PasswordEncoder used is defined as a @Bean in ProjectSecurityConfig
+ */
 @Component
 public class EazyBankUsernamePwdAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserDetailsService userDetailsService;  // this will be an instance of EazyBankUserDetailsService
 
     @Autowired
     private PasswordEncoder passwordEncoder;

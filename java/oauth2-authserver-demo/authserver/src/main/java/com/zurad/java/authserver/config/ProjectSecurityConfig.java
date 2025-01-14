@@ -112,7 +112,7 @@ public class ProjectSecurityConfig {
 //				.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)  /// note you can set multiple Grant Types...
 //				.authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
 //				.redirectUri("http://127.0.0.1:8080/login/oauth2/code/oidc-client")
-//				.postLogoutRedirectUri("http://127.0.0.1:8080/")    // TODO: add this to our RegisteredClients (below) when we have a web/client app?
+//				.postLogoutRedirectUri("http://127.0.0.1:8080/")    // TODO: add postLogoutRedirectUri to our RegisteredClients (below) when we have a web/client app?
 //				.scope(OidcScopes.OPENID)
 //				.scope(OidcScopes.PROFILE)
 //				.clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build()) // TODO: lookup what this does
@@ -129,11 +129,24 @@ public class ProjectSecurityConfig {
 			.clientId("eazybankapi")
 			.clientSecret("{noop}VxubZgAXyyTq9lGjj3qGvWNsHtE4SqTq") // some random string
 			.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-			.authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+			.authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)  // refresh_token should NOT be used with a service account that uses client_credentials
 			.scopes(scopeConfig -> scopeConfig.addAll(List.of(OidcScopes.OPENID, "ADMIN", "USER")))
 			.tokenSettings(TokenSettings.builder()
 				.accessTokenTimeToLive(Duration.ofMinutes(10))
 				.accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED)
+				.build())
+			.build();
+
+		// RegisteredClient for client_credentials with opaque tokens (not being used right now)
+		RegisteredClient introspectClient = RegisteredClient.withId(UUID.randomUUID().toString())
+			.clientId("eazybankintrospect")
+			.clientSecret("{noop}c1BK9Bg2REeydBbvUoUeKCbD2bvJzXGj")
+			.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+			.authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+			.scopes(scopeConfig -> scopeConfig.add(OidcScopes.OPENID))
+			.tokenSettings(TokenSettings.builder()
+				.accessTokenTimeToLive(Duration.ofMinutes(10))
+				.accessTokenFormat(OAuth2TokenFormat.REFERENCE)
 				.build())
 			.build();
 
@@ -173,7 +186,14 @@ public class ProjectSecurityConfig {
 				.build())
 			.build();
 
-		return new InMemoryRegisteredClientRepository(clientCredentialsClient, authCodeClient, pkceClient);
+		// TODO: if we want to store the registered client settings in the database, instead of in-memory, then we must use
+		//          JdbcRegisteredClientRepository instead of InMemoryRegisteredClientRepository, or implement our own RegisteredClientRepository
+		return new InMemoryRegisteredClientRepository(
+			clientCredentialsClient,
+			authCodeClient,
+			pkceClient,
+			introspectClient
+		);
 	}
 
 	@Bean 
@@ -212,22 +232,21 @@ public class ProjectSecurityConfig {
 		return AuthorizationServerSettings.builder().build();
 	}
 
-	/*
-		This customizer modifies the access token, copying the scopes into roles.
-	 */
 	@Bean
 	public OAuth2TokenCustomizer<JwtEncodingContext> jwtTokenCustomizer() {
 		return (context) -> {
 			if (context.getTokenType().equals(OAuth2TokenType.ACCESS_TOKEN)) {
 				context.getClaims().claims((claims) -> {
 					if (context.getAuthorizationGrantType().equals(AuthorizationGrantType.CLIENT_CREDENTIALS)) {
+						// for client_credentials grant type, copy "scope" into "roles"
 						Set<String> scopes = context.getClaims().build().getClaim("scope");
 						claims.put("roles", scopes);
 					} else if (context.getAuthorizationGrantType().equals(AuthorizationGrantType.AUTHORIZATION_CODE)) {
+						// for authorization_code grant type, copy the user's authorities into "roles"
 						Set<String> authorities = AuthorityUtils
 							.authorityListToSet(context.getPrincipal().getAuthorities())
 							.stream()
-							.map(c -> c.replaceFirst("^ROLE_", ""))
+							.map(c -> c.replaceFirst("^ROLE_", "")) // remove ROLE_ prefix, if it exists
 							.collect(Collectors.collectingAndThen(Collectors.toSet(), Collections::unmodifiableSet));
 						claims.put("roles", authorities);
 					}
@@ -242,7 +261,8 @@ public class ProjectSecurityConfig {
 	}
 
 	/**
-	 * HaveIBeenPwnedRestApiPasswordChecker requires Spring Security 6.3 or later
+	 * HaveIBeenPwnedRestApiPasswordChecker requires Spring Security 6.3 or later.
+	 * This bean is completely optional, and not currently being used.
      */
 	@Bean
 	public CompromisedPasswordChecker compromisedPasswordChecker() {

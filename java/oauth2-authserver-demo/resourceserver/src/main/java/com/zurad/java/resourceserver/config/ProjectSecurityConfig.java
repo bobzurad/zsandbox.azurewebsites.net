@@ -1,9 +1,9 @@
 package com.zurad.java.resourceserver.config;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.context.annotation.Bean;
@@ -60,7 +60,7 @@ public class ProjectSecurityConfig {
                     config.setAllowedMethods(Collections.singletonList("*"));
                     config.setAllowCredentials(true);
                     config.setAllowedHeaders(Collections.singletonList("*"));
-                    config.setExposedHeaders(Arrays.asList("Authorization"));
+                    config.setExposedHeaders(List.of("Authorization"));
                     config.setMaxAge(3600L);
                     return config;
                 }
@@ -113,11 +113,11 @@ public class ProjectSecurityConfig {
         /**
          * @param introspectedToken      the bearer token used to perform token introspection
          * @param authenticatedPrincipal the result of token introspection
-         * @return
+         * @return  UsernamePasswordAuthenticationToken
          */
         @Override
         public Authentication convert(String introspectedToken, OAuth2AuthenticatedPrincipal authenticatedPrincipal) {
-            ArrayList<String> roles  = authenticatedPrincipal.getAttribute("scope");
+            ArrayList<String> roles  = authenticatedPrincipal.getAttribute("scope");    // we don't have a TokenCustomizer for opaque tokens, so roles are in "scope"
             assert roles != null;
             Collection<GrantedAuthority> grantedAuthorities = roles
                 .stream().map(roleName -> "ROLE_" + roleName)

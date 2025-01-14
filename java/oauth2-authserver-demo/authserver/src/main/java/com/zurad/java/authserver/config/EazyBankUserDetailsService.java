@@ -15,6 +15,9 @@ import java.util.stream.Collectors;
 import com.zurad.java.authserver.model.entity.Customer;
 import com.zurad.java.authserver.repository.CustomerRepository;
 
+/*
+    This class is used by the AuthenticationProvider to load the user information from the database.
+ */
 @Service
 public class EazyBankUserDetailsService implements UserDetailsService {
 
