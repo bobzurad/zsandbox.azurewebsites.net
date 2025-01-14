@@ -15,6 +15,10 @@ Authorization Server configuration can be found at: http://localhost:9000/.well-
 * Start the `ResourceServerApplication`
   * runs at port 8080
 
+When using Authorization Code Grant Type, use the following credentials to login:
+* username: happy@example.com
+* password: EazyBytes@54321
+
 Tokens can be validated at: https://jwt.io/
 
 ### TODO:

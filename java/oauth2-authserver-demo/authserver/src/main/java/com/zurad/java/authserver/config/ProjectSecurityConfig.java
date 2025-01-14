@@ -14,9 +14,6 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
@@ -35,7 +32,6 @@ import org.springframework.security.oauth2.server.authorization.settings.OAuth2T
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.password.HaveIBeenPwnedRestApiPasswordChecker;
@@ -60,20 +56,20 @@ public class ProjectSecurityConfig {
 
     @Bean 
 	@Order(1)
-	public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http)
-			throws Exception {
+	public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
 		OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
-		http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
-			.oidc(Customizer.withDefaults());	// Enable OpenID Connect 1.0
+
 		http
+			.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
+			.oidc(Customizer.withDefaults());	// Enable OpenID Connect 1.0
+
+	    http
 			// Redirect to the login page when not authenticated from the
 			// authorization endpoint
 			.exceptionHandling((exceptions) -> exceptions
 				.defaultAuthenticationEntryPointFor(
 					new LoginUrlAuthenticationEntryPoint("/login"),
-					new MediaTypeRequestMatcher(MediaType.TEXT_HTML)
-				)
-			)
+					new MediaTypeRequestMatcher(MediaType.TEXT_HTML)))
 			// Accept access tokens for User Info and/or Client Registration
 			.oauth2ResourceServer((resourceServer) -> resourceServer
 				.jwt(Customizer.withDefaults()));
@@ -83,12 +79,10 @@ public class ProjectSecurityConfig {
 
 	@Bean 
 	@Order(2)
-	public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http)
-			throws Exception {
+	public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests((authorize) -> authorize
-				.anyRequest().authenticated()
-			)
+				.anyRequest().authenticated())
 			// Form login handles the redirect to the login page from the
 			// authorization server filter chain
 			.formLogin(Customizer.withDefaults());
@@ -96,7 +90,7 @@ public class ProjectSecurityConfig {
 		return http.build();
 	}
 
-	// default UserDetailsService commented out because we're going to make our own
+	// default UserDetailsService commented out because we're using EazyBankUserDetailsService instead
 //	@Bean
 //	public UserDetailsService userDetailsService() {
 //		UserDetails userDetails = User.withDefaultPasswordEncoder()
@@ -108,7 +102,7 @@ public class ProjectSecurityConfig {
 //		return new InMemoryUserDetailsManager(userDetails);
 //	}
 
-	// default RegisteredClientRepository commented out because we're going to make our own
+	// default RegisteredClientRepository commented out because we're going to make our own (see below)
 //	@Bean
 //	public RegisteredClientRepository registeredClientRepository() {
 //		RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
@@ -118,10 +112,10 @@ public class ProjectSecurityConfig {
 //				.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)  /// note you can set multiple Grant Types...
 //				.authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
 //				.redirectUri("http://127.0.0.1:8080/login/oauth2/code/oidc-client")
-//				.postLogoutRedirectUri("http://127.0.0.1:8080/")
+//				.postLogoutRedirectUri("http://127.0.0.1:8080/")    // TODO: add this to our RegisteredClients (below) when we have a web/client app?
 //				.scope(OidcScopes.OPENID)
 //				.scope(OidcScopes.PROFILE)
-//				.clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
+//				.clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build()) // TODO: lookup what this does
 //				.build();
 //
 //		return new InMemoryRegisteredClientRepository(oidcClient);
@@ -129,6 +123,8 @@ public class ProjectSecurityConfig {
 
 	@Bean
 	public RegisteredClientRepository registeredClientRepository() {
+
+		// RegisteredClient for client_credentials grant type
 		RegisteredClient clientCredentialsClient = RegisteredClient.withId(UUID.randomUUID().toString())
 			.clientId("eazybankapi")
 			.clientSecret("{noop}VxubZgAXyyTq9lGjj3qGvWNsHtE4SqTq") // some random string
@@ -141,7 +137,43 @@ public class ProjectSecurityConfig {
 				.build())
 			.build();
 
-		return new InMemoryRegisteredClientRepository(clientCredentialsClient);
+		// RegisteredClient for authorization_code grant type
+		RegisteredClient authCodeClient = RegisteredClient.withId(UUID.randomUUID().toString())
+			.clientId("eazybankclient")
+			.clientSecret("{noop}Qw3rTy6UjMnB9zXcV2pL0sKjHn5TxQqB") // some random string
+			.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
+			.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+			.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+			.authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+			.redirectUri("https://oauth.pstmn.io/v1/callback")
+			.scopes(scopeConfig -> scopeConfig.addAll(List.of(OidcScopes.OPENID, OidcScopes.EMAIL)))
+			.tokenSettings(TokenSettings.builder()
+				.accessTokenTimeToLive(Duration.ofMinutes(10))
+				.refreshTokenTimeToLive(Duration.ofHours(8))
+				.reuseRefreshTokens(false)
+				.accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED)
+				.build())
+			.build();
+
+		// RegisteredClient for authorization_code with pkce grant type
+		RegisteredClient pkceClient = RegisteredClient.withId(UUID.randomUUID().toString())
+			.clientId("eazypublicclient")
+			.clientAuthenticationMethod(ClientAuthenticationMethod.NONE)
+			.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
+			.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+			.authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+			.redirectUri("https://oauth.pstmn.io/v1/callback")
+			.scopes(scopeConfig -> scopeConfig.addAll(List.of(OidcScopes.OPENID, OidcScopes.EMAIL)))
+			.clientSettings(ClientSettings.builder().requireProofKey(true).build())
+			.tokenSettings(TokenSettings.builder()
+				.accessTokenTimeToLive(Duration.ofMinutes(10))
+				.refreshTokenTimeToLive(Duration.ofHours(8))
+				.reuseRefreshTokens(false)
+				.accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED)
+				.build())
+			.build();
+
+		return new InMemoryRegisteredClientRepository(clientCredentialsClient, authCodeClient, pkceClient);
 	}
 
 	@Bean 
@@ -188,10 +220,32 @@ public class ProjectSecurityConfig {
 		return (context) -> {
 			if (context.getTokenType().equals(OAuth2TokenType.ACCESS_TOKEN)) {
 				context.getClaims().claims((claims) -> {
-					Set<String> scopes = context.getClaims().build().getClaim("scope");
-					claims.put("roles", scopes);
+					if (context.getAuthorizationGrantType().equals(AuthorizationGrantType.CLIENT_CREDENTIALS)) {
+						Set<String> scopes = context.getClaims().build().getClaim("scope");
+						claims.put("roles", scopes);
+					} else if (context.getAuthorizationGrantType().equals(AuthorizationGrantType.AUTHORIZATION_CODE)) {
+						Set<String> authorities = AuthorityUtils
+							.authorityListToSet(context.getPrincipal().getAuthorities())
+							.stream()
+							.map(c -> c.replaceFirst("^ROLE_", ""))
+							.collect(Collectors.collectingAndThen(Collectors.toSet(), Collections::unmodifiableSet));
+						claims.put("roles", authorities);
+					}
 				});
 			}
 		};
+	}
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+	}
+
+	/**
+	 * HaveIBeenPwnedRestApiPasswordChecker requires Spring Security 6.3 or later
+     */
+	@Bean
+	public CompromisedPasswordChecker compromisedPasswordChecker() {
+		return new HaveIBeenPwnedRestApiPasswordChecker();
 	}
 }
