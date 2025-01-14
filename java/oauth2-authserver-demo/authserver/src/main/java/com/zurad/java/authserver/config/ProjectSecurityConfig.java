@@ -179,4 +179,19 @@ public class ProjectSecurityConfig {
 	public AuthorizationServerSettings authorizationServerSettings() {
 		return AuthorizationServerSettings.builder().build();
 	}
+
+	/*
+		This customizer modifies the access token, copying the scopes into roles.
+	 */
+	@Bean
+	public OAuth2TokenCustomizer<JwtEncodingContext> jwtTokenCustomizer() {
+		return (context) -> {
+			if (context.getTokenType().equals(OAuth2TokenType.ACCESS_TOKEN)) {
+				context.getClaims().claims((claims) -> {
+					Set<String> scopes = context.getClaims().build().getClaim("scope");
+					claims.put("roles", scopes);
+				});
+			}
+		};
+	}
 }
