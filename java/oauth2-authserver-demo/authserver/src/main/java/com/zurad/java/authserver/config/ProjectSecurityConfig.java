@@ -115,7 +115,7 @@ public class ProjectSecurityConfig {
 //				.clientId("oidc-client")
 //				.clientSecret("{noop}secret")
 //				.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-//				.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)  //TODO: note you can set multiple Grant Types...
+//				.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)  /// note you can set multiple Grant Types...
 //				.authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
 //				.redirectUri("http://127.0.0.1:8080/login/oauth2/code/oidc-client")
 //				.postLogoutRedirectUri("http://127.0.0.1:8080/")
