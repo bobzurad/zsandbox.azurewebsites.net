@@ -23,3 +23,4 @@ Tokens can be validated at: https://jwt.io/
 
 ### TODO:
 * Fix controllers returning empty objects
+* Add Postman collection to repo
