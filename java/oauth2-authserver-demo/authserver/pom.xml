@@ -12,23 +12,12 @@
 	<artifactId>authserver</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>AuthServerApplication</name>
-	<description>Demo project for Spring Boot</description>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
+	<description>An example Spring Authentication Server to be used with OAuth2</description>
+
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
