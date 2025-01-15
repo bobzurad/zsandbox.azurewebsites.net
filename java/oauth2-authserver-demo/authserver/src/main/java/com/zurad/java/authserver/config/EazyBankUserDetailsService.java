@@ -1,6 +1,5 @@
 package com.zurad.java.authserver.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -21,8 +20,11 @@ import com.zurad.java.authserver.repository.CustomerRepository;
 @Service
 public class EazyBankUserDetailsService implements UserDetailsService {
 
-    @Autowired
-    private CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
+
+    public EazyBankUserDetailsService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
