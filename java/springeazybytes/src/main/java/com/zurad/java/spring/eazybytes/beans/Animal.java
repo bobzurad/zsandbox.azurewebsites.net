@@ -1,6 +1,7 @@
 package com.zurad.java.spring.eazybytes.beans;
 
 import org.springframework.stereotype.Component;
+
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 
@@ -11,7 +12,9 @@ public class Animal {
 
     private String name;
 
-    public Animal() {}
+    public Animal() {
+        System.out.println("Creating Animal bean");
+    }
 
     public Animal(String name) {
         this.name = name;

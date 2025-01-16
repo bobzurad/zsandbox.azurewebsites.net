@@ -18,8 +18,13 @@ public class Main {
 
         // now we can create beans from the IoC container, which we configured in ProjectConfig.java
         // we use the BeansExample object to load and run the beans.
-        var beanExamples = new BeanExamples(context);
+        runBeanExamples(new BeanExamples(context));
 
+        // close context
+        context.close();
+    }
+
+    private static void runBeanExamples(BeanExamples beanExamples) {
         // create some beans
         beanExamples.beans();
 
@@ -35,7 +40,13 @@ public class Main {
         // run our services
         beanExamples.services();
 
-        // close context
-        context.close();
+        // create lazy beans
+        beanExamples.lazyBeans();
+
+        // show that by default, beans are singletons
+        beanExamples.singletonBeans();
+
+        // show an example of prototype scope bean
+        beanExamples.prototypeScopeBeans();
     }
 }
