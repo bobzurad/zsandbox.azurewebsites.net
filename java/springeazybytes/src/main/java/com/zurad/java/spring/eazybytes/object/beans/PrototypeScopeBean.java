@@ -1,4 +1,4 @@
-package com.zurad.java.spring.eazybytes.beans;
+package com.zurad.java.spring.eazybytes.object.beans;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;

@@ -6,12 +6,12 @@ import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.zurad.java.spring.eazybytes.beans.Animal;
-import com.zurad.java.spring.eazybytes.beans.Car;
-import com.zurad.java.spring.eazybytes.beans.LazyBean;
-import com.zurad.java.spring.eazybytes.beans.Person;
-import com.zurad.java.spring.eazybytes.beans.PrototypeScopeBean;
-import com.zurad.java.spring.eazybytes.beans.Vehicle;
+import com.zurad.java.spring.eazybytes.object.Car;
+import com.zurad.java.spring.eazybytes.object.Vehicle;
+import com.zurad.java.spring.eazybytes.object.beans.Animal;
+import com.zurad.java.spring.eazybytes.object.beans.LazyBean;
+import com.zurad.java.spring.eazybytes.object.beans.Person;
+import com.zurad.java.spring.eazybytes.object.beans.PrototypeScopeBean;
 
 public class BeanExamples {
 

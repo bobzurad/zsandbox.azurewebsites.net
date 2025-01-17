@@ -3,8 +3,8 @@ package com.zurad.java.spring.eazybytes.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.zurad.java.spring.eazybytes.beans.speakers.Speakers;
-import com.zurad.java.spring.eazybytes.beans.tires.Tires;
+import com.zurad.java.spring.eazybytes.object.beans.speakers.Speakers;
+import com.zurad.java.spring.eazybytes.object.beans.tires.Tires;
 
 @Service
 public class CarService {
@@ -15,7 +15,8 @@ public class CarService {
     @Autowired
     private Tires tires;
 
-    public CarService() {}
+    public CarService() {
+    }
 
     public Speakers getSpeakers() {
         return speakers;

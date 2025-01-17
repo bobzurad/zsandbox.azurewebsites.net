@@ -1,4 +1,4 @@
-package com.zurad.java.spring.eazybytes.beans;
+package com.zurad.java.spring.eazybytes.object.beans;
 
 import org.springframework.stereotype.Component;
 

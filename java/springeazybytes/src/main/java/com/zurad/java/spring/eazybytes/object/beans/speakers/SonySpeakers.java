@@ -1,11 +1,13 @@
-package com.zurad.java.spring.eazybytes.beans.speakers;
+package com.zurad.java.spring.eazybytes.object.beans.speakers;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BoseSpeakers {
+@Primary
+public class SonySpeakers implements Speakers {
 
-    private String name = "Bose";
+    private String name = "Sony";
 
     public String getName() {
         return name;

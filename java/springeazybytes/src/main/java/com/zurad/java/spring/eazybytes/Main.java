@@ -2,8 +2,8 @@ package com.zurad.java.spring.eazybytes;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.zurad.java.spring.eazybytes.beans.Vehicle;
 import com.zurad.java.spring.eazybytes.config.ProjectConfig;
+import com.zurad.java.spring.eazybytes.object.Vehicle;
 
 public class Main {
 

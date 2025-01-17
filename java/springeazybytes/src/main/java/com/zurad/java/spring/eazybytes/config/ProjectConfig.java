@@ -5,13 +5,16 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
-import com.zurad.java.spring.eazybytes.beans.Car;
-import com.zurad.java.spring.eazybytes.beans.Vehicle;
+import com.zurad.java.spring.eazybytes.object.Car;
+import com.zurad.java.spring.eazybytes.object.Vehicle;
 
 @Configuration
-@ComponentScan(basePackages = { "com.zurad.java.spring.eazybytes.beans",
-        "com.zurad.java.spring.eazybytes.beans.speakers",
-        "com.zurad.java.spring.eazybytes.beans.tires", "com.zurad.java.spring.eazybytes.services" }) // register components in this package as beans
+// register components in these packages as beans
+@ComponentScan(basePackages = {
+    "com.zurad.java.spring.eazybytes.object.beans",
+    "com.zurad.java.spring.eazybytes.object.beans.speakers",
+    "com.zurad.java.spring.eazybytes.object.beans.tires",
+    "com.zurad.java.spring.eazybytes.services" })
 public class ProjectConfig {
 
     // name and value of this bean is vehicle
@@ -27,7 +30,8 @@ public class ProjectConfig {
     }
 
     // a named bean
-    @Bean(name = "Rivian") // @Bean(value = "Rivian") and @Bean("Rivian") are also ways to name a bean
+    @Bean(name = "Rivian")
+    // @Bean(value = "Rivian") and @Bean("Rivian") are also ways to name a bean
     Vehicle vehicle3() {
         return new Vehicle("Rivian R1S");
     }

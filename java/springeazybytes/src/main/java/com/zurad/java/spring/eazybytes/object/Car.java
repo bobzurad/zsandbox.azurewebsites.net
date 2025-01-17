@@ -1,4 +1,4 @@
-package com.zurad.java.spring.eazybytes.beans;
+package com.zurad.java.spring.eazybytes.object;
 
 import org.springframework.beans.factory.annotation.Autowired;
 

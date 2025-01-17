@@ -1,4 +1,4 @@
-package com.zurad.java.spring.eazybytes.beans.tires;
+package com.zurad.java.spring.eazybytes.object.beans.tires;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
