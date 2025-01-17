@@ -2,6 +2,8 @@ package com.zurad.java.spring.eazybytes;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import com.zurad.java.spring.eazybytes.examples.aop.AOPExample;
+import com.zurad.java.spring.eazybytes.examples.aop.config.AOPExampleConfig;
 import com.zurad.java.spring.eazybytes.examples.beans.BeanExamples;
 import com.zurad.java.spring.eazybytes.examples.beans.config.BeanExamplesConfig;
 import com.zurad.java.spring.eazybytes.examples.beans.object.Vehicle;
@@ -14,7 +16,7 @@ public class Main {
         notABean.setName("VW Atlas");
         System.out.println("Vehicle name from non-spring context: " + notABean.getName());
 
-        // create the application context
+        // create the application context for Bean examples
         var context = new AnnotationConfigApplicationContext(BeanExamplesConfig.class);
 
         // now we can create beans from the IoC container, which we configured in ProjectConfig.java
@@ -22,6 +24,12 @@ public class Main {
         runBeanExamples(new BeanExamples(context));
 
         // close context
+        context.close();
+
+        // create a new context for AOP example, and run the AOP example
+        context = new AnnotationConfigApplicationContext(AOPExampleConfig.class);
+        var aopExample = new AOPExample(context);
+        aopExample.run();
         context.close();
     }
 
