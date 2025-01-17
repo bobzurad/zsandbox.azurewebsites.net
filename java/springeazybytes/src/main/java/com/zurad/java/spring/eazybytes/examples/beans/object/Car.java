@@ -1,8 +1,8 @@
-package com.zurad.java.spring.eazybytes.object;
+package com.zurad.java.spring.eazybytes.examples.beans.object;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.zurad.java.spring.eazybytes.services.CarService;
+import com.zurad.java.spring.eazybytes.examples.beans.services.CarService;
 
 public class Car {
 

@@ -1,4 +1,4 @@
-package com.zurad.java.spring.eazybytes.object;
+package com.zurad.java.spring.eazybytes.examples.beans.object;
 
 public class Vehicle {
 

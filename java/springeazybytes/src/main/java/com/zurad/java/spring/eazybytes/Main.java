@@ -2,8 +2,9 @@ package com.zurad.java.spring.eazybytes;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.zurad.java.spring.eazybytes.config.ProjectConfig;
-import com.zurad.java.spring.eazybytes.object.Vehicle;
+import com.zurad.java.spring.eazybytes.examples.beans.BeanExamples;
+import com.zurad.java.spring.eazybytes.examples.beans.config.BeanExamplesConfig;
+import com.zurad.java.spring.eazybytes.examples.beans.object.Vehicle;
 
 public class Main {
 
@@ -14,7 +15,7 @@ public class Main {
         System.out.println("Vehicle name from non-spring context: " + notABean.getName());
 
         // create the application context
-        var context = new AnnotationConfigApplicationContext(ProjectConfig.class);
+        var context = new AnnotationConfigApplicationContext(BeanExamplesConfig.class);
 
         // now we can create beans from the IoC container, which we configured in ProjectConfig.java
         // we use the BeansExample object to load and run the beans.

@@ -1,10 +1,10 @@
-package com.zurad.java.spring.eazybytes.services;
+package com.zurad.java.spring.eazybytes.examples.beans.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.zurad.java.spring.eazybytes.object.beans.speakers.Speakers;
-import com.zurad.java.spring.eazybytes.object.beans.tires.Tires;
+import com.zurad.java.spring.eazybytes.examples.beans.object.beans.speakers.Speakers;
+import com.zurad.java.spring.eazybytes.examples.beans.object.beans.tires.Tires;
 
 @Service
 public class CarService {

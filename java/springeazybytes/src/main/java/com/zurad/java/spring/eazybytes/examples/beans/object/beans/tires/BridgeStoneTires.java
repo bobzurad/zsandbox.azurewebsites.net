@@ -1,4 +1,4 @@
-package com.zurad.java.spring.eazybytes.object.beans.tires;
+package com.zurad.java.spring.eazybytes.examples.beans.object.beans.tires;
 
 import org.springframework.stereotype.Component;
 

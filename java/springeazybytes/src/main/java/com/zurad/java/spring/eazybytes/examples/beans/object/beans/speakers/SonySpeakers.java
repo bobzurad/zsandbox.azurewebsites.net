@@ -1,4 +1,4 @@
-package com.zurad.java.spring.eazybytes.object.beans.speakers;
+package com.zurad.java.spring.eazybytes.examples.beans.object.beans.speakers;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;

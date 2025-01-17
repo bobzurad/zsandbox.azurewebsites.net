@@ -1,21 +1,21 @@
-package com.zurad.java.spring.eazybytes.config;
+package com.zurad.java.spring.eazybytes.examples.beans.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
-import com.zurad.java.spring.eazybytes.object.Car;
-import com.zurad.java.spring.eazybytes.object.Vehicle;
+import com.zurad.java.spring.eazybytes.examples.beans.object.Car;
+import com.zurad.java.spring.eazybytes.examples.beans.object.Vehicle;
 
 @Configuration
 // register components in these packages as beans
 @ComponentScan(basePackages = {
-    "com.zurad.java.spring.eazybytes.object.beans",
-    "com.zurad.java.spring.eazybytes.object.beans.speakers",
-    "com.zurad.java.spring.eazybytes.object.beans.tires",
-    "com.zurad.java.spring.eazybytes.services" })
-public class ProjectConfig {
+    "com.zurad.java.spring.eazybytes.examples.beans.object.beans",
+    "com.zurad.java.spring.eazybytes.examples.beans.object.beans.speakers",
+    "com.zurad.java.spring.eazybytes.examples.beans.object.beans.tires",
+    "com.zurad.java.spring.eazybytes.examples.beans.services" })
+public class BeanExamplesConfig {
 
     // name and value of this bean is vehicle
     @Bean

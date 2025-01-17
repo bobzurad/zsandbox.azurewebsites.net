@@ -1,10 +1,10 @@
-package com.zurad.java.spring.eazybytes.object.beans;
+package com.zurad.java.spring.eazybytes.examples.beans.object.beans;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.zurad.java.spring.eazybytes.object.Vehicle;
+import com.zurad.java.spring.eazybytes.examples.beans.object.Vehicle;
 
 // this class is defined as a Component
 // we don't need to define it as a Bean in our Configuration, if we use @ComponentScan in ProjectConfig.java
