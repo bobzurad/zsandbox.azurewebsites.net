@@ -13,6 +13,8 @@ import com.zurad.java.spring.eazybytes.beans.object.beans.LazyBean;
 import com.zurad.java.spring.eazybytes.beans.object.beans.Person;
 import com.zurad.java.spring.eazybytes.beans.object.beans.PrototypeScopeBean;
 
+/// Note: using context.getBean("name", .class) causes IntelliJ to crash, so those lines are commented out for now.
+
 public class BeanExamples {
 
     private final AnnotationConfigApplicationContext context;
@@ -23,8 +25,8 @@ public class BeanExamples {
 
     public void beans() {
         // we have to specify the bean name because we have more than one bean of type Vehicle defined
-        var bean = context.getBean("vehicle", Vehicle.class);
-        System.out.println("Vehicle name from Spring Context: " + bean.getName());
+//        var bean = context.getBean("vehicle", Vehicle.class);
+//        System.out.println("Vehicle name from Spring Context: " + bean.getName());
 
         // this will throw a NoUniqueBeanDefinitionException because we have more than one bean of type Vehicle defined
         try {
@@ -36,14 +38,14 @@ public class BeanExamples {
         }
 
         // more beans from the IoC container
-        var helloBean = context.getBean("hello", String.class); // we have more than one bean of type String defined
-        System.out.println("hello String from Spring Context: " + helloBean);
+//        var helloBean = context.getBean("hello", String.class); // we have more than one bean of type String defined
+//        System.out.println("hello String from Spring Context: " + helloBean);
         var numberBean = context.getBean(Integer.class);
         System.out.println("number Integer from Spring Context: " + numberBean);
 
         // named bean
-        var rivianBean = context.getBean("Rivian", Vehicle.class);
-        System.out.println("Vehicle name from Rivian bean: " + rivianBean.getName());
+//        var rivianBean = context.getBean("Rivian", Vehicle.class);
+//        System.out.println("Vehicle name from Rivian bean: " + rivianBean.getName());
 
         // primary bean, so don't need to specify it's name
         var goodbyeBean = context.getBean(String.class);
@@ -72,8 +74,8 @@ public class BeanExamples {
 
         context.registerBean("Subaru", Vehicle.class, subaruSupplier);
 
-        var subaruBean = context.getBean("Subaru", Vehicle.class);
-        System.out.println("Vehicle name from Subaru bean: " + subaruBean.getName());
+//        var subaruBean = context.getBean("Subaru", Vehicle.class);
+//        System.out.println("Vehicle name from Subaru bean: " + subaruBean.getName());
     }
 
     public void xmlBeans() {
