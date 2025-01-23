@@ -1,6 +1,5 @@
 package com.zurad.java.spring.eazybytes.examples.aop.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -14,8 +13,4 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @EnableAspectJAutoProxy
 public class AOPExampleConfig {
 
-    @Bean
-    String name() {
-        return "";
-    }    // TODO: how do we Autowire without this so we can have our Abstract classes?
 }

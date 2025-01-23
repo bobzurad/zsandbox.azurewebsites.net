@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BridgeStoneTires extends AbstractTires {
 
-    public BridgeStoneTires(String name) {
-        super(name);
+    public BridgeStoneTires() {
+        super("BridgeStone");
     }
 }

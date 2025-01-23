@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Primary
 public class MichelinTires extends AbstractTires {
 
-    public MichelinTires(String name) {
-        super(name);
+    public MichelinTires() {
+        super("Michelin");
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Primary
 public class SonySpeakers extends AbstractSpeakers {
 
-    public SonySpeakers(String name) {
-        super(name);
+    public SonySpeakers() {
+        super("Sony");
     }
 }

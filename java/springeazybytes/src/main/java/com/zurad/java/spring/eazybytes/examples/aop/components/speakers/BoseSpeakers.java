@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BoseSpeakers extends AbstractSpeakers {
 
-    public BoseSpeakers(String name) {
-        super(name);
+    public BoseSpeakers() {
+        super("Bose");
     }
 }
