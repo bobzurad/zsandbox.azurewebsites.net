@@ -1,0 +1,10 @@
+debug: true   # enables additional debug info to appear in console
+
+spring:
+  application:
+    name: eazyschool
+
+#server:
+#  port: 8081  # set port to 0 to have the application start on a random port number (to allow multiple instances to run)
+#  servlet:
+#    context-path: /eazyschool
