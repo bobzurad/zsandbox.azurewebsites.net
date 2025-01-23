@@ -2,6 +2,7 @@ package com.zurad.java.spring.eazybytes.examples.aop.services;
 
 import org.springframework.stereotype.Component;
 
+import com.zurad.java.spring.eazybytes.examples.aop.aspects.LogAspect;
 import com.zurad.java.spring.eazybytes.examples.aop.components.speakers.Speakers;
 import com.zurad.java.spring.eazybytes.examples.aop.components.tires.Tires;
 import com.zurad.java.spring.eazybytes.examples.aop.model.Song;
@@ -17,6 +18,7 @@ public class VehicleServices {
         this.tires = tires;
     }
 
+    @LogAspect
     public void playMusic(boolean vehicleStarted, Song song) {
         speakers.makeSound(song);
     }
