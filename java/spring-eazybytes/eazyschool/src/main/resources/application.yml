@@ -3,6 +3,8 @@ debug: true   # enables additional debug info to appear in console
 spring:
   application:
     name: eazyschool
+  thymeleaf:
+    cache: false  # disable caching of templates, so we don't have to restart the server to see changes in templates
 
 #server:
 #  port: 8081  # set port to 0 to have the application start on a random port number (to allow multiple instances to run)
