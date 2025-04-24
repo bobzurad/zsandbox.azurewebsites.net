@@ -1,0 +1,15 @@
+{
+  "name": "live-server-demo",
+  "version": "0.1.0",
+  "main": "./src/index.html",
+  "scripts": {
+    "start": "./node_modules/live-server/live-server.js --port=8081 ./src"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "live-server": "^1.2.2"
+  }
+}
