@@ -1,0 +1,33 @@
+# this docker file starts and runs Windows
+# for instructions, see here: https://github.com/dockur/windows
+
+# start the container with: docker compose up
+# stop the container with: docker stop windows
+
+services:
+  windows:
+    image: dockurr/windows
+    container_name: windows
+    environment:
+      VERSION: "11"
+      CPU_CORES: "4"
+      RAM_SIZE: "16G"
+      DISK_SIZE: "128G"
+      USERNAME: "bob"
+      PASSWORD: "windows"
+      VMX: "Y"  # enable nested virtualization for Intel
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 8006:8006
+      - 3389:3389/tcp
+      - 3389:3389/udp
+    volumes:
+      - /home/bob/vm/dockur/windows/storage:/storage
+      - /home/bob/vm/dockur/windows/share:/shared
+#    privileged: true   # WARNING!!! privileged gives the container access to host system!!
+#    restart: unless-stopped
+    stop_grace_period: 2m
