@@ -1,12 +1,18 @@
 An API written in Java.
 
-Prerequisites:
-* Java 11
+## Prerequisites
+* Java 21
 * Maven 3
 
-To run:
+## Dev Setup
+
+Install Java and Maven. If you have [asdf](https://asdf-vm.com) installed, you can run `asdf install java` and `asdf install maven` to make sure that the proper versions are installed.
+
+## Building
+* `mvn clean install`
+
+## Running
 * `mvn spring-boot:run`
 
 Swagger runs at http://localhost:8080/swagger-ui.html
 
-If you have SDKMAN installed, you can run `sdk env` to ensure that the proper version of Java is used.
