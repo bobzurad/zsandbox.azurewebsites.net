@@ -32,7 +32,7 @@ public class ProductController {
 
     @PostMapping("/add")
     public ResponseEntity<ApiResponse> addProduct(@RequestBody ProductDto productDto) {
-        Optional<Category> optionalCategory = categoryService.readCategory(productDto.categoryId);
+        Optional<Category> optionalCategory = categoryService.findCategoryById(productDto.categoryId);
 
         if (!optionalCategory.isPresent()) {
             return new ResponseEntity<>(new ApiResponse(false, "category is invalid"), HttpStatus.CONFLICT);
