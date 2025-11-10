@@ -14,5 +14,5 @@ Install Java and Maven. If you have [asdf](https://asdf-vm.com) installed, you c
 ## Running
 * `mvn spring-boot:run`
 
-Swagger runs at http://localhost:8080/swagger-ui.html
+Swagger runs at http://localhost:8080/swagger-ui/index.html
 
