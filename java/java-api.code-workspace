@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "ecomapp"
+		},
+		{
+			"path": "api-demo"
+		}
+	],
+  "settings": {
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.updateBuildConfiguration": "interactive"
+  }
+}
