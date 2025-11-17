@@ -5,6 +5,7 @@ import com.zurad.ecomapp.entity.Category;
 import com.zurad.ecomapp.entity.Product;
 import com.zurad.ecomapp.repository.ProductRepository;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,10 @@ public class ProductService {
             productDto.price,
             productDto.description,
             category));
+  }
+
+  public Optional<Product> getProductById(Integer productId) {
+    return productRepository.findById(productId);
   }
 
   public List<Product> listProducts() {

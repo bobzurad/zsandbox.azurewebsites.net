@@ -43,6 +43,22 @@ public class ProductControllerTests {
   }
 
   @Test
+  void getProductById_ShouldReturnProductById() {
+    var response = restTemplate.getForEntity(path + "/1", Product.class);
+    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+    var product = response.getBody();
+    assertThat(product).isNotNull();
+    assertThat(product.getId().equals(1));
+  }
+
+  @Test
+  void getProductById_WhenProductNotFound_ShouldReturnNotFoundResponse() {
+    var response = restTemplate.getForEntity(path + "/666", Product.class);
+    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+  }
+
+  @Test
   void getProductsByCategoryId_ShouldGetProductsByCategoryId() {
     var response = restTemplate.getForEntity(path + "/category/1", Product[].class);
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
