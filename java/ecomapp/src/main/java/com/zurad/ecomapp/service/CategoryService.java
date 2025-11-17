@@ -23,7 +23,7 @@ public class CategoryService {
 
   public Category createCategory(CategoryDto category) {
     return categoryrepository.save(
-        new Category(category.categoryName, category.description, category.imageURL));
+        new Category(category.categoryName, category.description, category.imageUrl));
   }
 
   public Category findCategoryByName(String categoryName) {
@@ -38,7 +38,7 @@ public class CategoryService {
     Category category = categoryrepository.findById(categoryId).get();
     category.setCategoryName(newCategory.categoryName);
     category.setDescription(newCategory.description);
-    category.setImageUrl(newCategory.imageURL);
+    category.setImageUrl(newCategory.imageUrl);
     categoryrepository.save(category);
   }
 

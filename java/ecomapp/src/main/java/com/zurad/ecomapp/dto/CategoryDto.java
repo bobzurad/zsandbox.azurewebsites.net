@@ -1,24 +1,26 @@
 package com.zurad.ecomapp.dto;
 
+import jakarta.validation.constraints.NotNull;
+
 public class CategoryDto {
 
   public Integer id;
-  public String categoryName;
-  public String imageURL;
-  public String description;
+  public @NotNull String categoryName;
+  public @NotNull String imageUrl;
+  public @NotNull String description;
 
   public CategoryDto() {}
 
-  public CategoryDto(String categoryName, String imageURL, String description) {
+  public CategoryDto(String categoryName, String imageUrl, String description) {
     this.categoryName = categoryName;
-    this.imageURL = imageURL;
+    this.imageUrl = imageUrl;
     this.description = description;
   }
 
-  public CategoryDto(Integer id, String categoryName, String imageURL, String description) {
+  public CategoryDto(Integer id, String categoryName, String imageUrl, String description) {
     this.id = id;
     this.categoryName = categoryName;
-    this.imageURL = imageURL;
+    this.imageUrl = imageUrl;
     this.description = description;
   }
 }
