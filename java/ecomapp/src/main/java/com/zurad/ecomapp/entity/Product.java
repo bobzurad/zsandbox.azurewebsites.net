@@ -1,6 +1,5 @@
 package com.zurad.ecomapp.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -17,8 +16,8 @@ public class Product {
   private @NotNull double price;
   private @NotNull String description;
 
-  @JsonIgnore
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  // @JsonIgnore  // JsonIgnore removes Category from the response object
+  @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "category_id", nullable = false)
   Category category;
 
@@ -77,10 +76,6 @@ public class Product {
   }
 
   public Category getCategory() {
-    return category;
-  }
-
-  public void setCategory(Category category) {
-    this.category = category;
+    return this.category;
   }
 }

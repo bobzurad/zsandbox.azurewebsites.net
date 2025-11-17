@@ -43,6 +43,18 @@ public class ProductControllerTests {
   }
 
   @Test
+  void getProductsByCategoryId_ShouldGetProductsByCategoryId() {
+    var response = restTemplate.getForEntity(path + "/category/1", Product[].class);
+    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+    var products = response.getBody();
+    assertThat(products).isNotNull();
+    assertThat(products.length).isGreaterThan(0);
+    assertThat(products[0].getCategory()).isNotNull();
+    assertThat(products[0].getCategory().getId()).isEqualTo(1);
+  }
+
+  @Test
   void createProduct_ShouldCreateProduct() {
     var product = new ProductDto("some name", "some desc", 129.95, "imageUrl", 1);
 

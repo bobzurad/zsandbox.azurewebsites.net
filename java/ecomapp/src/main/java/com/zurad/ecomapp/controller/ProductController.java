@@ -26,6 +26,13 @@ public class ProductController {
     return new ResponseEntity<>(body, HttpStatus.OK);
   }
 
+  @GetMapping("/category/{categoryId}")
+  public ResponseEntity<List<Product>> getProductsByCategoryId(
+      @PathVariable("categoryId") Integer categoryId) {
+    var products = productService.listProductsByCategoryId(categoryId);
+    return new ResponseEntity<>(products, HttpStatus.OK);
+  }
+
   @PostMapping("/create")
   public ResponseEntity<Product> addProduct(@RequestBody ProductDto productDto) {
     Optional<Category> optionalCategory = categoryService.findCategoryById(productDto.categoryId);

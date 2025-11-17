@@ -14,16 +14,20 @@ public class ProductService {
   @Autowired private ProductRepository productRepository;
 
   public Product createProduct(ProductDto productDto, Category category) {
-    Product product = getProductFromDto(productDto, category);
-    return productRepository.save(product);
+    return productRepository.save(
+        new Product(
+            productDto.name,
+            productDto.imageUrl,
+            productDto.price,
+            productDto.description,
+            category));
   }
 
   public List<Product> listProducts() {
     return productRepository.findAll();
   }
 
-  public static Product getProductFromDto(ProductDto productDto, Category category) {
-    return new Product(
-        productDto.name, productDto.imageUrl, productDto.price, productDto.description, category);
+  public List<Product> listProductsByCategoryId(Integer categoryId) {
+    return productRepository.findByCategoryId(categoryId);
   }
 }
