@@ -16,6 +16,15 @@ Install Java and Maven. If you have [asdf](https://asdf-vm.com) installed, you c
 
 Swagger runs at http://localhost:8080/swagger-ui/index.html
 
+## Extensions and Styling
+
+### VS Code Extensions:
+
+If using VS Code, install the following extensions to make your life easier:
+
+* [Extension Pack For Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
+* [Spring Boot Extension Pack](https://marketplace.visualstudio.com/items?itemName=vmware.vscode-boot-dev-pack)
+
 ### Code Style
 
 This project is styled using [google-java-format](https://github.com/google/google-java-format)
