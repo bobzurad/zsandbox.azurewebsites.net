@@ -1,0 +1,6 @@
+Id,Category Id,Name,Description,ImageUrl,Price
+1,1,Pants,optional,https://picsum.photos/200,29.95
+2,1,Sweater,to keep warm,https://picsum.photos/200,49.98
+3,2,Apple,Cosmic Crisp,https://picsum.photos/200,0.29
+4,2,Pizza,sausage and mushroom,https://picsum.photos/200,12.89
+5,3,DOOM,the best game ever,https://picsum.photos/200,4.99
