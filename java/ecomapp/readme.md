@@ -3,19 +3,22 @@ An API written in Java.
 ## Prerequisites
 * Java 21
 * Maven 3
-* Docker
+* Docker (optional)
 
 ## Dev Setup
 
 Install Java and Maven. If you have [asdf](https://asdf-vm.com) installed, you can run `asdf install java` and `asdf install maven` to make sure that the proper versions are installed.
 
 ### Data Persistence
-For data persistence, this project uses Docker containers for PostgreSQL and pgAdmin. To start the docker containers, run: `docker compose up`
 
-- PostgreSQL is available at localhost:5432
-- pgAdmin is accessible at http://localhost:5433
-  - create a connection to the server at `postgres:5432`
-- see `.env` for credentials
+For data persistence, this project uses Docker containers for PostgreSQL and pgAdmin. This project is also configured to use an in-memory database, by using the `h2` profile. The default profile uses PostgreSQL in a  Docker container.
+
+To start the docker containers, run: `docker compose up`
+
+* PostgreSQL is available at localhost:5432
+* pgAdmin is accessible at http://localhost:5433
+  * create a connection to the server at `postgres:5432`
+* see `.env` for credentials
 
 Data is loaded into PostgreSQL from the `.sql` scripts in the `./db` folder. To clear and reset all sql data, run the following:
 
@@ -27,10 +30,20 @@ docker volume rm ecomapp_pgadmin_working_dir
 ```
 
 ## Building
+
+To build the project, run:
+
 * `mvn clean install`
 
 ## Running
+
+To run the project with the default profile (which uses the docker containers), run:
+
 * `mvn spring-boot:run`
+
+To run the project using the in-memory database without docker, run:
+
+* `mvn spring-boot:run -Dspring-boot.run.profiles=h2`
 
 Swagger runs at http://localhost:8080/swagger-ui/index.html
 
