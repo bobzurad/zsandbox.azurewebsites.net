@@ -23,8 +23,8 @@ services:
     image: dpage/pgadmin4:latest # To download the latest image
     container_name: ecomapp-pgadmin
     volumes:
-      - ./docker-volumes/pgadmin:/var/lib/pgadmin
-      - ./docker-volumes/pgadmin-config:/pgadmin4
+      - pgadmin_working_dir:/var/lib/pgadmin
+      - pgadmin_config_dir:/pgadmin4
     env_file:
       - .env
     environment:
@@ -37,6 +37,12 @@ services:
       - "5433:80" # HOST_PORT:CONTAINER_PORT
     networks:
       - ecomapp-network
+
+volumes:
+  pgadmin_working_dir:
+    driver: local
+  pgadmin_config_dir:
+    driver: local
 
 networks:
   ecomapp-network:
