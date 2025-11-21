@@ -9,7 +9,20 @@ An API written in Java.
 
 Install Java and Maven. If you have [asdf](https://asdf-vm.com) installed, you can run `asdf install java` and `asdf install maven` to make sure that the proper versions are installed.
 
+### Data Persistence
 For data persistence, this project uses Docker containers for PostgreSQL and pgAdmin. To start the docker containers, run: `docker compose up`
+
+- PostgreSQL is available at localhost:5432
+- pgAdmin is accessible at http://localhost:5433
+  - create a connection to the server at `postgres:5432`
+- see `.env` for credentials
+
+Data is loaded into PostgreSQL from the `.sql` scripts in the `./db` folder. To clear and reset all sql data, run the following:
+
+```bash
+docker compose down
+sudo rm -rf docker-volumes
+```
 
 ## Building
 * `mvn clean install`
