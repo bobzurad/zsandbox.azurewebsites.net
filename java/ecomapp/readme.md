@@ -22,6 +22,8 @@ Data is loaded into PostgreSQL from the `.sql` scripts in the `./db` folder. To 
 ```bash
 docker compose down
 sudo rm -rf docker-volumes
+docker volume rm ecomapp_pgadmin_config_dir
+docker volume rm ecomapp_pgadmin_working_dir
 ```
 
 ## Building
