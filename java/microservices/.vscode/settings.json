@@ -1,0 +1,7 @@
+{
+    "java.compile.nullAnalysis.mode": "automatic",
+    "[spring-boot-properties-yaml]": {
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+    }
+}
